@@ -1,6 +1,3 @@
-[submodule "plugins/command-t"]
-	path = plugins/command-t
-	url = https://github.com/wincent/command-t.git
 [submodule "plugins/nerdcommenter"]
 	path = plugins/nerdcommenter
 	url = https://github.com/scrooloose/nerdcommenter.git
@@ -19,3 +16,9 @@
 [submodule "plugins/YouCompleteMe"]
 	path = plugins/YouCompleteMe
 	url = https://github.com/Valloric/YouCompleteMe.git
+[submodule "plugins/vim-orgmode"]
+	path = plugins/vim-orgmode
+	url = https://github.com/jceb/vim-orgmode.git
+[submodule "plugins/ctrlp"]
+	path = plugins/ctrlp
+	url = https://github.com/kien/ctrlp.vim.git
