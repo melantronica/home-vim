@@ -28,3 +28,6 @@
 [submodule "plugins/vim-airline"]
 	path = plugins/vim-airline
 	url = https://github.com/vim-airline/vim-airline.git
+[submodule "plugins/tagbar"]
+	path = plugins/tagbar
+	url = https://github.com/majutsushi/tagbar.git
