@@ -1,3 +1,12 @@
+""" Use pathogen to load further modules from plugins/
+filetype off
+runtime plugins/pathogen/autoload/pathogen.vim
+let g:pathogen_disabled = []
+call add(g:pathogen_disabled, 'YouCompleteMe')
+silent! call pathogen#infect('plugins/{}')
+silent! call pathogen#helptags()
+
+
 let name = "Bastian Zeller"
 
 colorscheme Tomorrow-Night-Bright
@@ -33,5 +42,4 @@ map <leader>s :source ~/.vimrc
 set hidden
 set history=1000
 
-execute pathogen#infect()
 
