@@ -25,3 +25,6 @@
 [submodule "plugins/speeddating"]
 	path = plugins/speeddating
 	url = https://github.com/tpope/vim-speeddating.git
+[submodule "plugins/vim-airline"]
+	path = plugins/vim-airline
+	url = https://github.com/vim-airline/vim-airline.git
