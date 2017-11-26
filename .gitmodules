@@ -16,12 +16,12 @@
 [submodule "plugins/YouCompleteMe"]
 	path = plugins/YouCompleteMe
 	url = https://github.com/Valloric/YouCompleteMe.git
-[submodule "plugins/vim-orgmode"]
-	path = plugins/vim-orgmode
-	url = https://github.com/jceb/vim-orgmode.git
 [submodule "plugins/ctrlp"]
 	path = plugins/ctrlp
 	url = https://github.com/kien/ctrlp.vim.git
 [submodule "plugins/pathogen"]
 	path = plugins/pathogen
 	url = https://github.com/tpope/vim-pathogen.git
+[submodule "plugins/speeddating"]
+	path = plugins/speeddating
+	url = https://github.com/tpope/vim-speeddating.git

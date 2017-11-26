@@ -2,10 +2,15 @@
 filetype off
 runtime plugins/pathogen/autoload/pathogen.vim
 let g:pathogen_disabled = []
-call add(g:pathogen_disabled, 'YouCompleteMe')
+"call add(g:pathogen_disabled, 'YouCompleteMe')
 silent! call pathogen#infect('plugins/{}')
 silent! call pathogen#helptags()
 
+call plug#begin('~/.vim/plugged')
+
+Plug 'https://github.com/jceb/vim-orgmode.git'
+
+call plug#end()
 
 let name = "Bastian Zeller"
 
@@ -18,6 +23,7 @@ syntax on		" syntax highlightling
 filetype on		" based on names
 
 filetype indent on
+filetype plugin indent on
 set nowrap
 set tabstop=4
 set shiftwidth=4
