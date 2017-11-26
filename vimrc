@@ -1,3 +1,9 @@
+" https://raw.githubusercontent.com/rasendubi/dotfiles/master/.vimrc
+" https://github.com/Valloric/YouCompleteMe#ubuntu-linux-x64
+" https://github.com/JBakamovic/yavide
+" https://vim.sourceforge.io/scripts/script.php?script_id=213
+" https://www.reddit.com/r/vim/comments/5iz4cw/making_a_vim_setup_for_cc/
+
 """ Use pathogen to load further modules from plugins/
 filetype off
 runtime plugins/pathogen/autoload/pathogen.vim
