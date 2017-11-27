@@ -10,17 +10,13 @@
 filetype off
 runtime plugins/pathogen/autoload/pathogen.vim
 let g:pathogen_disabled = []
-
-call add(g:pathogen_disabled, 'ctrlpe')
+call add(g:pathogen_disabled, 'ctrlp')
 call add(g:pathogen_disabled, 'git-gutter')
 call add(g:pathogen_disabled, 'nercommenter')
-call add(g:pathogen_disabled, 'nerdtree')
 call add(g:pathogen_disabled, 'speeddating')
 call add(g:pathogen_disabled, 'supertab')
 call add(g:pathogen_disabled, 'tagbar')
 call add(g:pathogen_disabled, 'vim-fugitive')
-call add(g:pathogen_disabled, 'ycm-generator')
-
 silent! call pathogen#infect('plugins/{}')
 silent! call pathogen#helptags()
 
@@ -101,7 +97,9 @@ nnoremap <silent> <leader>. :cnext<CR>
 
 """ plugins settings
 
-let g:airline_powerline_fonts = 1
+"let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='serene'
 
 " YCM settings {{{
 let g:clang_library_path = "/usr/lib64/"
@@ -118,12 +116,17 @@ let g:ycm_use_ultisnips_completer = 1
 let g:ycm_key_list_select_completion=[]
 let g:ycm_key_list_previous_completion=[]
 
-let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+
+if getcwd() =~ "kernel"
+    let g:ycm_global_ycm_extra_conf='~/ycm_extra_conf_kernel.py'
+else
+    let g:ycm_global_ycm_extra_conf='~/ycm_extra_conf.py'
+endif
+
 " }}}
 
 
 " nerdtree
-
 let NERDTreeHijackNetrw=1
-
+map <C-n> :NERDTreeToggle<CR>
 
