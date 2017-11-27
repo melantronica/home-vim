@@ -13,7 +13,7 @@ let g:pathogen_disabled = []
 call add(g:pathogen_disabled, 'ctrlp')
 call add(g:pathogen_disabled, 'git-gutter')
 call add(g:pathogen_disabled, 'nercommenter')
-call add(g:pathogen_disabled, 'speeddating')
+"call add(g:pathogen_disabled, 'speeddating')
 call add(g:pathogen_disabled, 'supertab')
 call add(g:pathogen_disabled, 'tagbar')
 call add(g:pathogen_disabled, 'vim-fugitive')
@@ -129,4 +129,10 @@ endif
 " nerdtree
 let NERDTreeHijackNetrw=1
 map <C-n> :NERDTreeToggle<CR>
+
+
+" org-mode
+
+let g:org_agenda_files = [ '~/home/org/*.org', '~/home/org/info/*.org', '~/home/org/knowledge/*.org', '~/work/org/*.org']
+
 
