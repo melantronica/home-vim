@@ -1,36 +1,54 @@
 [submodule "plugins/nerdcommenter"]
 	path = plugins/nerdcommenter
 	url = https://github.com/scrooloose/nerdcommenter.git
+	branch = master
 [submodule "plugins/nerdtree"]
 	path = plugins/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
+	branch = master
 [submodule "plugins/subertab"]
 	path = plugins/subertab
 	url = https://github.com/ervandew/supertab.git
+	branch = master
 [submodule "plugins/vim-fugitive"]
 	path = plugins/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
+	branch = master
 [submodule "plugins/git-gutter"]
 	path = plugins/git-gutter
 	url = https://github.com/airblade/vim-gitgutter.git
+	branch = master
 [submodule "plugins/YouCompleteMe"]
 	path = plugins/YouCompleteMe
 	url = https://github.com/Valloric/YouCompleteMe.git
+	branch = master
 [submodule "plugins/ctrlp"]
 	path = plugins/ctrlp
 	url = https://github.com/kien/ctrlp.vim.git
+	branch = master
 [submodule "plugins/pathogen"]
 	path = plugins/pathogen
 	url = https://github.com/tpope/vim-pathogen.git
+	branch = master
 [submodule "plugins/speeddating"]
 	path = plugins/speeddating
 	url = https://github.com/tpope/vim-speeddating.git
+	branch = master
 [submodule "plugins/vim-airline"]
 	path = plugins/airline
 	url = https://github.com/vim-airline/vim-airline.git
+	branch = master
 [submodule "plugins/tagbar"]
 	path = plugins/tagbar
 	url = https://github.com/majutsushi/tagbar.git
+	branch = master
 [submodule "plugins/ycm-generator"]
 	path = plugins/ycm-generator
 	url = https://github.com/rdnetto/YCM-Generator.git
+	branch = master
+[submodule "plugins/airline-themes"]
+	path = plugins/airline-themes
+	url = https://github.com/vim-airline/vim-airline-themes.git
+[submodule "plugins/vim-airline"]
+	path = plugins/vim-airline
+	url = https://github.com/vim/vim-airline.git
