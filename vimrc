@@ -4,6 +4,9 @@
 " https://vim.sourceforge.io/scripts/script.php?script_id=213
 " https://www.reddit.com/r/vim/comments/5iz4cw/making_a_vim_setup_for_cc/
 " test
+"
+
+
 """ Use pathogen to load further modules from plugins/
 filetype off
 runtime plugins/pathogen/autoload/pathogen.vim
@@ -12,62 +15,60 @@ let g:pathogen_disabled = []
 silent! call pathogen#infect('plugins/{}')
 silent! call pathogen#helptags()
 
+" load org-mode
 call plug#begin('~/.vim/plugged')
-
 Plug 'https://github.com/jceb/vim-orgmode.git'
-
 call plug#end()
 
 let name = "Bastian Zeller"
-
-colorscheme Tomorrow-Night-Bright
-
-set number		" line numbering
-set relativenumber	" relative numbering
-
-set mouse=a     " enable mouse
 
 " Do not create backup files
 set nobackup
 set nowritebackup
 set noswapfile
 
+set mouse=a         " enable mouse
+
+""" optics
+colorscheme Tomorrow-Night-Bright
+
+set number		    " line numbering
+set relativenumber	" relative numbering
+set colorcolumn=80
+
+""" syntax
 syntax on		" syntax highlightling
 filetype on		" based on names
 
-filetype indent on
-filetype plugin indent on
-set nowrap        " no line wrap
-set tabstop=4     " todo ?
-set shiftwidth=4  " todo ?
-set expandtab     " todo ?
-set smartindent   " todo ?
-set autoindent    " todo ?
+""" indent
+filetype indent on          " todo ?
+filetype plugin indent on   " todo ?
+set nowrap          " no line wrap
+set tabstop=4       " todo ?
+set shiftwidth=4    " todo ?
+set numberwidth=4   " Set the line numbers to 4 space
+set expandtab       " todo ?
+set smartindent     " todo ?
+set autoindent      " todo ?
 
-set showmatch "brackets
+set showmatch " show matching brackets
+                    
+set showcmd         " todo ??
 
-set numberwidth=4   "Set the line numbers to 4 space
+set scrolloff=2     " todo ??
 
-set colorcolumn=80
+set title           " todo ??
 
-set showcmd
-
-set scrolloff=2
-
-set title
-
-set hlsearch
-nohlsearch
-set incsearch
+set hlsearch        " todo?
+nohlsearch          " todo?
+set incsearch       " todo ??
 
 
 " List completions
-set wildmode=longest:list,full
-
+set wildmode=longest:list,full  " todo ????
 
 let mapleader=","
 let localleader="\\"
-            
 
 map <leader>s :source ~/.vim/vimrc
 
@@ -84,6 +85,8 @@ inoremap <C-U> <Esc>viwUea
 nnoremap <silent> <leader>, :cprevious<CR>
 nnoremap <silent> <leader>. :cnext<CR>
 
+
+""" plugins settings
 
 let g:airline_powerline_fonts = 1
 
