@@ -52,3 +52,6 @@
 [submodule "plugins/vim-airline"]
 	path = plugins/vim-airline
 	url = https://github.com/vim/vim-airline.git
+[submodule "plugins/utl"]
+	path = plugins/utl
+	url = https://github.com/vim-scripts/utl.vim.git
