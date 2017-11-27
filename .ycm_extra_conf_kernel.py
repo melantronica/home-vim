@@ -67,8 +67,12 @@ flags = [
 # Most projects will NOT need to set this to anything; you can just change the
 # 'flags' list of compilation flags. Notice that YCM itself uses that approach.
 compilation_database_folder = ''
-database = ycm_core.CompilationDatabase( compilation_database_folder )
+if compilation_database_folder:
+  database = ycm_core.CompilationDatabase( compilation_database_folder )
+else:
+  database = None
 
+  
 def DirectoryOfThisScript():
   return os.path.dirname( os.path.abspath( __file__ ) )
 
@@ -103,8 +107,25 @@ def MakeRelativePathsInFlagsAbsolute( flags, working_directory ):
 
 
 def FlagsForFile( filename ):
-  relative_to = DirectoryOfThisScript()
-  final_flags = MakeRelativePathsInFlagsAbsolute( flags, relative_to )
+  if compilation_database_folder:
+    if database:
+      # Bear in mind that compilation_info.compiler_flags_ does NOT return a
+      # python list, but a "list-like" StringVec object
+      compilation_info = database.GetCompilationInfoForFile( filename )
+      final_flags = MakeRelativePathsInFlagsAbsolute(
+        compilation_info.compiler_flags_,
+        compilation_info.compiler_working_dir_ )
+
+      # NOTE: This is just for YouCompleteMe; it's highly likely that your project
+      # does NOT need to remove the stdlib flag. DO NOT USE THIS IN YOUR
+      # ycm_extra_conf IF YOU'RE NOT 100% YOU NEED IT.
+      try:
+        final_flags.remove( '-stdlib=libc++' )
+      except ValueError:
+        pass
+  else:
+    relative_to = DirectoryOfThisScript()
+    final_flags = MakeRelativePathsInFlagsAbsolute( flags, relative_to )
   return {
     'flags': final_flags,
     'do_cache': True
