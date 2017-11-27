@@ -6,12 +6,21 @@
 " test
 "
 
-
 """ Use pathogen to load further modules from plugins/
 filetype off
 runtime plugins/pathogen/autoload/pathogen.vim
 let g:pathogen_disabled = []
-"call add(g:pathogen_disabled, 'YouCompleteMe')
+
+call add(g:pathogen_disabled, 'ctrlpe')
+call add(g:pathogen_disabled, 'git-gutter')
+call add(g:pathogen_disabled, 'nercommenter')
+call add(g:pathogen_disabled, 'nerdtree')
+call add(g:pathogen_disabled, 'speeddating')
+call add(g:pathogen_disabled, 'supertab')
+call add(g:pathogen_disabled, 'tagbar')
+call add(g:pathogen_disabled, 'vim-fugitive')
+call add(g:pathogen_disabled, 'ycm-generator')
+
 silent! call pathogen#infect('plugins/{}')
 silent! call pathogen#helptags()
 
@@ -27,64 +36,68 @@ set nobackup
 set nowritebackup
 set noswapfile
 
+set title           " set window title to filename
 set mouse=a         " enable mouse
+
+set hidden          " hide abandoned buffers
+set history=10000   " big history
 
 """ optics
 colorscheme Tomorrow-Night-Bright
 
 set number		    " line numbering
+set numberwidth=4   " gutter = 4 columns
 set relativenumber	" relative numbering
-set colorcolumn=80
+set colorcolumn=80  " highlight col80
+set showcmd         " show command at bottom
 
 """ syntax
 syntax on		" syntax highlightling
 filetype on		" based on names
 
 """ indent
-filetype indent on          " todo ?
-filetype plugin indent on   " todo ?
-set nowrap          " no line wrap
-set tabstop=4       " todo ?
-set shiftwidth=4    " todo ?
-set numberwidth=4   " Set the line numbers to 4 space
-set expandtab       " todo ?
-set smartindent     " todo ?
-set autoindent      " todo ?
+filetype indent on          " load indention ft based
+filetype plugin indent on   " load ft based plugins
+set nowrap          " no line wrapping
+set tabstop=4       " tab = 4 columns
+set shiftwidth=4    " 4 columns reindent
+set expandtab       " expand tabs to spaces
+set smartindent     " indention up to syntax of code
+set autoindent      " automatically transfer indention to next line
+set showmatch       " show matching brackets
 
-set showmatch " show matching brackets
-                    
-set showcmd         " todo ??
+set scrolloff=2     " minimal # of lines around the cursor
 
-set scrolloff=2     " todo ??
 
-set title           " todo ??
-
-set hlsearch        " todo?
-nohlsearch          " todo?
-set incsearch       " todo ??
+set hlsearch        " highlight search results 
+nohlsearch          " why is this here??
+set incsearch       " search while typing 
 
 
 " List completions
 set wildmode=longest:list,full  " todo ????
 
-let mapleader=","
-let localleader="\\"
 
-map <leader>s :source ~/.vim/vimrc
+" keymappings
+let mapleader=","       " leader ,
+let localleader="\\"    " localleader \\
 
-set hidden
-set history=1000
-
-
-
-inoremap jk <Esc>
+" reload vimrc
+map <leader>s :source ~/.vim/vimrc 
+" normal mode
+"inoremap jk <Esc>  we just use ctrl+[
 
 " Convert word to uppercase
 inoremap <C-U> <Esc>viwUea
 
+" <silent> wont echo cmd
+
 nnoremap <silent> <leader>, :cprevious<CR>
 nnoremap <silent> <leader>. :cnext<CR>
 
+" fast c-style comments
+:ab #b /****************************************
+:ab #e *****************************************/
 
 """ plugins settings
 
