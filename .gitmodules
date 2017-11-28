@@ -52,3 +52,15 @@
 	path = plugins/utl
     url = https://github.com/vim-scripts/utl.vim.git
     ignore = dirty
+[submodule "plugins/easytags"]
+	path = plugins/easytags
+	url = https://github.com/xolox/vim-easytags.git
+[submodule "plugins/vim-misc"]
+	path = plugins/vim-misc
+	url = https://github.com/xolox/vim-misc.git
+[submodule "plugins/vim-markdown"]
+	path = plugins/vim-markdown
+	url = https://github.com/tpope/vim-markdown.git
+[submodule "plugins/vim-markdown-folding"]
+	path = plugins/vim-markdown-folding
+	url = https://github.com/nelstrom/vim-markdown-folding.git

@@ -17,6 +17,7 @@ call add(g:pathogen_disabled, 'nercommenter')
 call add(g:pathogen_disabled, 'supertab')
 call add(g:pathogen_disabled, 'tagbar')
 call add(g:pathogen_disabled, 'vim-fugitive')
+"call add(g:pathogen_disabled, 'YouCompleteMe') 
 silent! call pathogen#infect('plugins/{}')
 silent! call pathogen#helptags()
 
@@ -74,14 +75,27 @@ colorscheme Tomorrow-Night-Bright
 set number		    " line numbering
 set numberwidth=4   " gutter = 4 columns
 set relativenumber	" relative numbering
-set colorcolumn=80  " highlight col80
 set showcmd         " show command at bottom
+
+" highlight long lines
+"set colorcolumn=80  " highlight col80 
+highlight ColorColumn ctermbg=darkred
+call matchadd('ColorColumn', '\%79v', 102)  
+
+set foldmethod=indent
+"set foldlevel=1
+
+"augroup vimrc
+"  au BufReadPre * setlocal foldmethod=syntax
+"  au BufWinEnter * if &fdm == 'syntax' | setlocal foldmethod=manual | endif
+"augroup END
 
 """ syntax
 syntax on		" syntax highlightling
 filetype on		" based on names
 
 """ indent
+set nocompatible
 filetype indent on          " load indention ft based
 filetype plugin indent on   " load ft based plugins
 set nowrap          " no line wrapping
@@ -99,6 +113,8 @@ set hlsearch        " highlight search results
 nohlsearch          " why is this here??
 set incsearch       " search while typing 
 
+" :B ghetto bufferlist
+command! -nargs=? -bang B if <q-args> != '' | exe 'buffer '.<q-args> | else | ls<bang> | let buffer_nn=input('Choose buffer: ') | if buffer_nn != '' | exe buffer_nn != 0 ? 'buffer '.buffer_nn : 'enew' | endif | endif
 
 " List completions
 set wildmode=longest:list,full  " todo ????
@@ -163,5 +179,32 @@ map <C-n> :NERDTreeToggle<CR>
 " org-mode
 
 let g:org_agenda_files = [ '~/home/org/*.org', '~/home/org/info/*.org', '~/home/org/knowledge/*.org', '~/work/org/*.org']
+
+" markdown
+
+let g:markdown_fold_style = 'nested' " or 'stacked'                  
+"let g:markdown_fold_override_foldtext = 0
+"set nofoldenable
+set foldlevel=99
+
+" highlighte long lines
+highlight ColorColumn ctermbg=darkred
+call matchadd('ColorColumn', '\%79v', 102)      
+
+
+function! s:DiffWithSaved()
+  let filetype=&ft
+  diffthis
+  vnew | r # | normal! 1Gdd
+  diffthis
+  exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
+endfunction
+com! DiffSaved call s:DiffWithSaved()
+
+function DiffUnsaved()
+    exe "diff  --color=always % -"
+endfunction
+
+
 
 
