@@ -1,7 +1,7 @@
 [submodule "plugins/nerdcommenter"]
 	path = plugins/nerdcommenter
 	url = https://github.com/scrooloose/nerdcommenter.git
-	branch = master
+    branch = master
 [submodule "plugins/nerdtree"]
 	path = plugins/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
@@ -54,4 +54,5 @@
 	url = https://github.com/vim/vim-airline.git
 [submodule "plugins/utl"]
 	path = plugins/utl
-	url = https://github.com/vim-scripts/utl.vim.git
+    url = https://github.com/vim-scripts/utl.vim.git
+    ignore = dirty
