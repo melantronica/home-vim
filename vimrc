@@ -160,12 +160,11 @@ let g:ycm_use_ultisnips_completer = 1
 let g:ycm_key_list_select_completion=[]
 let g:ycm_key_list_previous_completion=[]
 
-let g:ycm_min_num_of_chars_for_completion = 3
-
+"let g:ycm_min_num_of_chars_for_completion = 3
 
 let g:ycm_global_ycm_extra_conf='~/ycm_extra_conf.py'
 "let g:ycm_global_ycm_extra_conf='~/ycm_extra_conf_kernel.py'
-
+let g:ycm_auto_trigger = 0
 " }}}
 
 
