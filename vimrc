@@ -33,7 +33,37 @@ set nowritebackup
 set noswapfile
 
 set title           " set window title to filename
-set mouse=a         " enable mouse
+set mouse=a         " enable mouse in all modes
+
+set virtualedit=all                     " move around freely
+
+" {{{ cursor
+
+""" fancy cursor-crosshair
+augroup CursorLine
+    au!
+    au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+    au VimEnter,WinEnter,BufWinEnter * setlocal cursorcolumn
+    au WinLeave * setlocal nocursorline
+    au WinLeave * setlocal nocursorcolumn
+augroup END
+
+""" lines around the cursor
+"set scrolloff=3        " min 3 lines above/below cursor while scrolling
+
+" cursor centered
+set scrolloff=999
+
+" cursor is dash when in insert mode
+let &t_SI = "\e[6 q"
+let &t_EI = "\e[2 q"
+
+" optional reset cursor on start:
+augroup myCmds
+au!
+autocmd VimEnter * silent !echo -ne "\e[2 q"
+augroup END
+
 
 set hidden          " hide abandoned buffers
 set history=10000   " big history
@@ -105,10 +135,10 @@ let g:airline_theme='serene'
 let g:clang_library_path = "/usr/lib64/"
 let g:clang_complete_copen = 0
 let g:clang_hl_errors = 1
-let g:clang_snippets = 1
-let g:clang_snippets_engine = "ultisnips"
+"let g:clang_snippets = 1
+"let g:clang_snippets_engine = "ultisnips"
 let g:clang_close_preview = 1
-let g:clang_complete_macros = 1
+"let g:clang_complete_macros = 1
 
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
@@ -116,12 +146,11 @@ let g:ycm_use_ultisnips_completer = 1
 let g:ycm_key_list_select_completion=[]
 let g:ycm_key_list_previous_completion=[]
 
+let g:ycm_min_num_of_chars_for_completion = 3
 
-if getcwd() =~ "kernel"
-    let g:ycm_global_ycm_extra_conf='~/ycm_extra_conf_kernel.py'
-else
-    let g:ycm_global_ycm_extra_conf='~/ycm_extra_conf.py'
-endif
+
+let g:ycm_global_ycm_extra_conf='~/ycm_extra_conf.py'
+"let g:ycm_global_ycm_extra_conf='~/ycm_extra_conf_kernel.py'
 
 " }}}
 
