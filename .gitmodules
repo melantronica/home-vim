@@ -42,10 +42,6 @@
 	path = plugins/tagbar
 	url = https://github.com/majutsushi/tagbar.git
 	branch = master
-[submodule "plugins/ycm-generator"]
-	path = plugins/ycm-generator
-	url = https://github.com/rdnetto/YCM-Generator.git
-	branch = master
 [submodule "plugins/airline-themes"]
 	path = plugins/airline-themes
 	url = https://github.com/vim-airline/vim-airline-themes.git
