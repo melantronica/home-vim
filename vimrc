@@ -205,11 +205,15 @@ com! DiffSaved call s:DiffWithSaved()
 "" whitespaces
 " http://vim.wikia.com/wiki/Highlight_unwanted_spaces
 let g:whitespacemode = 'nospace'
-function TntclToggleWhitespace()
+function! TntclToggleWhitespace()
     if  g:whitespacemode == 'nospace' 
-        let g:whitespacemode = 'all'
+        let g:whitespacemode = 'noeol'
         exec "set listchars=eol:$,tab:\uBB\uBB,trail:\uB7,nbsp:~,precedes:\uB7,extends:\uB7"
         echo "showing no spaces"
+    elseif  g:whitespacemode == 'noeol' 
+        let g:whitespacemode = 'all'
+        exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~,precedes:\uB7,extends:\uB7"
+        echo "no spaces no tabs"
     elseif g:whitespacemode == 'all'  
         let g:whitespacemode = 'nospace'
         exec "set listchars=eol:$,tab:\uBB\uBB,trail:\uB7,nbsp:~,precedes:\uB7,extends:\uB7,space:\uB7"
@@ -218,8 +222,8 @@ function TntclToggleWhitespace()
 endfunction
 
 exec "set listchars=eol:$,tab:\uBB\uBB,trail:\uB7,nbsp:~,precedes:\uB7,extends:\uB7"
-map <leader>w :set list!<CR>
-map <leader>W :call TntclToggleWhitespace()<CR>
+map <leader>W :set list!<CR>
+map <leader>w :call TntclToggleWhitespace()<CR>
 
 
 set list
