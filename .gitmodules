@@ -67,3 +67,6 @@
 [submodule "plugins/syntastic"]
 	path = plugins/syntastic
 	url = https://github.com/vim-syntastic/syntastic.git
+[submodule "plugins/awesome-vim-colorschemes"]
+	path = plugins/awesome-vim-colorschemes
+	url = https://github.com/rafi/awesome-vim-colorschemes.git
