@@ -75,6 +75,28 @@ set history=10000   " big history
 """ optics
 colorscheme Tomorrow-Night-Bright
 
+"colorscheme abstract
+"colorscheme afterglow
+"colorscheme anderson
+"colorscheme angr
+"colorscheme deus
+"colorscheme carbonized
+"colorscheme flatcolor
+"colorscheme gruvbox
+"colorscheme parsec
+"colorscheme jellybeans
+"colorscheme lucid
+"colorscheme minimalist
+"colorscheme molokai
+"colorscheme onedark
+"colorscheme sierra
+"colorscheme tender
+""colorscheme twilight
+"colorscheme wombat256mod
+""colorscheme vivdchalk
+""colorscheme candy
+
+
 set number		    " line numbering
 set numberwidth=4   " gutter = 4 columns
 set relativenumber	" relative numbering
