@@ -64,3 +64,6 @@
 [submodule "plugins/vim-markdown-folding"]
 	path = plugins/vim-markdown-folding
 	url = https://github.com/nelstrom/vim-markdown-folding.git
+[submodule "plugins/syntastic"]
+	path = plugins/syntastic
+	url = https://github.com/vim-syntastic/syntastic.git

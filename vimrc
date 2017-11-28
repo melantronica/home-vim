@@ -36,7 +36,7 @@ set noswapfile
 set title           " set window title to filename
 set mouse=a         " enable mouse in all modes
 
-set virtualedit=all                     " move around freely
+"set virtualedit=all                     " move around freely
 
 " {{{ cursor
 
@@ -49,9 +49,12 @@ augroup CursorLine
     au WinLeave * setlocal nocursorcolumn
 augroup END
 
+let g:syntastic_check_on_open=1
+let g:syntastic_check_on_wq=0
+
+
 """ lines around the cursor
 "set scrolloff=3        " min 3 lines above/below cursor while scrolling
-
 " cursor centered
 set scrolloff=999
 
@@ -84,11 +87,6 @@ call matchadd('ColorColumn', '\%79v', 102)
 
 set foldmethod=indent
 "set foldlevel=1
-
-"augroup vimrc
-"  au BufReadPre * setlocal foldmethod=syntax
-"  au BufWinEnter * if &fdm == 'syntax' | setlocal foldmethod=manual | endif
-"augroup END
 
 """ syntax
 syntax on		" syntax highlightling
@@ -151,7 +149,7 @@ let g:airline_theme='serene'
 let g:clang_library_path = "/usr/lib64/"
 let g:clang_complete_copen = 0
 let g:clang_hl_errors = 1
-"let g:clang_snippets = 1
+"let g:clang_snippets = 1l
 "let g:clang_snippets_engine = "ultisnips"
 let g:clang_close_preview = 1
 "let g:clang_complete_macros = 1
@@ -184,14 +182,14 @@ let g:org_agenda_files = [ '~/home/org/*.org', '~/home/org/info/*.org', '~/home/
 
 let g:markdown_fold_style = 'nested' " or 'stacked'                  
 "let g:markdown_fold_override_foldtext = 0
-"set nofoldenable
+"set nofoldenable                          
 set foldlevel=99
 
 " highlighte long lines
 highlight ColorColumn ctermbg=darkred
-call matchadd('ColorColumn', '\%79v', 102)      
+    
 
-
+" diff local buffer
 function! s:DiffWithSaved()
   let filetype=&ft
   diffthis
@@ -201,10 +199,28 @@ function! s:DiffWithSaved()
 endfunction
 com! DiffSaved call s:DiffWithSaved()
 
-function DiffUnsaved()
-    exe "diff  --color=always % -"
+"  '!diff  --color=always % -'
+
+
+"" whitespaces
+" http://vim.wikia.com/wiki/Highlight_unwanted_spaces
+let g:whitespacemode = 'nospace'
+function TntclToggleWhitespace()
+    if  g:whitespacemode == 'nospace' 
+        let g:whitespacemode = 'all'
+        exec "set listchars=eol:$,tab:\uBB\uBB,trail:\uB7,nbsp:~,precedes:\uB7,extends:\uB7"
+        echo "showing no spaces"
+    elseif g:whitespacemode == 'all'  
+        let g:whitespacemode = 'nospace'
+        exec "set listchars=eol:$,tab:\uBB\uBB,trail:\uB7,nbsp:~,precedes:\uB7,extends:\uB7,space:\uB7"
+        echo "showing all"
+   endif     
 endfunction
 
+exec "set listchars=eol:$,tab:\uBB\uBB,trail:\uB7,nbsp:~,precedes:\uB7,extends:\uB7"
+map <leader>w :set list!<CR>
+map <leader>W :call TntclToggleWhitespace()<CR>
 
 
+set list
 
