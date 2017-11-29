@@ -10,8 +10,9 @@
 filetype off
 runtime plugins/pathogen/autoload/pathogen.vim
 let g:pathogen_disabled = []
-call add(g:pathogen_disabled, 'ctrlp')
 call add(g:pathogen_disabled, 'git-gutter')
+call add(g:pathogen_disabled, 'utl')
+call add(g:pathogen_disabled, 'ctrlp')
 call add(g:pathogen_disabled, 'nercommenter')
 "call add(g:pathogen_disabled, 'speeddating')
 call add(g:pathogen_disabled, 'supertab')
