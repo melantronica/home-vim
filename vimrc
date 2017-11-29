@@ -21,11 +21,6 @@ call add(g:pathogen_disabled, 'vim-fugitive')
 silent! call pathogen#infect('plugins/{}')
 silent! call pathogen#helptags()
 
-" load org-mode
-call plug#begin('~/.vim/plugged')
-Plug 'https://github.com/jceb/vim-orgmode.git'
-call plug#end()
-
 let name = "Bastian Zeller"
 
 " automatically set current path to buffer path
