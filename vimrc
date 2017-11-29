@@ -73,8 +73,8 @@ set hidden          " hide abandoned buffers
 set history=10000   " big history
 
 """ optics
-colorscheme Tomorrow-Night-Bright
-
+colorscheme "tentacle"
+"colorscheme Tomorrow-Night-Bright
 "colorscheme abstract
 "colorscheme afterglow
 "colorscheme anderson
