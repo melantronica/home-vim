@@ -28,6 +28,9 @@ call plug#end()
 
 let name = "Bastian Zeller"
 
+" automatically set current path to buffer path
+" autocmd BufEnter * silent! lcd %:p:h
+
 " Do not create backup files
 set nobackup
 set nowritebackup
@@ -125,6 +128,11 @@ let localleader="\\"    " localleader \\
 
 " reload vimrc
 map <leader>s :source ~/.vim/vimrc 
+" leader-e gives us and edit command with the current path
+
+map <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
+
+
 " normal mode
 "inoremap jk <Esc>  we just use ctrl+[
 
