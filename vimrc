@@ -27,6 +27,10 @@ let name = "Bastian Zeller"
 " automatically set current path to buffer path
 " autocmd BufEnter * silent! lcd %:p:h
 
+" color map:
+" http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
+
+
 " Do not create backup files
 set nobackup
 set nowritebackup
