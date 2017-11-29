@@ -51,7 +51,6 @@
 [submodule "plugins/utl"]
 	path = plugins/utl
     url = https://github.com/vim-scripts/utl.vim.git
-    ignore = dirty
 [submodule "plugins/easytags"]
 	path = plugins/easytags
 	url = https://github.com/xolox/vim-easytags.git
