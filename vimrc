@@ -1,3 +1,6 @@
+"" vimrc
+"" Bastian Zeller
+
 "" # some links {{{
 "" https://raw.githubusercontent.com/rasendubi/dotfiles/master/.vimrc
 "" https://github.com/Valloric/YouCompleteMe#ubuntu-linux-x64
@@ -150,7 +153,8 @@ set incsearch       " search while typing
 "" # }}}
 
 "" # keybindings {{{
-
+"" https://blog.codepen.io/2014/02/21/vim-key-bindings/
+"" https://hea-www.harvard.edu/~fine/Tech/vi.html
 
 " keymappings
 let mapleader=","       " leader ,
@@ -234,7 +238,7 @@ function! FoldText()
 
     let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
     let fillcharcount = windowwidth - len(line) - len(foldedlinecount) - 9 
-    return line . '   ' . repeat("-",fillcharcount) . ' [' . foldedlinecount . '] ...  '
+    return line . '   ' . repeat("-",fillcharcount) . ' [' . foldedlinecount . '] +++  '
 endfunction 
 set foldtext=FoldText()
 
