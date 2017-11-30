@@ -11,6 +11,8 @@ hi markdownH4     guifg=#FFB6C1        guibg=NONE     gui=NONE      ctermfg=107 
 hi markdownH5     guifg=#FFB6C1        guibg=NONE     gui=NONE      ctermfg=133      ctermbg=NONE   cterm=NONE
 hi markdownH6     guifg=#FFB6C1        guibg=NONE     gui=NONE      ctermfg=53      ctermbg=NONE   cterm=NONE
 
+hi Folded         guibg=NONE           ctermfg=152    ctermbg=233
+
 "hi markdownHeadingRule           markdownRule
 "hi markdownH1Delimiter           markdownHeadingDelimiter
 "hi markdownH2Delimiter           markdownHeadingDelimiter
