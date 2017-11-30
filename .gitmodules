@@ -72,3 +72,6 @@
 [submodule "plugins/vim-surround"]
 	path = plugins/vim-surround
 	url = https://github.com/tpope/vim-surround.git
+[submodule "plugins/riv"]
+	path = plugins/riv
+	url = https://github.com/Rykka/riv.vim.git
