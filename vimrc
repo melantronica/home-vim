@@ -204,8 +204,8 @@ let g:org_agenda_files = [ '~/home/org/*.org', '~/home/org/info/*.org', '~/home/
 
 let g:markdown_fold_style = 'nested' " or 'stacked'                  
 "let g:markdown_fold_override_foldtext = 0
-"set nofoldenable                          
-"set foldlevel=1
+set nofoldenable                          
+set foldlevel=1
 
 " highlighte long lines
 highlight ColorColumn ctermbg=darkred
