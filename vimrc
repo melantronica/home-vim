@@ -10,15 +10,29 @@
 filetype off
 runtime plugins/pathogen/autoload/pathogen.vim
 let g:pathogen_disabled = []
-call add(g:pathogen_disabled, 'git-gutter')
-call add(g:pathogen_disabled, 'utl')
+
+
+"call add(g:pathogen_disabled, 'airline-themes')
+"call add(g:pathogen_disabled, 'awesome-vim-colorschemes')
 call add(g:pathogen_disabled, 'ctrlp')
-call add(g:pathogen_disabled, 'nercommenter')
-"call add(g:pathogen_disabled, 'speeddating')
-call add(g:pathogen_disabled, 'supertab')
+call add(g:pathogen_disabled, 'easytags')
+call add(g:pathogen_disabled, 'git-gutter')
+call add(g:pathogen_disabled, 'nerdcommenter')
+call add(g:pathogen_disabled, 'nerdtree')
+"call add(g:pathogen_disabled, 'pathogen')
+call add(g:pathogen_disabled, 'speeddating')
+call add(g:pathogen_disabled, 'subertab')
+call add(g:pathogen_disabled, 'syntastic')
 call add(g:pathogen_disabled, 'tagbar')
+"call add(g:pathogen_disabled, 'vim-airline')
 call add(g:pathogen_disabled, 'vim-fugitive')
-"call add(g:pathogen_disabled, 'YouCompleteMe') 
+"call add(g:pathogen_disabled, 'vim-markdown')
+"call add(g:pathogen_disabled, 'vim-markdown-folding')
+call add(g:pathogen_disabled, 'vim-misc')
+call add(g:pathogen_disabled, 'vim-surround')
+"call add(g:pathogen_disabled, 'YouCompleteMe')
+
+
 silent! call pathogen#infect('plugins/{}')
 silent! call pathogen#helptags()
 
