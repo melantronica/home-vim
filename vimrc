@@ -368,12 +368,9 @@ let g:markdown_fold_style = 'nested' " or 'stacked'
 "let g:markdown_fold_override_foldtext = 0
 "" }}}
 
-
 "" ## ctrlp {{{
-
 "nunmap <C-p>
 nnoremap <C-p> :CtrlPBuffer <CR> 
-
 "" ## }}}
 
 
