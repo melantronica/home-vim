@@ -59,7 +59,7 @@ set nobackup
 set nowritebackup
 set noswapfile
 
-set title               " set window title to filename
+"set title               " set window title to filename
 set mouse=a             " enable mouse in all modes
 "set virtualedit=all    " move around freely
 
@@ -69,13 +69,12 @@ set history=10000       " big history
 "" :B ghetto bufferlist
 command! -nargs=? -bang B if <q-args> != '' | exe 'buffer '.<q-args> | else | ls<bang> | let buffer_nn=input('Choose buffer: ') | if buffer_nn != '' | exe buffer_nn != 0 ? 'buffer '.buffer_nn : 'enew' | endif | endif
 
-
 " List completions
 set wildmode=longest:list,full  " completition style
 
 "" # }}}
 
-"" # colors {{{
+"" # syntax, highlight {{{
 "colorscheme Tomorrow-Night-Bright
 colorscheme tentacle
 
@@ -90,14 +89,13 @@ highlight ColorColumn ctermbg=darkred
 call matchadd('ColorColumn', '\%79v', 102)  
 
 "" syntax
-syntax on		" syntax highlightling
-filetype on		" based on names
-
+set nocompatible
+syntax on		    " syntax highlightling
+filetype on		    " based on names
+filetype indent on  " load indention ft based
+filetype plugin indent on   " load ft based plugins
 
 "" indent
-set nocompatible
-filetype indent on          " load indention ft based
-filetype plugin indent on   " load ft based plugins
 set nowrap          " no line wrapping
 set tabstop=4       " tab = 4 columns
 set shiftwidth=4    " 4 columns reindent
@@ -106,17 +104,9 @@ set smartindent     " indention up to syntax of code
 set autoindent      " automatically transfer indention to next line
 set showmatch       " show matching brackets
 
-
-
-
-set scrolloff=2     " minimal # of lines around the cursor
-
-
 set hlsearch        " highlight search results 
 nohlsearch          " why is this here??
 set incsearch       " search while typing 
-
-
 "" # }}}
 
 "" # cursor {{{
@@ -130,29 +120,27 @@ augroup CursorLine
     au WinLeave * setlocal nocursorcolumn
 augroup END
 
-let g:syntastic_check_on_open=1
-let g:syntastic_check_on_wq=0
-
+let g:syntastic_check_on_open=1     "
+let g:syntastic_check_on_wq=0       "
 
 """ lines around the cursor
-set scrolloff=3        " min 3 lines above/below cursor while scrolling
-" cursor centered
-"set scrolloff=999
+"set scrolloff=2    " minimal # of lines around the cursor
+set scrolloff=3     " mininmal # of lines around the cursor
+"set scrolloff=999  " cursor centered
+
 
 " cursor is dash when in insert mode
 let &t_SI = "\e[6 q"
 let &t_EI = "\e[2 q"
-
 " optional reset cursor on start:
 augroup myCmds
 au!
 autocmd VimEnter * silent !echo -ne "\e[2 q"
 augroup END
-
-
 "" # }}}
 
 "" # folding {{{
+"" make folded blocks more readable
 function! FoldText()
     let line = getline(v:foldstart)
 
@@ -170,9 +158,11 @@ function! FoldText()
 endfunction 
 set foldtext=FoldText()
 
-set nofoldenable
-set foldlevel=1
+set nofoldenable        " we start without folding
+set foldlevel=1         " if enabled we want to have foldlevel 1 expanded
+set foldmethod=marker   " default mode is marker, so {{{ }}} gives us folding
 
+"" toggle through different foldmethods
 noremap <Leader>zf :call <SID>ToggleFold()<CR>
 function! s:ToggleFold()
     if &foldmethod == 'marker'
@@ -184,12 +174,14 @@ function! s:ToggleFold()
     endif
     echo 'foldmethod is now ' . &l:foldmethod
 endfunction
-set foldmethod=marker
 "" # }}}
 
 "" # whitespaces {{{
-set list    " show listchars
+set list    " show listchars by default
+set listchars=eol:$,tab:\ \ ,trail:·,nbsp:~,precedes:·,extends:·
 " http://vim.wikia.com/wiki/Highlight_unwanted_spaces
+
+"" function to switch between different listchars
 let g:whitespacemode = 'nospacenotab'
 function! TntclToggleWhitespace()
     if  g:whitespacemode == 'nospacenotab' 
@@ -209,49 +201,61 @@ function! TntclToggleWhitespace()
         set listchars=eol:$,tab:>\ ,trail:·,nbsp:~,precedes:·,extends:·,space:·
         echo "showing all"
    endif     
-
 endfunction
-"" default setting
 
-set listchars=eol:$,tab:\ \ ,trail:·,nbsp:~,precedes:·,extends:·
-" on/off
-map <leader>W :set list!<CR>
-" toggle visible listchars
+"" " keybindings
+"" on/off
+map <leader>W :set list!<CR>                        
+"" toggle visible listchars
 map <leader>w :call TntclToggleWhitespace()<CR>
+"" # }}}
+
+"" # diff buffer {{{
+"" diff local buffer
+function! s:DiffWithSaved()
+  let filetype=&ft
+  diffthis
+  vnew | r # | normal! 1Gdd
+  diffthis
+  exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
+endfunction
+com! DiffSaved call s:DiffWithSaved()
+
+"" another way of diffing local changes
+"  '!diff  --color=always % -'
 "" # }}}
 
 "" # keybindings {{{
 "" https://blog.codepen.io/2014/02/21/vim-key-bindings/
 "" https://hea-www.harvard.edu/~fine/Tech/vi.html
+"" <silent> wont echo cmd
 
-" keymappings
-let mapleader=","       " leader ,
-let localleader="\\"    " localleader \\
+"" leader keys
+let mapleader=","       " leader , (comma)
+let localleader="\\"    " localleader \\ (backslash)
 
-" reload vimrc
+"" reload vimrc
 map <leader>s :source ~/.vim/vimrc 
-" leader-e gives us and edit command with the current path
 
+"" edit file with current path filled out
 map <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 
 
-" normal mode
+"" normal mode
 "inoremap jk <Esc>  we just use ctrl+[
 
 " Convert word to uppercase
 inoremap <C-U> <Esc>viwUea
 
-" <silent> wont echo cmd
-
 nnoremap <silent> <leader>, :cprevious<CR>
 nnoremap <silent> <leader>. :cnext<CR>
+"" # }}}
 
+"" # abbrev {{{
 " fast c-style comments
 :ab #b /****************************************
 :ab #e *****************************************/
-
-
-"" # }}}
+"" }}}
 
 "" # plugin settings {{{
 
@@ -296,20 +300,6 @@ let g:markdown_fold_style = 'nested' " or 'stacked'
 
 
 "" }}}
-
-"" # diff buffer {{{
-" diff local buffer
-function! s:DiffWithSaved()
-  let filetype=&ft
-  diffthis
-  vnew | r # | normal! 1Gdd
-  diffthis
-  exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
-endfunction
-com! DiffSaved call s:DiffWithSaved()
-
-"  '!diff  --color=always % -'
-"" # }}}
 
 
 
