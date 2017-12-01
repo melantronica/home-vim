@@ -266,32 +266,53 @@ let g:airline_theme='serene'
 "" ## }}}
 
 "" ## YCM settings {{{
-let g:clang_library_path = "/usr/lib64/"
-let g:clang_complete_copen = 0
-let g:clang_hl_errors = 1
-"let g:clang_snippets = 1l
-"let g:clang_snippets_engine = "ultisnips"
-let g:clang_close_preview = 1
-"let g:clang_complete_macros = 1
 
+"" ### completion triggers {{{
+"" keybindings
+let g:ycm_key_invoke_completion = '<C-Space>'
+let g:ycm_key_list_select_completion=['<TAB>', '<Down>']
+let g:ycm_key_list_previous_completion=['<S-TAB>', '<Up>']
+
+"" disable in-buffer auto-completition popup
+let g:ycm_min_num_of_chars_for_completion = 99  " disable identifier completer
+"let g:ycm_auto_trigger = 0                      " disable identifier+semantic completer
+
+let g:ycm_complete_in_comments = 1              " comment inline completion
+let g:ycm_complete_in_strings = 1               " string completion
+
+"" ### }}}
+
+"" ### window behaviour {{{
+
+"" automatically close preview after selction
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_use_ultisnips_completer = 1
-let g:ycm_key_list_select_completion=[]
-let g:ycm_key_list_previous_completion=[]
 
-let g:ycm_min_num_of_chars_for_completion = 99 
+"" open gotos in a vertical split
+""[ 'same-buffer', 'horizontal-split', 'vertical-split', 'new-tab', 'new-or-existing-tab' ] 
+let g:ycm_goto_buffer_command = 'horizontal-split'
+"" ### }}}
 
-let g:ycm_global_ycm_extra_conf='~/ycm_extra_conf.py'
-"let g:ycm_global_ycm_extra_conf='~/ycm_extra_conf_kernel.py'
-let g:ycm_auto_trigger = 0
-" ## }}}
+"" ### identifier sources {{{
+let g:ycm_collect_identifiers_from_tags_files = 1   " we want tags files to be used
+let g:ycm_seed_identifiers_with_syntax = 0          " use vims syntax file to get language identifiers
+"" ### }}}
+
+"" ### ycm_extra_conf {{{
+let g:ycm_confirm_extra_conf = 1                    " automatically load extra conf when found recursively
+let g:ycm_global_ycm_extra_conf='~/ycm_extra_conf.py'   " otherwise load this
+"let g:ycm_global_ycm_extra_conf='~/ycm_extra_conf.py.kernel'
+"let g:ycm_global_ycm_extra_conf='~/ycm_extra_conf.py.android'
+
+"" white- and blacklist for conf files (! is blocklist)
+"let g:ycm_extra_conf_globlist = ['~/dev/*','!~/*']
+"" ### }}}
+"" ## }}}
 
 "" ## nerdtree {{{
 let NERDTreeHijackNetrw=1
 map <C-n> :NERDTreeToggle<CR>
 "" ## }}}
-
 
 "" ## markdown {{{
 let g:markdown_fold_style = 'nested' " or 'stacked'
