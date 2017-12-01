@@ -4,14 +4,17 @@ let g:colors_name = "tentacle"
 
 
 
-hi markdownH1     guifg=#FFB6C1        guibg=NONE     gui=NONE      ctermfg=104      ctermbg=NONE   cterm=NONE
-hi markdownH2     guifg=#FFB6C1        guibg=NONE     gui=NONE      ctermfg=130      ctermbg=NONE   cterm=NONE
-hi markdownH3     guifg=#FFB6C1        guibg=NONE     gui=NONE      ctermfg=33      ctermbg=NONE   cterm=NONE
-hi markdownH4     guifg=#FFB6C1        guibg=NONE     gui=NONE      ctermfg=107      ctermbg=NONE   cterm=NONE
-hi markdownH5     guifg=#FFB6C1        guibg=NONE     gui=NONE      ctermfg=133      ctermbg=NONE   cterm=NONE
-hi markdownH6     guifg=#FFB6C1        guibg=NONE     gui=NONE      ctermfg=53      ctermbg=NONE   cterm=NONE
+hi markdownH1   guifg=#FFB6C1   guibg=NONE      gui=NONE    ctermfg=104     ctermbg=NONE    cterm=NONE
+hi markdownH2   guifg=#FFB6C1   guibg=NONE      gui=NONE    ctermfg=130     ctermbg=NONE    cterm=NONE
+hi markdownH3   guifg=#FFB6C1   guibg=NONE      gui=NONE    ctermfg=33      ctermbg=NONE    cterm=NONE
+hi markdownH4   guifg=#FFB6C1   guibg=NONE      gui=NONE    ctermfg=107     ctermbg=NONE    cterm=NONE
+hi markdownH5   guifg=#FFB6C1   guibg=NONE      gui=NONE    ctermfg=133     ctermbg=NONE    cterm=NONE
+hi markdownH6   guifg=#FFB6C1   guibg=NONE      gui=NONE    ctermfg=53      ctermbg=NONE    cterm=NONE
 
-hi Folded         guibg=NONE           ctermfg=152    ctermbg=233
+hi Folded       guibg=NONE      guibg=NONE      gui=NONE    ctermfg=152     ctermbg=233     cterm=NONE
+
+hi ColorColumn  ctermbg=darkred
+
 
 "hi markdownHeadingRule           markdownRule
 "hi markdownH1Delimiter           markdownHeadingDelimiter
