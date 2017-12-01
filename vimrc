@@ -295,6 +295,12 @@ let g:ycm_complete_in_strings = 1               " string completion
 
 "" ### }}}
 
+"" ### keybindings {{{
+nnoremap <leader>y :YcmCompleter GoTo<CR>
+nnoremap <leader>Y :YcmCompleter GoTo
+"" ### }}}
+
+
 "" ### window behaviour {{{
 
 "" automatically close preview after selction
@@ -303,7 +309,7 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 
 "" open gotos in a vertical split
 ""[ 'same-buffer', 'horizontal-split', 'vertical-split', 'new-tab', 'new-or-existing-tab' ] 
-let g:ycm_goto_buffer_command = 'horizontal-split'
+let g:ycm_goto_buffer_command = 'same-buffer'
 "" ### }}}
 
 "" ### identifier sources {{{
@@ -312,7 +318,7 @@ let g:ycm_seed_identifiers_with_syntax = 0          " use vims syntax file to ge
 "" ### }}}
 
 "" ### ycm_extra_conf {{{
-let g:ycm_confirm_extra_conf = 1                    " automatically load extra conf when found recursively
+let g:ycm_confirm_extra_conf = 0                    " automatically load extra conf when found recursively
 let g:ycm_global_ycm_extra_conf='~/ycm_extra_conf.py'   " otherwise load this
 "let g:ycm_global_ycm_extra_conf='~/ycm_extra_conf.py.kernel'
 "let g:ycm_global_ycm_extra_conf='~/ycm_extra_conf.py.android'
