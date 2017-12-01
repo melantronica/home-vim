@@ -73,7 +73,9 @@ command! -nargs=? -bang B if <q-args> != '' | exe 'buffer '.<q-args> | else | ls
 " List completions
 set wildmode=longest:list,full  " completition style
 
-"" # }}}
+au CursorHold * checktime
+
+" # }}}
 
 "" # syntax, highlight {{{
 "colorscheme Tomorrow-Night-Bright
@@ -275,6 +277,12 @@ imap <S-Up> <Esc>v<Up>
 imap <S-Down> <Esc>v<Down>
 imap <S-Left> <Esc>v<Left>
 imap <S-Right> <Esc>v<Right>
+"" shift+home selection
+imap <S-Home> <C-o>v<Home>
+imap <S-End> <C-o>v<End>
+nmap <S-Home> v<Home>
+nmap <S-End> v<End>
+
 "" ctrl-cxv
 vmap <C-c> y<Esc>
 vmap <C-x> d<Esc>
@@ -286,8 +294,6 @@ imap <C-h> <C-o>h
 imap <C-j> <C-o>j
 imap <C-k> <C-o>k
 imap <C-l> <C-o>l
-
-
 
 
 set whichwrap+=h,l,<,>,[,]
@@ -376,5 +382,4 @@ nnoremap <C-p> :CtrlPBuffer <CR>
 
 "" }}}
 
-"" TODO: something was overwriting this... no clue why!
-highlight ColorColumn ctermbg=darkred
+
