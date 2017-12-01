@@ -90,12 +90,9 @@ nnoremap <silent> <leader>l :set rnu!<CR>
 "" this only shows relative linenumbers on the active split
 augroup numbertoggle
   autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+  autocmd BufEnter,FocusGained * set relativenumber
+  autocmd BufLeave,FocusLost   * set norelativenumber
 augroup END
-
-
-
 
 " highlight long lines
 "set colorcolumn=80  " highlight col80 
