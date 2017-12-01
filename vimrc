@@ -262,6 +262,29 @@ inoremap <C-U> <Esc>viwUea
 
 nnoremap <silent> <leader>, :cprevious<CR>
 nnoremap <silent> <leader>. :cnext<CR>
+
+" shift+arrow selection
+nmap <S-Up> v<Up>
+nmap <S-Down> v<Down>
+nmap <S-Left> v<Left>
+nmap <S-Right> v<Right>
+vmap <S-Up> <Up>
+vmap <S-Down> <Down>
+vmap <S-Left> <Left>
+vmap <S-Right> <Right>
+imap <S-Up> <Esc>v<Up>
+imap <S-Down> <Esc>v<Down>
+imap <S-Left> <Esc>v<Left>
+imap <S-Right> <Esc>v<Right>
+" ctrl-cxv
+vmap <C-c> y<Esc>
+vmap <C-x> d<Esc>
+map  <C-v> p
+imap <C-v> <Esc>pi
+imap <C-z> <Esc>ui
+
+set whichwrap+=h,l,<,>,[,]
+set backspace=indent,eol,start
 "" # }}}
 
 "" # abbrev {{{
