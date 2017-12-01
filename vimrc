@@ -17,23 +17,24 @@ filetype off
 runtime plugins/pathogen/autoload/pathogen.vim
 let g:pathogen_disabled = []
 "" disabled plugins
-"call add(g:pathogen_disabled, 'airline-themes')
-"call add(g:pathogen_disabled, 'awesome-vim-colorschemes')
-call add(g:pathogen_disabled, 'ctrlp')
-call add(g:pathogen_disabled, 'easytags')
-call add(g:pathogen_disabled, 'git-gutter')
+"call add(g:pathogen_disabled, 'airline-themes')            " airline themes
+call add(g:pathogen_disabled, 'awesome-vim-colorschemes')  " some nice colors
+"call add(g:pathogen_disabled, 'ctrlp')                     " fuzzy finder
+"call add(g:pathogen_disabled, 'easytags')
+"call add(g:pathogen_disabled, 'git-gutter')
 call add(g:pathogen_disabled, 'nerdcommenter')
-call add(g:pathogen_disabled, 'nerdtree')
+"call add(g:pathogen_disabled, 'nerdtree')
 "call add(g:pathogen_disabled, 'pathogen')
-call add(g:pathogen_disabled, 'speeddating')
-call add(g:pathogen_disabled, 'subertab')
-call add(g:pathogen_disabled, 'syntastic')
-call add(g:pathogen_disabled, 'tagbar')
+"call add(g:pathogen_disabled, 'riv')                       " rst note taking
+call add(g:pathogen_disabled, 'speeddating')                " pretty formatted dates
+call add(g:pathogen_disabled, 'subertab')                   " magic tab key TODO
+call add(g:pathogen_disabled, 'syntastic')                  " not sure if I want that
+call add(g:pathogen_disabled, 'tagbar')                     
 "call add(g:pathogen_disabled, 'vim-airline')
 call add(g:pathogen_disabled, 'vim-fugitive')
 "call add(g:pathogen_disabled, 'vim-markdown')
 "call add(g:pathogen_disabled, 'vim-markdown-folding')
-call add(g:pathogen_disabled, 'vim-misc')
+"call add(g:pathogen_disabled, 'vim-misc')
 call add(g:pathogen_disabled, 'vim-surround')
 "call add(g:pathogen_disabled, 'YouCompleteMe')
 
