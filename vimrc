@@ -248,7 +248,7 @@ let g:markdown_fold_style = 'nested' " or 'stacked'
 set nofoldenable                          
 set foldlevel=1
 
-nmap <Leader>zf :call <SID>ToggleFold()<CR>
+noremap <Leader>zf :call <SID>ToggleFold()<CR>
 function! s:ToggleFold()
     if &foldmethod == 'marker'
         let &l:foldmethod = 'syntax'
@@ -280,19 +280,23 @@ com! DiffSaved call s:DiffWithSaved()
 "" # whitespaces {{{
 set list    " show listchars
 " http://vim.wikia.com/wiki/Highlight_unwanted_spaces
-let g:whitespacemode = 'nospace'
+let g:whitespacemode = 'nospacenotab'
 function! TntclToggleWhitespace()
-    if  g:whitespacemode == 'nospace' 
+    if  g:whitespacemode == 'nospacenotab' 
+        let g:whitespacemode = 'nospace'
+        set listchars=eol:$,tab:\ \ ,trail:·,nbsp:~,precedes:·,extends:·
+        echo "showing no spaces no tabs"
+    elseif  g:whitespacemode == 'nospace' 
         let g:whitespacemode = 'noeol'
-        exec "set listchars=eol:$,tab:\uBB\uBB,trail:\uB7,nbsp:~,precedes:\uB7,extends:\uB7"
+        set listchars=eol:$,tab:>\ ,trail:·,nbsp:~,precedes:·,extends:·
         echo "showing no spaces"
     elseif  g:whitespacemode == 'noeol' 
         let g:whitespacemode = 'all'
-        exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~,precedes:\uB7,extends:\uB7"
+        set listchars=tab:>\ ,trail:·,nbsp:~,precedes:·,extends:·
         echo "no spaces no tabs"
     elseif g:whitespacemode == 'all'  
-        let g:whitespacemode = 'nospace'
-        exec "set listchars=eol:$,tab:\uBB\uBB,trail:\uB7,nbsp:~,precedes:\uB7,extends:\uB7,space:\uB7"
+        let g:whitespacemode = 'nospacenotab'
+        set listchars=eol:$,tab:>\ ,trail:·,nbsp:~,precedes:·,extends:·,space:·
         echo "showing all"
    endif     
 
