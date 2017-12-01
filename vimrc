@@ -369,8 +369,15 @@ let g:markdown_fold_style = 'nested' " or 'stacked'
 "" }}}
 
 
+"" ## ctrlp {{{
+
+"nunmap <C-p>
+nnoremap <C-p> :CtrlPBuffer <CR> 
+
+"" ## }}}
+
+
 "" }}}
 
-
-
-
+"" TODO: something was overwriting this... no clue why!
+highlight ColorColumn ctermbg=darkred
