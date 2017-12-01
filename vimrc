@@ -75,39 +75,6 @@ set wildmode=longest:list,full  " completition style
 
 "" # }}}
 
-"" # cursor {{{
-
-""" fancy cursor-crosshair
-augroup CursorLine
-    au!
-    au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-    au VimEnter,WinEnter,BufWinEnter * setlocal cursorcolumn
-    au WinLeave * setlocal nocursorline
-    au WinLeave * setlocal nocursorcolumn
-augroup END
-
-let g:syntastic_check_on_open=1
-let g:syntastic_check_on_wq=0
-
-
-""" lines around the cursor
-set scrolloff=3        " min 3 lines above/below cursor while scrolling
-" cursor centered
-"set scrolloff=999
-
-" cursor is dash when in insert mode
-let &t_SI = "\e[6 q"
-let &t_EI = "\e[2 q"
-
-" optional reset cursor on start:
-augroup myCmds
-au!
-autocmd VimEnter * silent !echo -ne "\e[2 q"
-augroup END
-
-
-"" # }}}
-
 "" # colors {{{
 "colorscheme Tomorrow-Night-Bright
 colorscheme tentacle
@@ -150,6 +117,107 @@ nohlsearch          " why is this here??
 set incsearch       " search while typing 
 
 
+"" # }}}
+
+"" # cursor {{{
+
+""" fancy cursor-crosshair
+augroup CursorLine
+    au!
+    au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+    au VimEnter,WinEnter,BufWinEnter * setlocal cursorcolumn
+    au WinLeave * setlocal nocursorline
+    au WinLeave * setlocal nocursorcolumn
+augroup END
+
+let g:syntastic_check_on_open=1
+let g:syntastic_check_on_wq=0
+
+
+""" lines around the cursor
+set scrolloff=3        " min 3 lines above/below cursor while scrolling
+" cursor centered
+"set scrolloff=999
+
+" cursor is dash when in insert mode
+let &t_SI = "\e[6 q"
+let &t_EI = "\e[2 q"
+
+" optional reset cursor on start:
+augroup myCmds
+au!
+autocmd VimEnter * silent !echo -ne "\e[2 q"
+augroup END
+
+
+"" # }}}
+
+"" # folding {{{
+function! FoldText()
+    let line = getline(v:foldstart)
+
+    let nucolwidth = &fdc + &number * &numberwidth
+    let windowwidth = winwidth(0) - nucolwidth - 3
+    let foldedlinecount = v:foldend - v:foldstart
+
+    " expand tabs into spaces
+    let onetab = strpart('          ', 0, &tabstop)
+    let line = substitute(line, '\t', onetab, 'g')
+
+    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
+    let fillcharcount = windowwidth - len(line) - len(foldedlinecount) - 9 
+    return line . '   ' . repeat("-",fillcharcount) . ' [' . foldedlinecount . '] +++  '
+endfunction 
+set foldtext=FoldText()
+
+set nofoldenable
+set foldlevel=1
+
+noremap <Leader>zf :call <SID>ToggleFold()<CR>
+function! s:ToggleFold()
+    if &foldmethod == 'marker'
+        let &l:foldmethod = 'syntax'
+    elseif &foldmethod == 'syntax'
+        let &l:foldmethod = 'indent'
+    else
+        let &l:foldmethod = 'marker'
+    endif
+    echo 'foldmethod is now ' . &l:foldmethod
+endfunction
+set foldmethod=marker
+"" # }}}
+
+"" # whitespaces {{{
+set list    " show listchars
+" http://vim.wikia.com/wiki/Highlight_unwanted_spaces
+let g:whitespacemode = 'nospacenotab'
+function! TntclToggleWhitespace()
+    if  g:whitespacemode == 'nospacenotab' 
+        let g:whitespacemode = 'nospace'
+        set listchars=eol:$,tab:\ \ ,trail:·,nbsp:~,precedes:·,extends:·
+        echo "showing no spaces no tabs"
+    elseif  g:whitespacemode == 'nospace' 
+        let g:whitespacemode = 'noeol'
+        set listchars=eol:$,tab:>\ ,trail:·,nbsp:~,precedes:·,extends:·
+        echo "showing no spaces"
+    elseif  g:whitespacemode == 'noeol' 
+        let g:whitespacemode = 'all'
+        set listchars=tab:>\ ,trail:·,nbsp:~,precedes:·,extends:·
+        echo "no spaces no tabs"
+    elseif g:whitespacemode == 'all'  
+        let g:whitespacemode = 'nospacenotab'
+        set listchars=eol:$,tab:>\ ,trail:·,nbsp:~,precedes:·,extends:·,space:·
+        echo "showing all"
+   endif     
+
+endfunction
+"" default setting
+
+set listchars=eol:$,tab:\ \ ,trail:·,nbsp:~,precedes:·,extends:·
+" on/off
+map <leader>W :set list!<CR>
+" toggle visible listchars
+map <leader>w :call TntclToggleWhitespace()<CR>
 "" # }}}
 
 "" # keybindings {{{
@@ -220,48 +288,14 @@ let NERDTreeHijackNetrw=1
 map <C-n> :NERDTreeToggle<CR>
 "" ## }}}
 
+
+"" ## markdown {{{
+let g:markdown_fold_style = 'nested' " or 'stacked'
+"let g:markdown_fold_override_foldtext = 0
 "" }}}
 
-"" # folding {{{
 
-
-function! FoldText()
-    let line = getline(v:foldstart)
-
-    let nucolwidth = &fdc + &number * &numberwidth
-    let windowwidth = winwidth(0) - nucolwidth - 3
-    let foldedlinecount = v:foldend - v:foldstart
-
-    " expand tabs into spaces
-    let onetab = strpart('          ', 0, &tabstop)
-    let line = substitute(line, '\t', onetab, 'g')
-
-    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
-    let fillcharcount = windowwidth - len(line) - len(foldedlinecount) - 9 
-    return line . '   ' . repeat("-",fillcharcount) . ' [' . foldedlinecount . '] +++  '
-endfunction 
-set foldtext=FoldText()
-
-
-let g:markdown_fold_style = 'nested' " or 'stacked'                  
-"let g:markdown_fold_override_foldtext = 0
-set nofoldenable                          
-set foldlevel=1
-
-noremap <Leader>zf :call <SID>ToggleFold()<CR>
-function! s:ToggleFold()
-    if &foldmethod == 'marker'
-        let &l:foldmethod = 'syntax'
-    elseif &foldmethod == 'syntax'
-        let &l:foldmethod = 'indent'
-    else
-        let &l:foldmethod = 'marker'
-    endif
-    echo 'foldmethod is now ' . &l:foldmethod
-endfunction
-set foldmethod=marker
-
-"" # }}}
+"" }}}
 
 "" # diff buffer {{{
 " diff local buffer
@@ -277,36 +311,6 @@ com! DiffSaved call s:DiffWithSaved()
 "  '!diff  --color=always % -'
 "" # }}}
 
-"" # whitespaces {{{
-set list    " show listchars
-" http://vim.wikia.com/wiki/Highlight_unwanted_spaces
-let g:whitespacemode = 'nospacenotab'
-function! TntclToggleWhitespace()
-    if  g:whitespacemode == 'nospacenotab' 
-        let g:whitespacemode = 'nospace'
-        set listchars=eol:$,tab:\ \ ,trail:·,nbsp:~,precedes:·,extends:·
-        echo "showing no spaces no tabs"
-    elseif  g:whitespacemode == 'nospace' 
-        let g:whitespacemode = 'noeol'
-        set listchars=eol:$,tab:>\ ,trail:·,nbsp:~,precedes:·,extends:·
-        echo "showing no spaces"
-    elseif  g:whitespacemode == 'noeol' 
-        let g:whitespacemode = 'all'
-        set listchars=tab:>\ ,trail:·,nbsp:~,precedes:·,extends:·
-        echo "no spaces no tabs"
-    elseif g:whitespacemode == 'all'  
-        let g:whitespacemode = 'nospacenotab'
-        set listchars=eol:$,tab:>\ ,trail:·,nbsp:~,precedes:·,extends:·,space:·
-        echo "showing all"
-   endif     
 
-endfunction
-"" default setting
-exec "set listchars=eol:$,tab:\uBB\uBB,trail:\uB7,nbsp:~,precedes:\uB7,extends:\uB7"
-" on/off
-map <leader>W :set list!<CR>
-" toggle visible listchars
-map <leader>w :call TntclToggleWhitespace()<CR>
-"" # }}}
 
 
