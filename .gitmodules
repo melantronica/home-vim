@@ -78,3 +78,6 @@
 [submodule "plugins/conque-gdb"]
 	path = plugins/conque-gdb
 	url = https://github.com/vim-scripts/Conque-GDB.git
+[submodule "plugins/vim-gutentags"]
+	path = plugins/vim-gutentags
+	url = https://github.com/ludovicchabant/vim-gutentags.git
