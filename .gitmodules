@@ -2,82 +2,106 @@
 	path = plugins/nerdcommenter
 	url = https://github.com/scrooloose/nerdcommenter.git
     branch = master
+    ignore = dirty
 [submodule "plugins/nerdtree"]
 	path = plugins/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
 	branch = master
+    ignore = dirty
 [submodule "plugins/subertab"]
 	path = plugins/subertab
 	url = https://github.com/ervandew/supertab.git
 	branch = master
+    ignore = dirty
 [submodule "plugins/vim-fugitive"]
 	path = plugins/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
 	branch = master
+    ignore = dirty
 [submodule "plugins/git-gutter"]
 	path = plugins/git-gutter
 	url = https://github.com/airblade/vim-gitgutter.git
 	branch = master
+    ignore = dirty
 [submodule "plugins/YouCompleteMe"]
 	path = plugins/YouCompleteMe
 	url = https://github.com/Valloric/YouCompleteMe.git
 	branch = master
+    ignore = dirty
 [submodule "plugins/ctrlp"]
 	path = plugins/ctrlp
 	url = https://github.com/kien/ctrlp.vim.git
 	branch = master
+    ignore = dirty
 [submodule "plugins/pathogen"]
 	path = plugins/pathogen
 	url = https://github.com/tpope/vim-pathogen.git
 	branch = master
+    ignore = dirty
 [submodule "plugins/speeddating"]
 	path = plugins/speeddating
 	url = https://github.com/tpope/vim-speeddating.git
 	branch = master
+    ignore = dirty
 [submodule "plugins/vim-airline"]
 	path = plugins/airline
 	url = https://github.com/vim-airline/vim-airline.git
 	branch = master
+    ignore = dirty
 [submodule "plugins/tagbar"]
 	path = plugins/tagbar
 	url = https://github.com/majutsushi/tagbar.git
 	branch = master
+    ignore = dirty
 [submodule "plugins/airline-themes"]
 	path = plugins/airline-themes
 	url = https://github.com/vim-airline/vim-airline-themes.git
+    ignore = dirty
 [submodule "plugins/vim-airline"]
 	path = plugins/vim-airline
 	url = https://github.com/vim/vim-airline.git
+    ignore = dirty
 [submodule "plugins/utl"]
 	path = plugins/utl
     url = https://github.com/vim-scripts/utl.vim.git
+    ignore = dirty
 [submodule "plugins/easytags"]
 	path = plugins/easytags
 	url = https://github.com/xolox/vim-easytags.git
+    ignore = dirty
 [submodule "plugins/vim-misc"]
 	path = plugins/vim-misc
 	url = https://github.com/xolox/vim-misc.git
+    ignore = dirty
 [submodule "plugins/vim-markdown"]
 	path = plugins/vim-markdown
 	url = https://github.com/tpope/vim-markdown.git
+    ignore = dirty
 [submodule "plugins/vim-markdown-folding"]
 	path = plugins/vim-markdown-folding
 	url = https://github.com/nelstrom/vim-markdown-folding.git
+    ignore = dirty
 [submodule "plugins/syntastic"]
 	path = plugins/syntastic
 	url = https://github.com/vim-syntastic/syntastic.git
+    ignore = dirty
 [submodule "plugins/awesome-vim-colorschemes"]
 	path = plugins/awesome-vim-colorschemes
 	url = https://github.com/rafi/awesome-vim-colorschemes.git
+    ignore = dirty
 [submodule "plugins/vim-surround"]
 	path = plugins/vim-surround
 	url = https://github.com/tpope/vim-surround.git
+    ignore = dirty
 [submodule "plugins/riv"]
 	path = plugins/riv
 	url = https://github.com/Rykka/riv.vim.git
+    ignore = dirty
 [submodule "plugins/conque-gdb"]
 	path = plugins/conque-gdb
 	url = https://github.com/vim-scripts/Conque-GDB.git
+    ignore = dirty
 [submodule "plugins/vim-gutentags"]
 	path = plugins/vim-gutentags
 	url = https://github.com/ludovicchabant/vim-gutentags.git
+    ignore = dirty
