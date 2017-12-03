@@ -1,4 +1,4 @@
-"" vimrc
+    "" vimrc
 "" Bastian Zeller
 
 "" # some links {{{
@@ -19,6 +19,7 @@ let g:pathogen_disabled = []
 "" disabled plugins
 "call add(g:pathogen_disabled, 'airline-themes')            " airline themes
 call add(g:pathogen_disabled, 'awesome-vim-colorschemes')  " some nice colors
+call add(g:pathogen_disabled, 'conque-gdb')                     " fuzzy finder
 "call add(g:pathogen_disabled, 'ctrlp')                     " fuzzy finder
 "call add(g:pathogen_disabled, 'easytags')
 "call add(g:pathogen_disabled, 'git-gutter')
@@ -355,7 +356,7 @@ let g:ycm_seed_identifiers_with_syntax = 0          " use vims syntax file to ge
 
 "" ### ycm_extra_conf {{{
 let g:ycm_confirm_extra_conf = 0                    " automatically load extra conf when found recursively
-let g:ycm_global_ycm_extra_conf='~/ycm_extra_conf.py'   " otherwise load this
+let g:ycm_global_ycm_extra_conf='~/.vim/templates/ycm_extra_conf.py.kernel'   " otherwise load this
 "let g:ycm_global_ycm_extra_conf='~/ycm_extra_conf.py.kernel'
 "let g:ycm_global_ycm_extra_conf='~/ycm_extra_conf.py.android'
 
