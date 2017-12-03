@@ -57,6 +57,9 @@ let name = "Bastian Zeller"
 "" color map:
 "" http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
 
+let mapleader=","       " leader , (comma)
+let localleader="\\"    " localleader \\ (backslash)
+
 "" copy paste from x clipboard
 set clipboard=unnamedplus
 
@@ -249,9 +252,6 @@ com! DiffSaved call s:DiffWithSaved()
 "" <silent> wont echo cmd
 
 "" leader keys
-let mapleader=","       " leader , (comma)
-let localleader="\\"    " localleader \\ (backslash)
-
 "" reload vimrc
 map <leader>s :source ~/.vim/vimrc 
 
