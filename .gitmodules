@@ -75,9 +75,6 @@
 [submodule "plugins/riv"]
 	path = plugins/riv
 	url = https://github.com/Rykka/riv.vim.git
-[submodule "pluings/conque-gdb"]
-	path = pluings/conque-gdb
-	url = https://github.com/vim-scripts/Conque-GDB.git
 [submodule "plugins/conque-gdb"]
 	path = plugins/conque-gdb
 	url = https://github.com/vim-scripts/Conque-GDB.git
