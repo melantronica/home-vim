@@ -39,10 +39,16 @@ call add(g:pathogen_disabled, 'vim-fugitive')
 call add(g:pathogen_disabled, 'vim-surround')
 "call add(g:pathogen_disabled, 'YouCompleteMe')
 
-
 silent! call pathogen#infect('plugins/{}')
 silent! call pathogen#helptags()
+
+
+"source ~/.vim/plugins/gtags/gtags.vim
+"source ~/.vim/plugins/gtags/gtags-cscope.vim
+
 "" # }}}
+
+
 
 "" # general {{{
 let name = "Bastian Zeller"
@@ -285,11 +291,11 @@ nmap <S-Home> v<Home>
 nmap <S-End> v<End>
 
 "" ctrl-cxv
-vmap <C-c> y<Esc>
-vmap <C-x> d<Esc>
-map  <C-v> p
-imap <C-v> <C-o>p
-imap <C-z> <C-o>u
+"vmap <C-c> y<Esc>
+"vmap <C-x> d<Esc>
+"map  <C-v> p
+"imap <C-v> <C-o>p
+"imap <C-z> <C-o>u
 "" ctrl+hjkl
 imap <C-h> <C-o>h
 imap <C-j> <C-o>j
@@ -383,4 +389,5 @@ nnoremap <C-p> :CtrlPBuffer <CR>
 
 "" }}}
 
+:set csprg=gtags-cscope
 
