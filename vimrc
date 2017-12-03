@@ -18,20 +18,21 @@ runtime plugins/pathogen/autoload/pathogen.vim
 let g:pathogen_disabled = []
 "" disabled plugins
 "call add(g:pathogen_disabled, 'airline-themes')            " airline themes
-call add(g:pathogen_disabled, 'awesome-vim-colorschemes')  " some nice colors
-call add(g:pathogen_disabled, 'conque-gdb')                     " fuzzy finder
+"call add(g:pathogen_disabled, 'awesome-vim-colorschemes')  " some nice colors
+"call add(g:pathogen_disabled, 'conque-gdb')                " gdb integration 
 "call add(g:pathogen_disabled, 'ctrlp')                     " fuzzy finder
-"call add(g:pathogen_disabled, 'git-gutter')
-call add(g:pathogen_disabled, 'nerdcommenter')
+"call add(g:pathogen_disabled, 'git-gutter')                " see git status in the gutter
+"call add(g:pathogen_disabled, 'nerdcommenter')
 "call add(g:pathogen_disabled, 'nerdtree')
+"call add(g:pathogen_disabled, 'OmniCppComplete')
 "call add(g:pathogen_disabled, 'pathogen')
 "call add(g:pathogen_disabled, 'riv')                       " rst note taking
-call add(g:pathogen_disabled, 'speeddating')                " pretty formatted dates
-call add(g:pathogen_disabled, 'subertab')                   " magic tab key TODO
-call add(g:pathogen_disabled, 'syntastic')                  " not sure if I want that
-"call add(g:pathogen_disabled, 'tagbar')                     
+"call add(g:pathogen_disabled, 'subertab')                   " magic tab key TODO
+"call add(g:pathogen_disabled, 'syntastic')                  " not sure if I want that
+"call add(g:pathogen_disabled, 'tagbar')
 "call add(g:pathogen_disabled, 'vim-airline')
-call add(g:pathogen_disabled, 'vim-fugitive')
+"call add(g:pathogen_disabled, 'vim-fugitive')
+"call add(g:pathogen_disabled, 'vim-gutentags')
 "call add(g:pathogen_disabled, 'vim-markdown')
 "call add(g:pathogen_disabled, 'vim-markdown-folding')
 "call add(g:pathogen_disabled, 'vim-surround')
@@ -45,8 +46,6 @@ silent! call pathogen#helptags()
 "source ~/.vim/plugins/gtags/gtags-cscope.vim
 
 "" # }}}
-
-
 
 "" # general {{{
 let name = "Bastian Zeller"
@@ -121,6 +120,19 @@ set showmatch       " show matching brackets
 set hlsearch        " highlight search results 
 nohlsearch          " why is this here??
 set incsearch       " search while typing 
+"" # }}}
+
+"" # compeltion {{{
+
+"" close preview after completion done
+autocmd CompleteDone * pclose
+
+function! UpdateTags()
+  execute ":!ctags -R --languages=C++ --c++-kinds=+p --fields=+iaS --extra=+q ./"
+  echohl StatusLine | echo "C/C++ tag updated" | echohl None
+endfunction
+
+
 "" # }}}
 
 "" # cursor {{{
@@ -309,11 +321,26 @@ set backspace=indent,eol,start
 
 "" # plugin settings {{{
 
+"" ## conque-gdb {{{
+let g:ConqueTerm_StartMessages = 0
+let g:ConqueTerm_CloseOnEnd = 1
+let g:ConqueTerm_Interrupt = '<C-g><C-c>'
+let g:ConqueTerm_ReadUnfocused = 1
+"" ##}}}
+
 "" ## airline {{{
 "let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='serene'
 "" ## }}}
+
+let g:gitgutter_enabled = 0
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+
 
 "" ## YCM settings {{{
 
@@ -336,7 +363,6 @@ let g:ycm_complete_in_strings = 1               " string completion
 nnoremap <leader>y :YcmCompleter GoTo<CR>
 nnoremap <leader>Y :YcmCompleter GoTo
 "" ### }}}
-
 
 "" ### window behaviour {{{
 
@@ -381,8 +407,8 @@ nnoremap <C-p> :CtrlPBuffer <CR>
 "" ## }}}
 
 "" ## gutentags {{{
-    let g:gutentags_resolve_symlinks=1
-    "set csprg=gtags-cscope
+let g:gutentags_resolve_symlinks=1
+let g:gutentags_enabled=0
 "" ## }}}
 
 
