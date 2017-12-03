@@ -107,4 +107,5 @@
     ignore = dirty
 [submodule "plugins/OmniCppComplete"]
 	path = plugins/OmniCppComplete
-	url = https://github.com/vim-scripts/OmniCppComplete.git
+    url = https://github.com/vim-scripts/OmniCppComplete.git
+    ignore = dirty
