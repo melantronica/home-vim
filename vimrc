@@ -97,13 +97,6 @@ set showcmd         " show command at bottom
 "" toggle relative numbers
 nnoremap <silent> <leader>l :set rnu!<CR>
 
-"" this only shows relative linenumbers on the active split
-augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained * set relativenumber
-  autocmd BufLeave,FocusLost   * set norelativenumber
-augroup END
-
 " highlight long lines
 "set colorcolumn=80  " highlight col80 
 highlight ColorColumn ctermbg=darkred
@@ -133,13 +126,16 @@ set incsearch       " search while typing
 "" # cursor {{{
 
 """ fancy cursor-crosshair
-augroup CursorLine
-    au!
-    au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-    au VimEnter,WinEnter,BufWinEnter * setlocal cursorcolumn
-    au WinLeave * setlocal nocursorline
-    au WinLeave * setlocal nocursorcolumn
-augroup END
+"augroup CursorLine
+"    au!
+"    au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+"    au VimEnter,WinEnter,BufWinEnter * setlocal cursorcolumn
+"    au WinLeave * setlocal nocursorline
+"    au WinLeave * setlocal nocursorcolumn
+"augroup END
+
+set cursorline
+set cursorcolumn
 
 let g:syntastic_check_on_open=1     "
 let g:syntastic_check_on_wq=0       "
