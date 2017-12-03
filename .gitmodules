@@ -105,3 +105,6 @@
 	path = plugins/vim-gutentags
 	url = https://github.com/ludovicchabant/vim-gutentags.git
     ignore = dirty
+[submodule "plugins/OmniCppComplete"]
+	path = plugins/OmniCppComplete
+	url = https://github.com/vim-scripts/OmniCppComplete.git
