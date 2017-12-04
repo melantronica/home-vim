@@ -74,6 +74,9 @@ set mouse=a             " enable mouse in all modes
 set hidden              " hide abandoned buffers
 set history=10000       " big history
 
+"" Allow saving of files as sudo when I forgot to start vim using sudo.
+cmap w!! w !sudo tee > /dev/null %
+
 "" :B ghetto bufferlist
 command! -nargs=? -bang B if <q-args> != '' | exe 'buffer '.<q-args> | else | ls<bang> | let buffer_nn=input('Choose buffer: ') | if buffer_nn != '' | exe buffer_nn != 0 ? 'buffer '.buffer_nn : 'enew' | endif | endif
 
