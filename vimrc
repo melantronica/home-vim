@@ -8,6 +8,15 @@ set nocompatible            " turn off vi compatibility
 set ttyfast                 " faster redeaw
 set showcmd                 " show command
 
+"" path for finding files, etc
+set path=**,/usr/include
+",include,inc,
+"    \ ..,../include,../inc,
+"    \ ...,.../include,.../inc,
+"    \ ...,.../include,.../inc,
+"    \ /usr/include
+
+
 filetype on		            " based on names
 filetype indent on          " load indention ft based
 filetype plugin indent on   " load ft based plugins
