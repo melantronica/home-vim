@@ -13,7 +13,7 @@ hi markdownH6   guifg=#FFB6C1   guibg=NONE      gui=NONE    ctermfg=53      cter
 
 hi Folded       guibg=NONE      guibg=NONE      gui=NONE    ctermfg=152     ctermbg=233     cterm=NONE
 
-hi ColorColumn  ctermbg=darkred
+hi ColorColumn  ctermbg=127
 
 
 "hi markdownHeadingRule           markdownRule

@@ -113,8 +113,8 @@ nnoremap <silent> <leader>l :set rnu!<CR>
 
 " highlight long lines
 "set colorcolumn=80  " highlight col80 
-highlight ColorColumn ctermbg=darkred
-call matchadd('ColorColumn', '\%79v', 102)  
+highlight ColorColumn ctermbg=127
+call matchadd('ColorColumn', '\%79v', 127)  
 
 "" syntax
 syntax on		            " syntax highlightling
@@ -257,7 +257,7 @@ set foldmethod=marker   " default mode is marker, so {{{ }}} gives us folding
 noremap <Leader>zf :call MyToggleFold()<CR>
 
 let g:myFoldMode = 0
-let g:myFoldModes = ['marker', 'syntax', 'indent']
+let g:myFoldModes = ['marker', 'syntax', 'indent', 'diff', 'manual']
 function! MyToggleFold()
     let g:myFoldMode = g:myFoldMode + 1
     if g:myFoldMode >= len(g:myFoldModes) | let g:myFoldMode = 0 | endif
