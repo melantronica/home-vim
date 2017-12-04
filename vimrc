@@ -17,9 +17,17 @@ endif
 let name = "Bastian Zeller"
 
 set nocompatible
+set ttyfast
+set showcmd
 filetype on		            " based on names
 filetype indent on          " load indention ft based
 filetype plugin indent on   " load ft based plugins
+
+set encoding=utf-8
+set ff=unix
+set shell=/bin/bash
+let readline_has_bash=1
+let g:is_bash=1
 
 "" automatically set current path to buffer path
 " autocmd BufEnter * silent! lcd %:p:h
@@ -28,23 +36,20 @@ filetype plugin indent on   " load ft based plugins
 "" http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
 
 let mapleader=","       " leader , (comma)
+let g:mapleader=","     " leader , (comma)
 let localleader="\\"    " localleader \\ (backslash)
+
+set printoptions=paper:a4
+set printoptions=number:y " put line numbers on hardcopy
 
 "" copy paste from x clipboard
 set clipboard=unnamedplus
 
-"" Do not create backup files
-set nobackup
-set nowritebackup
-set noswapfile
-
 "set title               " set window title to filename
-set mouse=a             " enable mouse in all modes
+set mouse=a|b           " enable mouse in all modes
 "set virtualedit=all    " move around freely
 
 set hidden              " hide abandoned buffers
-set history=10000       " big history
-
 "" Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
 
@@ -52,16 +57,47 @@ cmap w!! w !sudo tee > /dev/null %
 command! -nargs=? -bang B if <q-args> != '' | exe 'buffer '.<q-args> | else | ls<bang> | let buffer_nn=input('Choose buffer: ') | if buffer_nn != '' | exe buffer_nn != 0 ? 'buffer '.buffer_nn : 'enew' | endif | endif
 
 "" List completions
-set wildmode=longest:list,full  " completition style
+set wildmenu
+set wildignore=.svn,CVS,.git,.hg,*.o,*.a,*.mo,*.la,*.so,*.obj,*.swp,*.xpm,*.exe,*.rar
+"set wildmode=longest:list,full  " completition style
+set wildmode=longest:full,full  " completition style
+
+set noerrorbells
+set visualbell
 
 "" check if the file was changed on disk
 au CursorHold * checktime
 
 "" global macro in slop p
-map <f8> qp
-map <f9> @p
+map <F7> qp
+map <F8> @p
 
 " # }}}
+"" # backup, history, swap, viminfo, undo {{{
+set history=10000       " big history
+
+" Tell vim to remember certain things when we exit
+" "  '10  :  marks will be remembered for up to 10 previously edited files
+" "  "100 :  will save up to 100 lines for each register
+" "  :20  :  up to 20 lines of command-line history will be remembered
+" "  %    :  saves and restores the buffer list
+" "  n... :  where to save the viminfo files
+"set viminfo='20,\"10000 " read/write a .viminfo file  """
+set viminfo='500,\"3000,:50,%,n~/.vim/tmp/viminfo'
+
+"" Do not create backup files
+set nobackup
+set nowritebackup
+set noswapfile
+
+set undolevels=500          " 500 undos
+set undoreload=10000        " number of lines
+set undodir=~/vim/tmp/undo
+
+
+
+
+"" #}}}
 "" # syntax, highlight {{{
 "colorscheme Tomorrow-Night-Bright
 colorscheme tentacle
@@ -84,12 +120,21 @@ syntax on		            " syntax highlightling
 
 "" indent
 set nowrap          " no line wrapping
-set tabstop=4       " tab = 4 columns
+set tabstop=4       " tab = 4 columnsi
+set softtabstop=4
 set shiftwidth=4    " 4 columns reindent
 set expandtab       " expand tabs to spaces
+set smarttab
 set smartindent     " indention up to syntax of code
 set autoindent      " automatically transfer indention to next line
+
+""" don't lose visual selection after doing indents
+vnoremap > >gv
+vnoremap < <gv
+
 set showmatch       " show matching brackets
+set matchpairs+=<:> " add < >
+set matchtime=1     " faster response
 
 "" we want to wrap around lines with movement and backspace
 set whichwrap+=h,l,<,>,[,]
@@ -97,9 +142,37 @@ set backspace=indent,eol,start
 
 set hlsearch        " highlight search results 
 nohlsearch          " why is this here??
-set incsearch       " search while typing 
+set incsearch       " search while typing
+set ignorecase      " 
+set smartcase       " 
+
+"" disable highliting temporary (afterddiwpp search)
+" keymapping:<F2> _clear search highliting
+nnoremap <silent> <F2> :noh<CR>
+
+" This rewires n and N to do the blink for the next match
+nnoremap <silent> n   n:call HLNext(0.3)<cr>
+nnoremap <silent> N   N:call HLNext(0.3)<cr>
+
+" highlight the match in red
+function! HLNext (blinktime)
+    highlight WhiteOnRed ctermfg=white ctermbg=red
+    let [bufnum, lnum, col, off] = getpos('.')
+    let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
+    let target_pat = '\c\%#\%('.@/.'\)'
+    let ring = matchadd('WhiteOnRed', target_pat, 101)
+    redraw
+    exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+    call matchdelete(ring)
+    redraw
+endfunction
+
+
+
 "" # }}}
-"" # compeltion {{{
+"" # completion {{{
+
+set omnifunc=syntaxcomplete#Complete
 
 "" close preview after completion done
 autocmd CompleteDone * pclose
@@ -109,6 +182,33 @@ function! UpdateTags()
   echohl StatusLine | echo "C/C++ tag updated" | echohl None
 endfunction
 
+
+"" # }}}
+"" # spelling {{{
+highlight SpellBad term=underline gui=undercurl guisp=Red
+
+" English spellchecking
+set spl=en spell
+
+" disable by default
+set nospell
+
+
+let g:myLang = 0
+let g:myLangList = ['nospell', 'de', 'en']
+
+function! MySpellLang()
+  let g:myLang = g:myLang + 1
+  if g:myLang >= len(g:myLangList) | let g:myLang = 0 | endif
+
+  if g:myLang == 0 | setlocal nospell | endif
+  if g:myLang == 1 | let &l:spelllang = g:myLangList[g:myLang] | setlocal spell | endif
+  if g:myLang == 2 | let &l:spelllang = g:myLangList[g:myLang] | setlocal spell | endif
+  echomsg 'language:' g:myLangList[g:myLang]
+endfunction
+
+" key-mapping:<F7> _Toggle spellcheck / switch languages
+nmap <F7> :<C-U>call MySpellLang()<CR>
 
 "" # }}}
 "" # cursor {{{
@@ -153,61 +253,53 @@ set foldlevel=1         " if enabled we want to have foldlevel 1 expanded
 set foldmethod=marker   " default mode is marker, so {{{ }}} gives us folding
 
 "" toggle through different foldmethods
-noremap <Leader>zf :call <SID>ToggleFold()<CR>
-function! s:ToggleFold()
-    if &foldmethod == 'marker'
-        let &l:foldmethod = 'syntax'
-    elseif &foldmethod == 'syntax'
-        let &l:foldmethod = 'indent'
-    else
-        let &l:foldmethod = 'marker'
-    endif
-    echo 'foldmethod is now ' . &l:foldmethod
+noremap <Leader>zf :call MyToggleFold()<CR>
+
+let g:myFoldMode = 0
+let g:myFoldModes = ['marker', 'syntax', 'indent']
+function! MyToggleFold()
+    let g:myFoldMode = g:myFoldMode + 1
+    if g:myFoldMode >= len(g:myFoldModes) | let g:myFoldMode = 0 | endif
+    let &l:foldmethod = g:myFoldModes[g:myFoldMode]
+    echo "foldmode: " &l:foldmethod
 endfunction
 "" # }}}
 "" # whitespaces {{{
 set list    " show listchars by default
-set listchars=eol:$,tab:\ \ ,trail:·,nbsp:~,precedes:·,extends:·
 " http://vim.wikia.com/wiki/Highlight_unwanted_spaces
-
+set fillchars=vert:┃,diff:⎼,fold:⎼     " it's about borders?!
 "" function to switch between different listchars
-let g:whitespacemode = 'nospacenotab'
-function! TntclToggleWhitespace()
-    if  g:whitespacemode == 'nospacenotab' 
-        let g:whitespacemode = 'nospace'
-        set listchars=eol:$,tab:\ \ ,trail:·,nbsp:~,precedes:·,extends:·
-        echo "showing no spaces no tabs"
-    elseif  g:whitespacemode == 'nospace' 
-        let g:whitespacemode = 'noeol'
-        set listchars=eol:$,tab:>\ ,trail:·,nbsp:~,precedes:·,extends:·
-        echo "showing no spaces"
-    elseif  g:whitespacemode == 'noeol' 
-        let g:whitespacemode = 'all'
-        set listchars=tab:>\ ,trail:·,nbsp:~,precedes:·,extends:·
-        echo "no spaces no tabs"
-    elseif g:whitespacemode == 'all'  
-        let g:whitespacemode = 'nospacenotab'
-        set listchars=eol:$,tab:>\ ,trail:·,nbsp:~,precedes:·,extends:·,space:·
-        echo "showing all"
-   endif     
+let g:myWhitespaceMode = 0
+let g:myWhitespaceModes = [ 
+    \ ['nospace notab', 'set listchars=eol:$,tab:\ \ ,trail:·,nbsp:~,precedes:·,extends:·'], 
+    \ ['nospace',       'set listchars=eol:$,tab:>\ ,trail:·,nbsp:~,precedes:·,extends:·'],
+    \ ['noeol',         'set listchars=tab:>\ ,trail:·,nbsp:~,precedes:·,extends:·'],
+    \ ['all',           'set listchars=eol:$,tab:>\ ,trail:·,nbsp:~,precedes:·,extends:·,space:·']]
+function! MyToggleWhitespace()
+    let g:myWhitespaceMode = g:myWhitespaceMode + 1
+    if g:myWhitespaceMode >= len(g:myWhitespaceModes) | let g:myWhitespaceMode = 0 | endif
+
+    exec g:myWhitespaceModes[g:myWhitespaceMode][1]
+    echo "whitespace mode: " g:myWhitespaceModes[g:myWhitespaceMode][0]
 endfunction
 
+exec g:myWhitespaceModes[0][1]
 "" " keybindings
 "" on/off
 map <leader>W :set list!<CR>                        
 "" toggle visible listchars
-map <leader>w :call TntclToggleWhitespace()<CR>
+map <leader>w :call MyToggleWhitespace()<CR>
 "" # }}}
 "" # diff buffer {{{
 "" diff local buffer
-function! s:DiffWithSaved()
+function! s:MyDiffWithSaved()
   let filetype=&ft
   diffthis
   vnew | r # | normal! 1Gdd
   diffthis
   exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
 endfunction
-com! DiffSaved call s:DiffWithSaved()
+com! MyDiffSaved call s:MyDiffWithSaved()
 
 "" another way of diffing local changes
 "  '!diff  --color=always % -'
@@ -254,12 +346,34 @@ imap <C-l> <C-o>l
 :ab #b /****************************************
 :ab #e *****************************************/
 "" }}}
+"" # language-specific {{{
+"" ## python {{{
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+
+""" syntastic
+let g:syntastic_python_checkers=['pyflakes', 'flake8', 'pylint']
+" let g:syntastic_python_flake8_args='--ignore=E501'  " E501 - long lines
+
+" pydoc on 'K'
+autocmd FileType python nnoremap <buffer> K :<C-u>let save_isk = &iskeyword \|
+    \ set iskeyword+=. \|
+    \ execute "!pydoc " . expand("<cword>") \|
+    \ let &iskeyword = save_isk<CR>
+
+""" isort
+let g:vim_isort_map = '<C-i>'
+
+
+"" ##}}}
+"" #}}}
 "" # plugin settings {{{
 "" ## colors {{{
 "" ### airline {{{
 "let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='serene'
+let g:airline#extensions#tabline#show_buffers = 1
+
 "" ### }}}
 
 "" ## }}}
@@ -318,20 +432,56 @@ let g:ycm_global_ycm_extra_conf='~/.vim/templates/ycm_extra_conf.py.kernel'   " 
 "let g:ycm_extra_conf_globlist = ['~/dev/*','!~/*']
 "" #### }}}
 "" ### }}}
-
+"" ### tagbar {{{
+nmap <F10> :TagbarToggle<CR>
+let g:tagbar_usearrows = 1
+"" ### }}}
 "" ## }}}
 "" ## editing {{{
 "" ## }}}
 "" ## files {{{
 "" ### nerdtree {{{
 let NERDTreeHijackNetrw=1
-map <C-n> :NERDTreeToggle<CR>
+let g:NERDTreeQuitOnOpen = 1
+
+autocmd vimenter * if !argc() | NERDTree | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+" keymapping:todo
+nnoremap <silent> <F9> :NERDTreeToggle<CR>
+
+
 "" ### }}}
 "" ### ctrlp {{{
-"nunmap <C-p>
-nmap <C-p> :CtrlPBuffer 
-"" ### }}}
+" keymapping:<leader>p _ctrlp bufferlist
+nnoremap <leader>p :CtrlPBuffer<CR>
+" keymapping:<leader>o _ctrlp open file
+nnoremap <leader>o :CtrlP<CR>
+" keymapping:<C-o> _ctrlp open file
+nnoremap <silent> <C-o> :CtrlP<CR>
+" let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:10,results:10'
+let g:ctrlp_map='<c-p>'
+let g:ctrlp_cmd='CtrlPBuffer'
+" show hidden files
+let g:ctrlp_show_hidden=1
+" ignore paths
+let g:ctrlp_custom_ignore='\v[\/]\.(git|hg|svn)$'
+" reuse windows
+let g:ctrlp_reuse_window='netrw\|help\|quickfix'
+" don't reuse cache
+let g:ctrlp_clear_cache_on_exit=1
+" ctrlp cache dir
+let g:ctrlp_cache_dir=$HOME.'/.vim/tmp/ctrlp'
+" ctrlp history
+let g:ctrlp_max_history=&history
+" ctrlp follow symlinks
+let g:ctrlp_follow_symlinks=1
+" ctrlp regex search by default
+let g:ctrlp_regexp_search=1
+" ctrlp height 15
+let g:ctrlp_max_height=15
 
+"" ### }}}
 "" ## }}}
 "" ## git {{{
 "" ### git-gutter {{{
@@ -351,6 +501,16 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
+
+let g:syntastic_enable_signs=1
+let g:syntastic_auto_jump=0
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_warning_symbol = '⚠'
+"let g:syntastic_disabled_filetypes=['html']
+
+let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
+
+
 "" ### }}}
 "" ## }}}
 "" ## markup {{{
@@ -362,6 +522,10 @@ let g:markdown_fold_style = 'nested' " or 'stacked'
 
 "" }}}
 
+
+"" # incoming {{{
+
+"" # }}}
 
 "" # some links {{{
 "" https://raw.githubusercontent.com/rasendubi/dotfiles/master/.vimrc
