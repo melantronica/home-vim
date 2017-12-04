@@ -1,107 +1,90 @@
-[submodule "plugins/nerdcommenter"]
+[submodule "pack/editing/start/nerdcommenter"]
 	path = pack/editing/start/nerdcommenter
 	url = https://github.com/scrooloose/nerdcommenter.git
     branch = master
     ignore = dirty
-[submodule "plugins/nerdtree"]
+[submodule "pack/files/start/nerdtree"]
 	path = pack/files/start/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
 	branch = master
     ignore = dirty
-[submodule "plugins/subertab"]
+[submodule "pack/completion/start/subertab"]
 	path = pack/completion/start/subertab
 	url = https://github.com/ervandew/supertab.git
 	branch = master
     ignore = dirty
-[submodule "plugins/vim-fugitive"]
+[submodule "pack/git/start/vim-fugitive"]
 	path = pack/git/start/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
 	branch = master
     ignore = dirty
-[submodule "plugins/git-gutter"]
+[submodule "pack/git/opt/git-gutter"]
 	path = pack/git/opt/git-gutter
 	url = https://github.com/airblade/vim-gitgutter.git
 	branch = master
     ignore = dirty
-[submodule "plugins/YouCompleteMe"]
+[submodule "pack/completion/opt/YouCompleteMe"]
 	path = pack/completion/opt/YouCompleteMe
 	url = https://github.com/Valloric/YouCompleteMe.git
 	branch = master
     ignore = dirty
-[submodule "plugins/ctrlp"]
+[submodule "pack/files/start/ctrlp"]
 	path = pack/files/start/ctrlp
 	url = https://github.com/kien/ctrlp.vim.git
 	branch = master
     ignore = dirty
-[submodule "plugins/pathogen"]
+[submodule "pack/backports/opt/pathogen"]
 	path = pack/backports/opt/pathogen
 	url = https://github.com/tpope/vim-pathogen.git
 	branch = master
     ignore = dirty
-[submodule "plugins/speeddating"]
-	path = plugins/speeddating
-	url = https://github.com/tpope/vim-speeddating.git
-	branch = master
-    ignore = dirty
-[submodule "plugins/vim-airline"]
+[submodule "pack/colors/start/vim-airline"]
 	path = pack/colors/start/airline
 	url = https://github.com/vim-airline/vim-airline.git
 	branch = master
     ignore = dirty
-[submodule "plugins/tagbar"]
+[submodule "pack/completion/start/tagbar"]
 	path = pack/completion/start/tagbar
 	url = https://github.com/majutsushi/tagbar.git
 	branch = master
     ignore = dirty
-[submodule "plugins/airline-themes"]
+[submodule "pack/colors/start/airline-themes"]
 	path = pack/colors/start/airline-themes
 	url = https://github.com/vim-airline/vim-airline-themes.git
     ignore = dirty
-[submodule "plugins/utl"]
-	path = plugins/utl
-    url = https://github.com/vim-scripts/utl.vim.git
-    ignore = dirty
-[submodule "plugins/easytags"]
-	path = plugins/easytags
-	url = https://github.com/xolox/vim-easytags.git
-    ignore = dirty
-[submodule "plugins/vim-misc"]
-	path = plugins/vim-misc
-	url = https://github.com/xolox/vim-misc.git
-    ignore = dirty
-[submodule "plugins/vim-markdown"]
+[submodule "pack/markup/start/vim-markdown"]
 	path = pack/markup/start/markdown
 	url = https://github.com/tpope/vim-markdown.git
     ignore = dirty
-[submodule "plugins/vim-markdown-folding"]
+[submodule "pack/markup/start/vim-markdown-folding"]
 	path = pack/markup/start/markdown-folding
 	url = https://github.com/nelstrom/vim-markdown-folding.git
     ignore = dirty
-[submodule "plugins/syntastic"]
+[submodule "pack/ide/opt/syntastic"]
 	path = pack/ide/opt/syntastic
 	url = https://github.com/vim-syntastic/syntastic.git
     ignore = dirty
-[submodule "plugins/awesome-vim-colorschemes"]
+[submodule "pack/colors/opt/awesome-vim-colorschemes"]
 	path = pack/colors/opt/awesome-vim-colorschemes
 	url = https://github.com/rafi/awesome-vim-colorschemes.git
     ignore = dirty
-[submodule "plugins/vim-surround"]
+[submodule "packs/editing/start/vim-surround"]
 	path = pack/editing/start/surround
 	url = https://github.com/tpope/vim-surround.git
     ignore = dirty
-[submodule "plugins/riv"]
+[submodule "packs/markup/start/riv"]
 	path = pack/markup/start/riv
 	url = https://github.com/Rykka/riv.vim.git
     ignore = dirty
-[submodule "plugins/conque-gdb"]
+[submodule "packs/ide/opt/conque-gdb"]
 	path = pack/ide/opt/conque-gdb
 	url = https://github.com/vim-scripts/Conque-GDB.git
     ignore = dirty
-[submodule "plugins/vim-gutentags"]
+[submodule "packs/completion/start/vim-gutentags"]
 	path = pack/completion/start/gutentags
 	url = https://github.com/ludovicchabant/vim-gutentags.git
     ignore = dirty
-[submodule "plugins/OmniCppComplete"]
+[submodule "packs/completion/start/OmniCppComplete"]
 	path = pack/completion/start/OmniCppComplete
     url = https://github.com/vim-scripts/OmniCppComplete.git
     ignore = dirty
