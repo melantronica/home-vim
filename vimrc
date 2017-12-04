@@ -1,4 +1,4 @@
-   "" vimrc
+"" vimrc
 "" Bastian Zeller
 
 "" # some links {{{
@@ -10,6 +10,7 @@
 "" test
 
 "" # }}}
+
 
 "" # pathogen {{{
 "" Use pathogen to load further modules from plugins/
@@ -315,7 +316,7 @@ imap <C-j> <C-o>j
 imap <C-k> <C-o>k
 imap <C-l> <C-o>l
 
-
+"" we want to wrap around lines with movement and backspace
 set whichwrap+=h,l,<,>,[,]
 set backspace=indent,eol,start
 "" # }}}
@@ -411,12 +412,14 @@ let g:markdown_fold_style = 'nested' " or 'stacked'
 
 "" ## ctrlp {{{
 "nunmap <C-p>
-nnoremap <C-p> :CtrlPBuffer <CR> 
+nmap <C-p> :CtrlPBuffer 
 "" ## }}}
 
 "" ## gutentags {{{
+let g:gutentags_define_advanced_commands=1 
 let g:gutentags_resolve_symlinks=1
 let g:gutentags_enabled=0
+command! GutentagsGetEnabled :echo g:gutentags_enabled
 "" ## }}}
 
 
