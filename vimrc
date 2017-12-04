@@ -262,7 +262,7 @@ set fillchars=vert:┃,diff:⎼,fold:⎼     " it's about borders?!
 "" function to switch between different listchars
 let g:myWhitespaceMode = 0
 let g:myWhitespaceModes = [ 
-    \ ['nospace notab', 'set listchars=eol:$,tab:\ \ ,trail:·,nbsp:~,precedes:·,extends:·'], 
+    \ ['nospace notab', 'set listchars=eol:$,tab:\ \ ,trail:·,nbsp:~,precedes:·,extends:·'],
     \ ['nospace',       'set listchars=eol:$,tab:>\ ,trail:·,nbsp:~,precedes:·,extends:·'],
     \ ['noeol',         'set listchars=tab:>\ ,trail:·,nbsp:~,precedes:·,extends:·'],
     \ ['all',           'set listchars=eol:$,tab:>\ ,trail:·,nbsp:~,precedes:·,extends:·,space:·']]
@@ -444,6 +444,12 @@ let g:tagbar_usearrows = 1
 "" ### }}}
 "" ## }}}
 "" ## editing {{{
+"" ### tabular {{{
+nmap <leader>t :Tabular /
+vmap <leader>t <ESC>:Tabular /
+
+"" ### }}}
+
 "" ## }}}
 "" ## files {{{
 "" ### nerdtree {{{

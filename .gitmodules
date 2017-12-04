@@ -100,3 +100,6 @@
 [submodule "pack/ide/start/obsession"]
 	path = pack/ide/start/obsession
 	url = https://github.com/tpope/vim-obsession.git
+[submodule "pack/editing/start/tabular"]
+	path = pack/editing/start/tabular
+	url = https://github.com/godlygeek/tabular.git
