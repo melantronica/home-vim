@@ -343,6 +343,10 @@ imap <C-j> <C-o>j
 imap <C-k> <C-o>k
 imap <C-l> <C-o>l
 
+"" in cmdline delete word
+cmap <C-S-Left> <C-W>
+cmap <C-S-j> <C-W>
+
 "" # }}}
 "" # abbrev {{{
 " fast c-style comments
