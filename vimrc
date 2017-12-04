@@ -1,4 +1,3 @@
-"
 "" vimrc
 "" Bastian Zeller
 
@@ -457,6 +456,10 @@ nmap <leader>t :Tabular /
 vmap <leader>t <ESC>:Tabular /
 
 "" ### }}}
+"" ### YankRing {{{
+let g:yankring_replace_n_pkey = '<silent><leader>p'
+let g:yankring_replace_n_nkey = '<silent><leader>n'
+"" ### }}}
 
 "" ## }}}
 "" ## files {{{
@@ -470,13 +473,12 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 " keymapping:todo
 nnoremap <silent> <F9> :NERDTreeToggle<CR>
 
-
 "" ### }}}
 "" ### ctrlp {{{
 " keymapping:<leader>p _ctrlp bufferlist
-nnoremap <leader>p :CtrlPBuffer<CR>
+"nnoremap <leader>p :CtrlPBuffer<CR>
 " keymapping:<leader>o _ctrlp open file
-nnoremap <leader>o :CtrlP<CR>
+"nnoremap <leader>o :CtrlP<CR>
 " let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:10,results:10'
 let g:ctrlp_map='<c-p>'
 let g:ctrlp_cmd='CtrlPBuffer'

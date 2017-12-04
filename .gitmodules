@@ -103,3 +103,6 @@
 [submodule "pack/editing/start/tabular"]
 	path = pack/editing/start/tabular
 	url = https://github.com/godlygeek/tabular.git
+[submodule "pack/editing/start/YankRing"]
+	path = pack/editing/start/YankRing
+	url = https://github.com/vim-scripts/YankRing.vim.git
