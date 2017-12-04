@@ -2,21 +2,6 @@
 "" vimrc
 "" Bastian Zeller
 
-let g:deoplete#enable_at_startup = 1
-
-
-"" # pathogen {{{
-if v:version < 800
-    "" vim < 800 doen't have package management. we fallback to pathogen here
-    "" plugins are stored in packs/{}/start/ or packs/{}/opt/
-    "" opt packages sholdn't be loaded
-    filetype off
-    runtime pack/backports/opt/pathogen/autoload/pathogen.vim
-    silent! call pathogen#infect('pack/{}/start/{}')
-    silent! call pathogen#helptags()
-endif
-
-"" # }}}
 "" # general {{{
 let name = "Bastian Zeller"
 
