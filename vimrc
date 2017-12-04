@@ -1,5 +1,9 @@
-"" vimrc
-"" Bastian Zeller
+"" name:   vimrc
+"" author: bastian zeller
+""
+"" for documentation visit this file
+"" - [](vim.md)
+""
 
 "" # general {{{
 let name = "Bastian Zeller"
@@ -9,7 +13,7 @@ set ttyfast                 " faster redeaw
 set showcmd                 " show command
 
 "" path for finding files, etc
-set path=**,/usr/include
+set path=**,$HOME/home/**,/usr/include
 ",include,inc,
 "    \ ..,../include,../inc,
 "    \ ...,.../include,.../inc,
