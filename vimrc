@@ -83,7 +83,7 @@ set history=10000       " big history
 " "  %    :  saves and restores the buffer list
 " "  n... :  where to save the viminfo files
 "set viminfo='20,\"10000 " read/write a .viminfo file  """
-set viminfo='500,\"3000,:50,%,n~/.vim/tmp/viminfo'
+set viminfo='500,\"3000,:50,%,n~/.vim/tmp/viminfo
 
 "" Do not create backup files
 set nobackup
