@@ -5,45 +5,49 @@
 "" # general {{{
 let name = "Bastian Zeller"
 
-set nocompatible
-set ttyfast
-set showcmd
+set nocompatible            " turn off vi compatibility
+set ttyfast                 " faster redeaw
+set showcmd                 " show command
+
 filetype on		            " based on names
 filetype indent on          " load indention ft based
 filetype plugin indent on   " load ft based plugins
 
-set encoding=utf-8
-set ff=unix
-set shell=/bin/bash
-let readline_has_bash=1
-let g:is_bash=1
+set encoding=utf-8          " fix encoding
+set ff=unix                 " set file format
+set shell=/bin/bash         " shell command
 
-"" automatically set current path to buffer path
-" autocmd BufEnter * silent! lcd %:p:h
+let readline_has_bash=1     " bash support for readline
+let g:is_bash=1             " force bash
 
 "" color map:
 "" http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
 
-let mapleader=","       " leader , (comma)
-let g:mapleader=","     " leader , (comma)
-let localleader="\\"    " localleader \\ (backslash)
+"" leader
+let mapleader=","
+let g:mapleader=","
+let localleader="\\"
 
+"" options for physical printing
 set printoptions=paper:a4
 set printoptions=number:y " put line numbers on hardcopy
 
 "" copy paste from x clipboard
 set clipboard=unnamedplus
 
-"set title               " set window title to filename
 set mouse=a|b           " enable mouse in all modes
 "set virtualedit=all    " move around freely
 
 set hidden              " hide abandoned buffers
-"" Allow saving of files as sudo when I forgot to start vim using sudo.
-cmap w!! w !sudo tee > /dev/null %
+
+"" check if the file was changed on disk
+au CursorHold * checktime
 
 "" :B ghetto bufferlist
 command! -nargs=? -bang B if <q-args> != '' | exe 'buffer '.<q-args> | else | ls<bang> | let buffer_nn=input('Choose buffer: ') | if buffer_nn != '' | exe buffer_nn != 0 ? 'buffer '.buffer_nn : 'enew' | endif | endif
+
+"" Allow saving of files as sudo when I forgot to start vim using sudo.
+cmap W!! w !sudo tee > /dev/null %
 
 "" List completions
 set wildmenu
@@ -51,15 +55,10 @@ set wildignore=.svn,CVS,.git,.hg,*.o,*.a,*.mo,*.la,*.so,*.obj,*.swp,*.xpm,*.exe,
 "set wildmode=longest:list,full  " completition style
 set wildmode=longest:full,full  " completition style
 
+"" disable sounds
 set noerrorbells
 set visualbell
 
-"" check if the file was changed on disk
-au CursorHold * checktime
-
-"" global macro in slop p
-map <F7> qp
-map <F8> @p
 
 " # }}}
 "" # backup, history, swap, viminfo, undo {{{
@@ -142,8 +141,8 @@ set smartcase       "
 nnoremap <silent> <F2> :noh<CR>
 
 " This rewires n and N to do the blink for the next match
-nnoremap <silent> n   n:call HLNext(0.3)<cr>
-nnoremap <silent> N   N:call HLNext(0.3)<cr>
+nnoremap <silent> n   n:call HLNext(0.1)<cr>
+nnoremap <silent> N   N:call HLNext(0.1)<cr>
 
 " highlight the match in red
 function! HLNext (blinktime)
@@ -153,6 +152,7 @@ function! HLNext (blinktime)
     let target_pat = '\c\%#\%('.@/.'\)'
     let ring = matchadd('WhiteOnRed', target_pat, 101)
     redraw
+    
     exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
     call matchdelete(ring)
     redraw
@@ -303,9 +303,17 @@ com! MyDiffSaved call s:MyDiffWithSaved()
 "" reload vimrc
 map <leader>s :source ~/.vim/vimrc 
 
+map <leader>h yiw:help <C-R>
+map <leader>0 Y:<C-R>"<BS>
 
-"" edit file with current path filled out
+" edit file with current path filled out
 map <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
+
+
+"" global macro in slot p
+map <F7> qp
+map <F8> @p
+
 
 "" shift+arrow selection
 nmap <S-Up> v<Up>
@@ -534,7 +542,10 @@ let g:markdown_fold_style = 'nested' " or 'stacked'
 
 
 "" # incoming {{{
+"" disabled by default
+if 0
 
+endif
 "" # }}}
 
 "" # some links {{{
