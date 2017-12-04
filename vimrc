@@ -404,6 +404,7 @@ nnoremap <F5> :ConqueGDB
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='serene'
 let g:airline#extensions#tabline#show_buffers = 1
+let g:airline_powerline_fonts = 1
 
 "" ### }}}
 
@@ -554,7 +555,7 @@ let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 "" ## markup {{{
 "" ### markdown-fold {{{
 let g:markdown_fold_style = 'nested' " or 'stacked'
-"let g:markdown_fold_override_foldtext = 0
+let g:markdown_fold_override_foldtext = 0
 "" ### }}}
 "" ## }}}
 
