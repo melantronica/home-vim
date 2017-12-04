@@ -1,3 +1,4 @@
+"
 "" vimrc
 "" Bastian Zeller
 
@@ -457,8 +458,6 @@ nnoremap <silent> <F9> :NERDTreeToggle<CR>
 nnoremap <leader>p :CtrlPBuffer<CR>
 " keymapping:<leader>o _ctrlp open file
 nnoremap <leader>o :CtrlP<CR>
-" keymapping:<C-o> _ctrlp open file
-nnoremap <silent> <C-o> :CtrlP<CR>
 " let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:10,results:10'
 let g:ctrlp_map='<c-p>'
 let g:ctrlp_cmd='CtrlPBuffer'
