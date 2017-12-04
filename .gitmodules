@@ -106,3 +106,6 @@
 [submodule "pack/editing/start/YankRing"]
 	path = pack/editing/start/YankRing
 	url = https://github.com/vim-scripts/YankRing.vim.git
+[submodule "pack/editing/start/table-mode"]
+	path = pack/editing/start/table-mode
+	url = https://github.com/dhruvasagar/vim-table-mode.git
