@@ -44,7 +44,7 @@
 	branch = master
     ignore = dirty
 [submodule "plugins/vim-airline"]
-	path = plugins/airline
+	path = plugins/vim-airline
 	url = https://github.com/vim-airline/vim-airline.git
 	branch = master
     ignore = dirty
