@@ -32,7 +32,7 @@ let g:pathogen_disabled = []
 "call add(g:pathogen_disabled, 'tagbar')
 "call add(g:pathogen_disabled, 'vim-airline')
 "call add(g:pathogen_disabled, 'vim-fugitive')
-call add(g:pathogen_disabled, 'vim-gutentags')
+"call add(g:pathogen_disabled, 'vim-gutentags')
 "call add(g:pathogen_disabled, 'vim-markdown')
 "call add(g:pathogen_disabled, 'vim-markdown-folding')
 "call add(g:pathogen_disabled, 'vim-surround')
