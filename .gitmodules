@@ -94,12 +94,9 @@
 [submodule "pack/editing/start/ack"]
 	path = pack/editing/start/ack
 	url = https://github.com/mileszs/ack.vim.git
-[submodule "pack/editing/start/backeted-paste"]
-	path = pack/editing/start/backeted-paste
+[submodule "pack/editing/start/bracketed-paste"]
+	path = pack/editing/start/bracketed-paste
 	url = https://github.com/ConradIrwin/vim-bracketed-paste.git
-[submodule "pack/completion/start/deoplete"]
-	path = pack/completion/start/deoplete
-	url = https://github.com/Shougo/deoplete.nvim.git
 [submodule "pack/ide/start/obsession"]
 	path = pack/ide/start/obsession
 	url = https://github.com/tpope/vim-obsession.git
