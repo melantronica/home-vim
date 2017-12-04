@@ -2,6 +2,9 @@
 "" vimrc
 "" Bastian Zeller
 
+let g:deoplete#enable_at_startup = 1
+
+
 "" # pathogen {{{
 if v:version < 800
     "" vim < 800 doen't have package management. we fallback to pathogen here
@@ -373,6 +376,17 @@ let g:vim_isort_map = '<C-i>'
 
 "" ##}}}
 "" #}}}
+"" # make, execute {{{
+
+set makeprg=make\ -C\ ../build\ -j4
+
+nnoremap <F4> :make!<cr>
+nnoremap <F5> :ConqueGDB
+
+
+
+
+"" # }}}
 "" # plugin settings {{{
 "" ## colors {{{
 "" ### airline {{{
