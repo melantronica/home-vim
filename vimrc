@@ -85,6 +85,10 @@ set wildmode=longest:list,full  " completition style
 
 au CursorHold * checktime
 
+"" global macro in slop p
+map <f8> qp
+map <f9> @p
+
 " # }}}
 
 "" # syntax, highlight {{{
