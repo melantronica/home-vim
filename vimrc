@@ -255,6 +255,14 @@ imap <C-l> <C-o>l
 :ab #e *****************************************/
 "" }}}
 "" # plugin settings {{{
+"" ## colors {{{
+"" ### airline {{{
+"let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='serene'
+"" ### }}}
+
+"" ## }}}
 "" ## completion {{{
 "" ### gutentags {{{
 let g:gutentags_define_advanced_commands=1 
