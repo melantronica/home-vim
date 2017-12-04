@@ -1,5 +1,8 @@
 runtime colors/Tomorrow-Night-Bright.vim
 
+" https://jonasjacek.github.io/colors/
+
+
 let g:colors_name = "tentacle"
 
 

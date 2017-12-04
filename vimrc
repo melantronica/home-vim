@@ -100,6 +100,8 @@ set undodir=~/vim/tmp/undo
 
 "" #}}}
 "" # syntax, highlight {{{
+"https://jonasjacek.github.io/colors/
+
 "colorscheme Tomorrow-Night-Bright
 colorscheme tentacle
 
