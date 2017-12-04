@@ -169,8 +169,8 @@ set omnifunc=syntaxcomplete#Complete
 autocmd CompleteDone * pclose
 
 function! UpdateTags()
-  execute ":!ctags -R --languages=C++ --c++-kinds=+p --fields=+iaS --extra=+q ./"
-  echohl StatusLine | echo "C/C++ tag updated" | echohl None
+    execute ":!ctags -R --languages=C++ --c++-kinds=+p --fields=+iaS --extra=+q ./"
+    echohl StatusLine | echo "C/C++ tag updated" | echohl None
 endfunction
 
 
@@ -189,13 +189,13 @@ let g:myLang = 0
 let g:myLangList = ['nospell', 'de', 'en']
 
 function! MySpellLang()
-  let g:myLang = g:myLang + 1
-  if g:myLang >= len(g:myLangList) | let g:myLang = 0 | endif
+    let g:myLang = g:myLang + 1
+    if g:myLang >= len(g:myLangList) | let g:myLang = 0 | endif
 
-  if g:myLang == 0 | setlocal nospell | endif
-  if g:myLang == 1 | let &l:spelllang = g:myLangList[g:myLang] | setlocal spell | endif
-  if g:myLang == 2 | let &l:spelllang = g:myLangList[g:myLang] | setlocal spell | endif
-  echomsg 'language:' g:myLangList[g:myLang]
+    if g:myLang == 0 | setlocal nospell | endif
+    if g:myLang == 1 | let &l:spelllang = g:myLangList[g:myLang] | setlocal spell | endif
+    if g:myLang == 2 | let &l:spelllang = g:myLangList[g:myLang] | setlocal spell | endif
+    echomsg 'language:' g:myLangList[g:myLang]
 endfunction
 
 " key-mapping:<F7> _Toggle spellcheck / switch languages
@@ -262,10 +262,10 @@ set fillchars=vert:┃,diff:⎼,fold:⎼     " it's about borders?!
 "" function to switch between different listchars
 let g:myWhitespaceMode = 0
 let g:myWhitespaceModes = [ 
-    \ ['nospace notab', 'set listchars=eol:$,tab:\ \ ,trail:·,nbsp:~,precedes:·,extends:·'],
-    \ ['nospace',       'set listchars=eol:$,tab:>\ ,trail:·,nbsp:~,precedes:·,extends:·'],
-    \ ['noeol',         'set listchars=tab:>\ ,trail:·,nbsp:~,precedes:·,extends:·'],
-    \ ['all',           'set listchars=eol:$,tab:>\ ,trail:·,nbsp:~,precedes:·,extends:·,space:·']]
+            \ ['nospace notab', 'set listchars=eol:$,tab:\ \ ,trail:·,nbsp:~,precedes:·,extends:·'],
+            \ ['nospace',       'set listchars=eol:$,tab:>\ ,trail:·,nbsp:~,precedes:·,extends:·'],
+            \ ['noeol',         'set listchars=tab:>\ ,trail:·,nbsp:~,precedes:·,extends:·'],
+            \ ['all',           'set listchars=eol:$,tab:>\ ,trail:·,nbsp:~,precedes:·,extends:·,space:·']]
 function! MyToggleWhitespace()
     let g:myWhitespaceMode = g:myWhitespaceMode + 1
     if g:myWhitespaceMode >= len(g:myWhitespaceModes) | let g:myWhitespaceMode = 0 | endif
@@ -284,11 +284,11 @@ map <leader>w :call MyToggleWhitespace()<CR>
 "" # diff buffer {{{
 "" diff local buffer
 function! s:MyDiffWithSaved()
-  let filetype=&ft
-  diffthis
-  vnew | r # | normal! 1Gdd
-  diffthis
-  exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
+    let filetype=&ft
+    diffthis
+    vnew | r # | normal! 1Gdd
+    diffthis
+    exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
 endfunction
 com! MyDiffSaved call s:MyDiffWithSaved()
 
@@ -351,9 +351,9 @@ let g:syntastic_python_checkers=['pyflakes', 'flake8', 'pylint']
 
 " pydoc on 'K'
 autocmd FileType python nnoremap <buffer> K :<C-u>let save_isk = &iskeyword \|
-    \ set iskeyword+=. \|
-    \ execute "!pydoc " . expand("<cword>") \|
-    \ let &iskeyword = save_isk<CR>
+            \ set iskeyword+=. \|
+            \ execute "!pydoc " . expand("<cword>") \|
+            \ let &iskeyword = save_isk<CR>
 
 """ isort
 let g:vim_isort_map = '<C-i>'
