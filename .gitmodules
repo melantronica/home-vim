@@ -68,23 +68,23 @@
 	path = pack/colors/opt/awesome-vim-colorschemes
 	url = https://github.com/rafi/awesome-vim-colorschemes.git
     ignore = dirty
-[submodule "packs/editing/start/vim-surround"]
+[submodule "pack/editing/start/vim-surround"]
 	path = pack/editing/start/surround
 	url = https://github.com/tpope/vim-surround.git
     ignore = dirty
-[submodule "packs/markup/start/riv"]
+[submodule "pack/markup/start/riv"]
 	path = pack/markup/start/riv
 	url = https://github.com/Rykka/riv.vim.git
     ignore = dirty
-[submodule "packs/ide/opt/conque-gdb"]
+[submodule "pack/ide/opt/conque-gdb"]
 	path = pack/ide/opt/conque-gdb
 	url = https://github.com/vim-scripts/Conque-GDB.git
     ignore = dirty
-[submodule "packs/completion/start/vim-gutentags"]
+[submodule "pack/completion/start/vim-gutentags"]
 	path = pack/completion/start/gutentags
 	url = https://github.com/ludovicchabant/vim-gutentags.git
     ignore = dirty
-[submodule "packs/completion/start/OmniCppComplete"]
+[submodule "pack/completion/start/OmniCppComplete"]
 	path = pack/completion/start/OmniCppComplete
     url = https://github.com/vim-scripts/OmniCppComplete.git
     ignore = dirty
