@@ -88,3 +88,12 @@
 	path = pack/completion/start/OmniCppComplete
     url = https://github.com/vim-scripts/OmniCppComplete.git
     ignore = dirty
+[submodule "pack/git/start/extradite"]
+	path = pack/git/start/extradite
+	url = https://github.com/int3/vim-extradite.git
+[submodule "pack/editing/start/ack"]
+	path = pack/editing/start/ack
+	url = https://github.com/mileszs/ack.vim.git
+[submodule "pack/editing/start/backeted-paste"]
+	path = pack/editing/start/backeted-paste
+	url = https://github.com/ConradIrwin/vim-bracketed-paste.git
