@@ -57,10 +57,6 @@
 	path = plugins/airline-themes
 	url = https://github.com/vim-airline/vim-airline-themes.git
     ignore = dirty
-[submodule "plugins/vim-airline"]
-	path = plugins/vim-airline
-	url = https://github.com/vim/vim-airline.git
-    ignore = dirty
 [submodule "plugins/utl"]
 	path = plugins/utl
     url = https://github.com/vim-scripts/utl.vim.git
