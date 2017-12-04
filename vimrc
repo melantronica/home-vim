@@ -314,9 +314,14 @@ com! MyDiffSaved call s:MyDiffWithSaved()
 
 "" reload vimrc
 map <leader>s :source ~/.vim/vimrc 
-
-map <leader>h yiw:help <C-R>
+map <leader>h yiw:help <C-R>"
 map <leader>0 Y:<C-R>"<BS>
+
+" 1234 0xFFFFFFFF  '1234' '0xdeaddeef'  0b00101001 
+function! MyConvertNumbers(numb)
+    echom printf('dec: %d hex: 0x%x,0%04x,0x%08x bin: 0b%08b', a:numb, a:numb, a:numb, a:numb, a:numb)
+endfunction
+map <localleader>cn yiw:call MyConvertNumbers(<C-R>")<CR>
 
 " edit file with current path filled out
 map <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
