@@ -5,7 +5,7 @@
 "" - [](vim.md)
 ""
 
-"" # general {{{
+"" # general {{{1
 let name = "Bastian Zeller"
 
 set nocompatible            " turn off vi compatibility
@@ -72,8 +72,10 @@ set noerrorbells
 set visualbell
 
 
-" # }}}
-"" # backup, history, swap, viminfo, undo {{{
+
+
+
+"" # backup, history, swap, viminfo, undo {{{1
 set history=10000       " big history
 
 " Tell vim to remember certain things when we exit
@@ -97,8 +99,7 @@ set undodir=~/vim/tmp/undo
 
 
 
-"" #}}}
-"" # syntax, highlight {{{
+"" # syntax, highlight {{{1
 "https://jonasjacek.github.io/colors/
 
 "colorscheme Tomorrow-Night-Bright
@@ -172,8 +173,7 @@ endfunction
 
 
 
-"" # }}}
-"" # completion {{{
+"" # completion {{{1
 
 set omnifunc=syntaxcomplete#Complete
 
@@ -186,8 +186,7 @@ function! UpdateTags()
 endfunction
 
 
-"" # }}}
-"" # spelling {{{
+"" # spelling {{{1
 highlight SpellBad term=underline gui=undercurl guisp=Red
 
 " English spellchecking
@@ -213,8 +212,11 @@ endfunction
 " key-mapping:<F3> _Toggle spellcheck / switch languages
 nmap <F3> :<C-U>call MySpellLang()<CR>
 
-"" # }}}
-"" # cursor {{{
+
+
+
+
+"" # cursor {{{1
 set cursorline
 set cursorcolumn
 
@@ -231,8 +233,11 @@ let &t_EI = "\e[2 q"
 "au!
 "autocmd VimEnter * silent !echo -ne "\e[2 q"
 "augroup END
-"" # }}}
-"" # folding {{{
+
+
+
+
+"" # folding {{{1
 "" make folded blocks more readable
 function! FoldText()
     let line = getline(v:foldstart)
@@ -266,8 +271,11 @@ function! MyToggleFold()
     let &l:foldmethod = g:myFoldModes[g:myFoldMode]
     echo "foldmode: " &l:foldmethod
 endfunction
-"" # }}}
-"" # whitespaces {{{
+
+
+
+
+"" # whitespaces {{{1
 set list    " show listchars by default
 " http://vim.wikia.com/wiki/Highlight_unwanted_spaces
 set fillchars=vert:┃,diff:⎼,fold:⎼     " it's about borders?!
@@ -292,8 +300,12 @@ exec g:myWhitespaceModes[0][1]
 map <leader>W :set list!<CR>                        
 "" toggle visible listchars
 map <leader>w :call MyToggleWhitespace()<CR>
-"" # }}}
-"" # diff buffer {{{
+
+
+
+
+
+"" # diff buffer {{{1
 "" diff local buffer
 function! s:MyDiffWithSaved()
     let filetype=&ft
@@ -306,8 +318,11 @@ com! MyDiffSaved call s:MyDiffWithSaved()
 
 "" another way of diffing local changes
 "  '!diff  --color=always % -'
-"" # }}}
-"" # keybindings {{{
+
+
+
+
+"" # keybindings {{{1
 "" https://blog.codepen.io/2014/02/21/vim-key-bindings/
 "" https://hea-www.harvard.edu/~fine/Tech/vi.html
 "" <silent> wont echo cmd
@@ -364,14 +379,20 @@ imap <C-l> <C-o>l
 cmap <C-S-Left> <C-W>
 cmap <C-S-j> <C-W>
 
-"" # }}}
-"" # abbrev {{{
+
+
+
+
+"" # abbrev {{{1
 " fast c-style comments
 :ab #b /****************************************
 :ab #e *****************************************/
-"" }}}
-"" # language-specific {{{
-"" ## python {{{
+
+
+
+
+"" # language-specific {{{1
+"" ##    python {{{2
 "autocmd FileType python set omnifunc=pythoncomplete#Complete
 autocmd FileType python set omnifunc=python3complete#Complete
 
@@ -384,41 +405,41 @@ autocmd FileType python nnoremap <buffer> K :<C-u>execute "!pydoc " . expand("<c
 
 """ isort
 let g:vim_isort_map = '<C-i>'
-"" ##}}}
-"" #}}}
-"" # make, execute {{{
 
+
+
+
+
+
+"" # make, execute {{{1
 set makeprg=make\ -C\ ../build\ -j4
 
 nnoremap <F4> :make!<cr>
 nnoremap <F5> :ConqueGDB
 
-
-
-
-"" # }}}
-"" # plugin settings {{{
-"" ## colors {{{
-"" ### airline {{{
+"" # plugin settings {{{1
+"" ##  # colors {{{2
+"" ###     # airline {{{3
 "let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='serene'
 let g:airline#extensions#tabline#show_buffers = 1
 let g:airline_powerline_fonts = 1
 
-"" ### }}}
 
-"" ## }}}
-"" ## completion {{{
-"" ### gutentags {{{
+"" ##  # completion {{{2
+"" ###     # gutentags {{{3
 let g:gutentags_define_advanced_commands=1 
 let g:gutentags_resolve_symlinks=1
 let g:gutentags_enabled=0
 command! GutentagsGetEnabled :echo g:gutentags_enabled
-"" ### }}}
-"" ### YouCompleteMe {{{
 
-"" #### completion triggers {{{
+
+
+
+
+"" ###     # YouCompleteMe {{{3
+"" ####        # completion triggers {{{4
 "" keybindings
 let g:ycm_key_invoke_completion = '<C-Space>'
 let g:ycm_key_list_select_completion=['<TAB>', '<Down>']
@@ -431,14 +452,10 @@ let g:ycm_min_num_of_chars_for_completion = 99  " disable identifier completer
 let g:ycm_complete_in_comments = 1              " comment inline completion
 let g:ycm_complete_in_strings = 1               " string completion
 
-"" #### }}}
-
-"" #### keybindings {{{
+"" ####        # keybindings {{{4
 nnoremap <leader>y :YcmCompleter GoTo<CR>
 nnoremap <leader>Y :YcmCompleter GoTo
-"" #### }}}
-
-"" #### window behaviour {{{
+"" ####        # window behaviour {{{4
 
 "" automatically close preview after selction
 let g:ycm_autoclose_preview_window_after_completion = 1
@@ -447,14 +464,10 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 "" open gotos in a vertical split
 ""[ 'same-buffer', 'horizontal-split', 'vertical-split', 'new-tab', 'new-or-existing-tab' ] 
 let g:ycm_goto_buffer_command = 'same-buffer'
-"" #### }}}
-
-"" #### identifier sources {{{
+"" ####        # identifier sources {{{4
 let g:ycm_collect_identifiers_from_tags_files = 1   " we want tags files to be used
 let g:ycm_seed_identifiers_with_syntax = 0          " use vims syntax file to get language identifiers
-"" #### }}}
-
-"" #### ycm_extra_conf {{{
+"" ####        # ycm_extra_conf {{{4
 let g:ycm_confirm_extra_conf = 0                    " automatically load extra conf when found recursively
 let g:ycm_global_ycm_extra_conf='~/.vim/templates/ycm_extra_conf.py.kernel'   " otherwise load this
 "let g:ycm_global_ycm_extra_conf='~/ycm_extra_conf.py.kernel'
@@ -462,30 +475,20 @@ let g:ycm_global_ycm_extra_conf='~/.vim/templates/ycm_extra_conf.py.kernel'   " 
 
 "" white- and blacklist for conf files (! is blocklist)
 "let g:ycm_extra_conf_globlist = ['~/dev/*','!~/*']
-"" #### }}}
-"" ### }}}
-"" ### tagbar {{{
+"" ###     # tagbar {{{3
 nmap <F10> :TagbarToggle<CR>
 let g:tagbar_usearrows = 1
-"" ### }}}
-"" ## }}}
-"" ## editing {{{
-"" ### tabular {{{
+
+
+
+"" ##  # editing {{{2
+"" ###     # tabular {{{3
 nmap <leader>t :Tabular /
 vmap <leader>t <ESC>:Tabular /
 
-"" ### }}}
-"" ### YankRing {{{
-"let g:yankring_replace_n_pkey = '<silent><leader>p'
-"let g:yankring_replace_n_nkey = '<silent><leader>n'
-"let g:yankring_history_dir = "~/.vim/tmp"
 
-
-"" ### }}}
-
-"" ## }}}
-"" ## files {{{
-"" ### nerdtree {{{
+"" ##  # files {{{2
+"" ###     # nerdtree {{{3
 let NERDTreeHijackNetrw=1
 let g:NERDTreeQuitOnOpen = 1
 
@@ -495,8 +498,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 " keymapping:todo
 nnoremap <silent> <F9> :NERDTreeToggle<CR>
 
-"" ### }}}
-"" ### ctrlp {{{
+"" ###     # ctrlp {{{3
 " keymapping:<leader>p _ctrlp bufferlist
 "nnoremap <leader>p :CtrlPBuffer<CR>
 " keymapping:<leader>o _ctrlp open file
@@ -523,22 +525,22 @@ let g:ctrlp_regexp_search=1
 " ctrlp height 15
 let g:ctrlp_max_height=15
 
-"" ### }}}
-"" ## }}}
-"" ## git {{{
-"" ### git-gutter {{{
+
+"" ##  # git {{{2
+"" ###     # git-gutter {{{3
 let g:gitgutter_enabled = 0
-"" ### }}}
-"" ## }}}
-"" ## ide {{{
-"" ### conque-gdb {{{
+
+"" ##  # ide {{{2
+"" ###     # conque-gdb {{{3
 let g:ConqueTerm_StartMessages = 0
 let g:ConqueTerm_CloseOnEnd = 1
 let g:ConqueTerm_Interrupt = '<C-g><C-c>'
 let g:ConqueTerm_ReadUnfocused = 1
 let g:ConqueGdb_Leader = '\\'
-"" ### }}}
-"" ### syntastic {{{
+
+
+
+"" ###     # syntastic {{{3
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
@@ -553,33 +555,26 @@ let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 
 
-"" ### }}}
-"" ## }}}
-"" ## markup {{{
-"" ### markdown-fold {{{
+
+"" ##  # markup {{{2
+"" ###     # markdown-fold {{{3
 let g:markdown_fold_style = 'nested' " or 'stacked'
 let g:markdown_fold_override_foldtext = 0
-"" ### }}}
-"" ## }}}
+"" # BREAK }}} }}} }}}
 
-"" }}}
-
-
-"" # incoming {{{
+"" # incoming {{{1
 "" disabled by default
 if 0
 
 endif
-"" # }}}
 
-"" # some links {{{
+"" # some links {{{1
 "" https://raw.githubusercontent.com/rasendubi/dotfiles/master/.vimrc
 "" https://github.com/Valloric/YouCompleteMe#ubuntu-linux-x64
 "" https://github.com/JBakamovic/yavide
 "" https://vim.sourceforge.io/scripts/script.php?script_id=213
 "" https://www.reddit.com/r/vim/comments/5iz4cw/making_a_vim_setup_for_cc/
 "" test
-
 "" # }}}
 
 
