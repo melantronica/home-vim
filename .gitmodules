@@ -115,6 +115,3 @@
 [submodule "pack/editing/start/neoyank"]
 	path = pack/editing/start/neoyank
 	url = https://github.com/Shougo/neoyank.vim.git
-[submodule "pack/editing/start/repeat"]
-	path = pack/editing/start/repeat
-	url = https://github.com/tpope/vim-repeat.git
