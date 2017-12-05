@@ -109,3 +109,6 @@
 [submodule "pack/editing/start/table-mode"]
 	path = pack/editing/start/table-mode
 	url = https://github.com/dhruvasagar/vim-table-mode.git
+[submodule "pack/editing/start/yankstack"]
+	path = pack/editing/start/yankstack
+	url = https://github.com/maxbrunsfeld/vim-yankstack
