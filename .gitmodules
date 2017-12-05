@@ -112,3 +112,6 @@
 [submodule "pack/editing/start/yankstack"]
 	path = pack/editing/start/yankstack
 	url = https://github.com/maxbrunsfeld/vim-yankstack
+[submodule "pack/editing/start/neoyank"]
+	path = pack/editing/start/neoyank
+	url = https://github.com/Shougo/neoyank.vim.git
