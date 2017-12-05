@@ -1,4 +1,4 @@
-"" name:   vimrc
+"" title:  vimrc
 "" author: bastian zeller
 ""
 "" for documentation visit this file
