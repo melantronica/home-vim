@@ -368,7 +368,8 @@ cmap <C-S-j> <C-W>
 "" }}}
 "" # language-specific {{{
 "" ## python {{{
-autocmd FileType python set omnifunc=pythoncomplete#Complete
+"autocmd FileType python set omnifunc=pythoncomplete#Complete
+autocmd FileType python set omnifunc=python3complete#Complete
 
 """ syntastic
 let g:syntastic_python_checkers=['pyflakes', 'flake8', 'pylint']
