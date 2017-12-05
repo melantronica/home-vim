@@ -479,6 +479,10 @@ vmap <leader>t <ESC>:Tabular /
 "" ### YankRing {{{
 let g:yankring_replace_n_pkey = '<silent><leader>p'
 let g:yankring_replace_n_nkey = '<silent><leader>n'
+
+let g:yankring_history_dir = "~/.vim/tmp"
+
+
 "" ### }}}
 
 "" ## }}}
