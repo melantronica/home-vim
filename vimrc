@@ -210,8 +210,8 @@ function! MySpellLang()
     echomsg 'language:' g:myLangList[g:myLang]
 endfunction
 
-" key-mapping:<F7> _Toggle spellcheck / switch languages
-nmap <F7> :<C-U>call MySpellLang()<CR>
+" key-mapping:<F3> _Toggle spellcheck / switch languages
+nmap <F3> :<C-U>call MySpellLang()<CR>
 
 "" # }}}
 "" # cursor {{{
@@ -314,23 +314,27 @@ com! MyDiffSaved call s:MyDiffWithSaved()
 
 "" reload vimrc
 map <leader>s :source ~/.vim/vimrc 
-map <leader>h yiw:help <C-R>"
+"map <leader>h yiw:help <C-R>"
+map <leader>h :<C-u>execute 'help ' . expand('<cexpr>') 
 map <leader>0 Y:<C-R>"<BS>
+
 
 " 1234 0xFFFFFFFF  '1234' '0xdeaddeef'  0b00101001 
 function! MyConvertNumbers(numb)
     echom printf('dec: %d hex: 0x%x,0%04x,0x%08x bin: 0b%08b', a:numb, a:numb, a:numb, a:numb, a:numb)
 endfunction
-map <localleader>cn yiw:call MyConvertNumbers(<C-R>")<CR>
+"map <localleader>cn yiw:call MyConvertNumbers(<C-R>")<CR>
+map <localleader>cn :<C-u>execute 'call MyConvertNumbers(' . expand('<cexpr>') . ')'<CR>
 
 " edit file with current path filled out
 map <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
-
 
 "" global macro in slot p
 map <F7> qp
 map <F8> @p
 
+map <leader>p "1p
+map <leader>P "1P
 
 "" shift+arrow selection
 nmap <S-Up> v<Up>
@@ -376,15 +380,10 @@ let g:syntastic_python_checkers=['pyflakes', 'flake8', 'pylint']
 " let g:syntastic_python_flake8_args='--ignore=E501'  " E501 - long lines
 
 " pydoc on 'K'
-autocmd FileType python nnoremap <buffer> K :<C-u>let save_isk = &iskeyword \|
-            \ set iskeyword+=. \|
-            \ execute "!pydoc " . expand("<cword>") \|
-            \ let &iskeyword = save_isk<CR>
+autocmd FileType python nnoremap <buffer> K :<C-u>execute "!pydoc " . expand("<cword>") <CR>
 
 """ isort
 let g:vim_isort_map = '<C-i>'
-
-
 "" ##}}}
 "" #}}}
 "" # make, execute {{{
