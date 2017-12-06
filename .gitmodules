@@ -103,15 +103,7 @@
 [submodule "pack/editing/start/tabular"]
 	path = pack/editing/start/tabular
 	url = https://github.com/godlygeek/tabular.git
-[submodule "pack/editing/start/YankRing"]
-	path = pack/editing/start/YankRing
-	url = https://github.com/vim-scripts/YankRing.vim.git
 [submodule "pack/editing/start/table-mode"]
 	path = pack/editing/start/table-mode
 	url = https://github.com/dhruvasagar/vim-table-mode.git
-[submodule "pack/editing/start/yankstack"]
-	path = pack/editing/start/yankstack
-	url = https://github.com/maxbrunsfeld/vim-yankstack
-[submodule "pack/editing/start/neoyank"]
-	path = pack/editing/start/neoyank
-	url = https://github.com/Shougo/neoyank.vim.git
+
