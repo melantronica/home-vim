@@ -197,6 +197,49 @@ function! UpdateTags()
     echohl StatusLine | echo "C/C++ tag updated" | echohl None
 endfunction
 
+fu! My_cscope(func)
+  let tmp1=&grepprg
+  let tmp2=&grepformat
+  set grepformat=%f\ %*[a-zA-Z_0-9]\ %l\ %m
+  set grepprg=cscope\ -R\ -L\ -3
+  exe "grep ".a:func
+  exe "set grepprg=".escape(tmp1,' ')
+  exe "set grepformat=".escape(tmp2, ' ')
+endf
+command! -nargs=* CScope :silent call My_cscope("<args>")
+
+
+
+"" # grep {{{1
+
+function! My_GrepTodo(func)
+  let tmp1=&grepprg
+  let tmp2=&grepformat
+"  set grepformat=%f\ %*[a-zA-Z_0-9]\ %l\ %m
+  set grepprg=/home/bastii/tmp/todo-agenda.sh
+  exe "grep! ".a:func
+  let &grepprg=tmp1
+  let &grepformat=tmp2
+  copen
+endfunction
+command! -nargs=* TodoGrep :silent call My_GrepTodo("<args>")
+
+exec 'set fillchars=stl:\ ,stlnc:=,vert:\|,fold:\ ,diff:-'
+
+function! My_GrepFold(dir)
+    setlocal foldlevel=0
+    setlocal foldmethod=expr
+    setlocal foldexpr=matchstr(getline(v:lnum),'^[^\|]\\+')==#matchstr(getline(v:lnum+1),'^[^\|]\\+')?1:'<1'
+    setlocal foldtext=matchstr(getline(v:foldstart),'^[^\|]\\+').'\ ['.(v:foldend-v:foldstart+1).'\ lines]'
+    if a:dir
+        setlocal foldexpr=matchstr(substitute(getline(v:lnum),'\|.*','',''),'^.*/')==#matchstr(substitute(getline(v:lnum+1),'\|.*','',''),'^.*/')?1:'<1'
+        setlocal foldtext=matchstr(substitute(getline(v:foldstart),'\|.*','',''),'^.*/').'\ ['.(v:foldend-v:foldstart+1).'\ lines]'
+    endif
+endfunction
+command! -nargs=* GrepFoldDir :silent call My_GrepFold(1)
+command! -nargs=* GrepFold :silent call My_GrepFold(0)
+
+
 
 "" # spelling {{{1
 highlight SpellBad term=underline gui=undercurl guisp=Red
