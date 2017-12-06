@@ -290,7 +290,6 @@ endfunction
 "" # whitespaces {{{1
 set list    " show listchars by default
 " http://vim.wikia.com/wiki/Highlight_unwanted_spaces
-set fillchars=vert:┃,diff:⎼,fold:⎼     " it's about borders?!
 "" function to switch between different listchars
 let g:myWhitespaceMode = 0
 let g:myWhitespaceModes = [ 
