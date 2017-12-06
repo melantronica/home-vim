@@ -57,7 +57,7 @@ set printoptions=paper:a4
 set printoptions=number:y " put line numbers on hardcopy
 
 "" copy paste from x clipboard
-set clipboard=unnamedplus
+"set clipboard=unnamedplus
 
 set mouse=a|b           " enable mouse in all modes
 "set virtualedit=all    " move around freely
@@ -174,24 +174,6 @@ hi def link MyTodo TodoRegion
 " keymapping:<F2> _clear search highliting
 nnoremap <silent> <F2> :noh<CR>
 
-" This rewires n and N to do the blink for the next match
-nnoremap <silent> n   n:call HLNext(0.1)<cr>
-nnoremap <silent> N   N:call HLNext(0.1)<cr>
-
-" highlight the match in red
-function! HLNext (blinktime)
-    highlight WhiteOnRed ctermfg=white ctermbg=red
-    let [bufnum, lnum, col, off] = getpos('.')
-    let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
-    let target_pat = '\c\%#\%('.@/.'\)'
-    let ring = matchadd('WhiteOnRed', target_pat, 101)
-    redraw
-    
-    exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
-    call matchdelete(ring)
-    redraw
-endfunction
-
 
 
 "" # completion {{{1
@@ -220,6 +202,25 @@ command! -nargs=* CScope :silent call My_cscope("<args>")
 
 
 "" # grep {{{1
+
+" This rewires n and N to do the blink for the next match
+nnoremap <silent> n   n:call HLNext(0.1)<cr>
+nnoremap <silent> N   N:call HLNext(0.1)<cr>
+
+" highlight the match in red
+function! HLNext (blinktime)
+    highlight WhiteOnRed ctermfg=white ctermbg=red
+    let [bufnum, lnum, col, off] = getpos('.')
+    let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
+    let target_pat = '\c\%#\%('.@/.'\)'
+    let ring = matchadd('WhiteOnRed', target_pat, 101)
+    redraw
+    
+    exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+    call matchdelete(ring)
+    redraw
+endfunction
+
 
 function! My_GrepTodo(func)
   let tmp1=&grepprg
