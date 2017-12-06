@@ -333,6 +333,11 @@ map <leader>s :source ~/.vim/vimrc
 map <leader>h :<C-u>execute 'help ' . expand('<cexpr>') 
 map <leader>0 Y:<C-R>"<BS>
 
+"" match current line
+nnoremap <silent> <Leader>cl1 ml:execute 'match Search /\%'.line('.').'l/'<CR>
+nnoremap <silent> <Leader>cl2 mm:execute '2match ColorColumn /\%'.line('.').'l/'<CR>
+nnoremap <silent> <Leader>cl3 mn:execute '3match ErrorMsg /\%'.line('.').'l/'<CR>
+
 
 " 1234 0xFFFFFFFF  '1234' '0xdeaddeef'  0b00101001 
 function! MyConvertNumbers(numb)
