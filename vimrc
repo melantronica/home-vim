@@ -161,6 +161,15 @@ set incsearch       " search while typing
 set ignorecase      " 
 set smartcase       " 
 
+augroup vimrc_todo
+    au!
+    au Syntax * syn match MyTodo /\v<(todo|Todo|ToDo|TODO|FIXME|NOTE|OPTIMIZE|XXX)/
+          \ containedin=ALL
+augroup END
+hi def link MyTodo Todo
+hi def link MyTodo TodoRegion
+
+
 "" disable highliting temporary (afterddiwpp search)
 " keymapping:<F2> _clear search highliting
 nnoremap <silent> <F2> :noh<CR>
@@ -651,6 +660,8 @@ command! -nargs=* MyMarkdownToc :silent call My_MarkdownToc()
 
 
 "" # BREAK }}} }}} }}}
+
+
 
 "" # incoming {{{1
 "" disabled by default
