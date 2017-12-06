@@ -430,6 +430,15 @@ let g:vim_isort_map = '<C-i>'
 
 "" # make, execute {{{1
 set makeprg=make\ -C\ ../build\ -j4
+" Folding of (gnu)make output.
+au BufReadPost quickfix setlocal foldmethod=marker
+au BufReadPost quickfix setlocal foldmarker=Entering\ directory,Leaving\ directory
+au BufReadPost quickfix map <buffer> <silent> zq zM:g/error:/normal zv<CR>
+au BufReadPost quickfix map <buffer> <silent> zw zq:g/warning:/normal zv<CR>
+au BufReadPost quickfix normal zq
+
+
+
 
 nnoremap <F4> :make!<cr>
 nnoremap <F5> :ConqueGDB
@@ -577,6 +586,30 @@ let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 "" ###     # markdown-fold {{{3
 let g:markdown_fold_style = 'nested' " or 'stacked'
 let g:markdown_fold_override_foldtext = 0
+
+function! My_MarkdownToc()
+    silent lvimgrep '^#' %
+    vertical lopen
+    let &winwidth=(&columns/2)
+    set modifiable
+    %s/\v^([^|]*\|){2,2} #//
+    for i in range(1, line('$'))
+        let l:line = getline(i)
+        let l:header =  matchstr(l:line, '^#*')
+        let l:length = len(l:header)
+        let l:line = substitute(l:line, '\v^#*[ ]*', '', '')
+        let l:line = substitute(l:line, '\v[ ]*#*$', '', '')
+        let l:line = repeat(' ', (2 * l:length)) . l:line
+        call setline(i, l:line)
+    endfor
+    set nomodified
+    set nomodifiable
+endfunction
+command! -nargs=* MyMarkdownToc :silent call My_MarkdownToc()
+
+
+
+
 "" # BREAK }}} }}} }}}
 
 "" # incoming {{{1
