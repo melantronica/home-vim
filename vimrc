@@ -5,6 +5,18 @@
 "" - [](vim.md)
 ""
 
+"" # pathogen {{{1
+if v:version < 800
+    "" vim < 800 doen't have package management. we fallback to pathogen here
+    "" plugins are stored in packs/{}/start/ or packs/{}/opt/
+    "" opt packages sholdn't be loaded
+    filetype off
+    runtime pack/backports/opt/pathogen/autoload/pathogen.vim
+    silent! call pathogen#infect('pack/{}/start/{}')
+    silent! call pathogen#helptags()
+endif
+
+
 "" # general {{{1
 let name = "Bastian Zeller"
 
