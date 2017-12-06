@@ -224,7 +224,6 @@ function! My_GrepTodo(func)
 endfunction
 command! -nargs=* TodoGrep :silent call My_GrepTodo("<args>")
 
-exec 'set fillchars=stl:\ ,stlnc:=,vert:\|,fold:\ ,diff:-'
 
 function! My_GrepFold(dir)
     setlocal foldlevel=0
@@ -355,7 +354,7 @@ map <leader>W :set list!<CR>
 "" toggle visible listchars
 map <leader>w :call MyToggleWhitespace()<CR>
 
-
+exec 'set fillchars=stl:\ ,stlnc:=,vert:\|,fold:\ ,diff:-'
 
 
 
@@ -446,7 +445,6 @@ cmap <C-S-j> <C-W>
 " fast c-style comments
 :ab #b /****************************************
 :ab #e *****************************************/
-
 
 
 
