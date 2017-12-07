@@ -479,7 +479,7 @@ let g:vim_isort_map = '<C-i>'
 
 
 "" # make, execute {{{1
-set makeprg=make\ -C\ ../build\ -j4
+"set makeprg=make\ -C\ ../build\ -j4
 " Folding of (gnu)make output.
 au BufReadPost quickfix setlocal foldmethod=marker
 au BufReadPost quickfix setlocal foldmarker=Entering\ directory,Leaving\ directory
