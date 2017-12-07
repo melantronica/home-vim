@@ -77,7 +77,7 @@
 	url = https://github.com/Rykka/riv.vim.git
     ignore = dirty
 [submodule "pack/ide/opt/conque-gdb"]
-	path = pack/ide/opt/conque-gdb
+	path = pack/ide/start/conque-gdb
 	url = https://github.com/vim-scripts/Conque-GDB.git
     ignore = dirty
 [submodule "pack/completion/start/vim-gutentags"]
