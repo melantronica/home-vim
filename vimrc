@@ -263,6 +263,9 @@ function! My_GrepTodo(func)
 endfunction
 command! -nargs=* TodoGrep :silent call My_GrepTodo("<args>")
 
+command! -nargs=* Notes :e ~/home/org/incoming/notes.md 
+command! -nargs=* NotesVim :e +/##\ TODO ~/.vim/vimrc 
+command! -nargs=* NotesVimB :b +/##\ TODO ~/.vim/vimrc 
 
 function! My_GrepFold(dir)
     setlocal foldlevel=0
