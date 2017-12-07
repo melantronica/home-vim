@@ -226,7 +226,7 @@ function! My_GrepTodo(func)
   let tmp1=&grepprg
   let tmp2=&grepformat
 "  set grepformat=%f\ %*[a-zA-Z_0-9]\ %l\ %m
-  set grepprg=/home/bastii/tmp/todo-agenda.sh
+  set grepprg=~/.vim/helper/todo-grep.sh
   exe "grep! ".a:func
   let &grepprg=tmp1
   let &grepformat=tmp2
