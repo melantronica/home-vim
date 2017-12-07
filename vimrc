@@ -162,12 +162,15 @@ set ignorecase      "
 set smartcase       " 
 
 augroup vimrc_todo
-    au!
-    au Syntax * syn match MyTodo /\v<(todo|Todo|ToDo|TODO|FIXME|NOTE|OPTIMIZE|XXX)/
-          \ containedin=ALL
+    au! 
+    " pre          \<\(@\|#\|/\|:\|\"\)
+    " patterm
+    " past
+    au Syntax * syn match MyTodo "\<\(todo\|Todo\|ToDo\|TODO\|FIXME\|NOTE\|OPTIMIZE\|XXX\)\>"
+        \ contained containedin=ALL
 augroup END
-hi def link MyTodo Todo
-hi def link MyTodo TodoRegion
+hi def link MyTodo Todo   " todo  
+"hi def link MyTodo TodoRegion 
 
 
 "" disable highliting temporary (afterddiwpp search)
