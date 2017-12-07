@@ -234,18 +234,19 @@ command! -nargs=* CScope :silent call My_cscope("<args>")
 nnoremap <silent> n   n:call HLNext(0.1)<cr>
 nnoremap <silent> N   N:call HLNext(0.1)<cr>
 
+
 " highlight the match in red
 function! HLNext (blinktime)
     highlight WhiteOnRed ctermfg=white ctermbg=red
     let [bufnum, lnum, col, off] = getpos('.')
     let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
     let target_pat = '\c\%#\%('.@/.'\)'
-    let ring = matchadd('WhiteOnRed', target_pat, 101)
-    redraw
-    
-    exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
-    call matchdelete(ring)
-    redraw
+    let last_match = matchadd('WhiteOnRed', target_pat, 101)
+"    I dont want the blinking anymore
+"    redraw    
+"    exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+"    call matchdelete(last_match)
+"    redraw
 endfunction
 
 
