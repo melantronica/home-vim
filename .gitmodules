@@ -107,3 +107,6 @@
 	path = pack/editing/start/table-mode
 	url = https://github.com/dhruvasagar/vim-table-mode.git
 
+[submodule "pack/ide/start/conque-gdb"]
+	path = pack/ide/start/conque-gdb
+	url = https://github.com/vim-scripts/Conque-GDB.git
