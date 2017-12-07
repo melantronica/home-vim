@@ -5,6 +5,27 @@
 "" - [](vim.md)
 ""
 
+"" # notes and TODOs {{{1
+"" ## notes {{{2
+""    empty so far
+
+"" ## TODO {{{2
+"" - vim-math david conrowell" 
+"" - make nice list of available functions and keybindings
+"" - use common style for definitions for searching
+"" - shall we structure into diffenrent files??  
+"" - $2 ctags system includes
+"" - $2 use cscope as well
+"" - $3 recursive search path=** should 
+"" - $2 conditionally load gutentags and use internal tagging mechanism
+"" - restructure folder layout
+"" - ssh edit (tee, netrw??)
+"" - discover tmux possibilities
+"" - $4 configure or disable subertab
+"" - snippets
+"" - check keybinding plausibility (recursive mapping, etc)
+"" }}} }}}
+
 "" # pathogen {{{1
 if v:version < 800
     "" vim < 800 doen't have package management. we fallback to pathogen here
