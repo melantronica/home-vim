@@ -108,3 +108,12 @@
 	url = https://github.com/dhruvasagar/vim-table-mode.git
 
 
+[submodule "pack/editing/start/grepper"]
+	path = pack/editing/start/grepper
+	url = https://github.com/mhinz/vim-grepper.git
+[submodule "pack/files/start/eunuch"]
+	path = pack/files/start/eunuch
+	url = https://github.com/tpope/vim-eunuch.git
+[submodule "pack/editing/start/repeat"]
+	path = pack/editing/start/repeat
+	url = https://github.com/tpope/vim-repeat.git
