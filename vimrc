@@ -13,8 +13,9 @@
 "" - vim-math david conrowell" 
 "" - make nice list of available functions and keybindings
 "" - use common style for definitions for searching
-"" - shall we structure into diffenrent files??  
-"" - $2 ctags system includes
+"" - shall we structure into diffenrent files?? 
+""   if so, follo this path: http://learnvimscriptthehardway.stevelosh.com/chapters/42.html
+"" - ctags system includes - might get tricky because of size... calculate 
 "" - $2 use cscope as well
 "" - $3 recursive search path=** should 
 "" - $2 conditionally load gutentags and use internal tagging mechanism
