@@ -614,7 +614,20 @@ let g:ConqueTerm_Interrupt = '<C-g><C-c>'
 let g:ConqueTerm_ReadUnfocused = 1
 let g:ConqueGdb_Leader = '\\'
 
+let g:ConqueGdb_ToggleBreak = g:ConqueGdb_Leader . 'b'
 
+map <localleader>b :<C-u>execute 'ConqueGdbCommand b ' . expand('%:p') . ':' . line('.') <CR>
+
+map <localleader>bb :call conque_gdb#toggle_breakpoint(expand("%:p"), line("."))<CR>
+"map <localleader>b :call conque_gdb#command("break " . expand("%:p") . ":" . line("."))<CR>
+"map <localleader>b :call conque_gdb#command("clear " . expand("%:p") . ":" . line("."))<CR>
+map <localleader>bc :call conque_gdb#command("continue")<CR>
+map <localleader>br :call conque_gdb#command("run")<CR>
+map <localleader>bn :call conque_gdb#command("next")<CR>
+map <localleader>bs :call conque_gdb#command("step")<CR>
+map <localleader>bf :call conque_gdb#command("finish")<CR>
+map <localleader>bt :call conque_gdb#command("backtrace")<CR>
+map <localleader>bp :call conque_gdb#print_word(expand("<cexpr>"))<CR>
 
 "" ###     # syntastic {{{3
 let g:syntastic_always_populate_loc_list = 1
