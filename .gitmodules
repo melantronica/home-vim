@@ -76,8 +76,8 @@
 	path = pack/markup/start/riv
 	url = https://github.com/Rykka/riv.vim.git
     ignore = dirty
-[submodule "pack/ide/opt/conque-gdb"]
-	path = pack/ide/opt/conque-gdb
+[submodule "pack/ide/start/conque-gdb"]
+	path = pack/ide/start/conque-gdb
 	url = https://github.com/vim-scripts/Conque-GDB.git
     ignore = dirty
 [submodule "pack/completion/start/vim-gutentags"]
@@ -107,6 +107,4 @@
 	path = pack/editing/start/table-mode
 	url = https://github.com/dhruvasagar/vim-table-mode.git
 
-[submodule "pack/ide/start/conque-gdb"]
-	path = pack/ide/start/conque-gdb
-	url = https://github.com/vim-scripts/Conque-GDB.git
+
