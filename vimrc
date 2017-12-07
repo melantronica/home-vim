@@ -182,7 +182,7 @@ set hlsearch        " highlight search results
 nohlsearch          " why is this here??
 set incsearch       " search while typing
 set ignorecase      " 
-set smartcase       " 
+"set smartcase       " somehow annoying
 
 augroup vimrc_todo
     au! 
