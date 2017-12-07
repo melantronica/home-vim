@@ -24,6 +24,8 @@ set nocompatible            " turn off vi compatibility
 set ttyfast                 " faster redeaw
 set showcmd                 " show command
 
+set confirm                 " 
+
 "" path for finding files, etc
 set path=**,$HOME/home/**,/usr/include
 ",include,inc,
