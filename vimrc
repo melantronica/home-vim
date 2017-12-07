@@ -49,7 +49,9 @@ set showcmd                 " show command
 set confirm                 " 
 
 "" path for finding files, etc
-set path=**,$HOME/home/**,/usr/include
+set path+=$HOME/home/**,**
+let g:DefaultPath=&path
+
 ",include,inc,
 "    \ ..,../include,../inc,
 "    \ ...,.../include,.../inc,
