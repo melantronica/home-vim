@@ -142,7 +142,7 @@ set expandtab       " expand tabs to spaces
 set smarttab
 set smartindent     " indention up to syntax of code
 set autoindent      " automatically transfer indention to next line
-
+set textwidth=0     " TODO not sure if thats correct, but its prevents autolewline after 79
 """ don't lose visual selection after doing indents
 vnoremap > >gv
 vnoremap < <gv
