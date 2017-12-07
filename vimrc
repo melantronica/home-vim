@@ -201,6 +201,7 @@ fu! My_cscope(func)
   exe "grep ".a:func
   exe "set grepprg=".escape(tmp1,' ')
   exe "set grepformat=".escape(tmp2, ' ')
+  redraw!
 endf
 command! -nargs=* CScope :silent call My_cscope("<args>")
 
@@ -236,6 +237,7 @@ function! My_GrepTodo(func)
   let &grepprg=tmp1
   let &grepformat=tmp2
   copen
+  redraw!
 endfunction
 command! -nargs=* TodoGrep :silent call My_GrepTodo("<args>")
 
