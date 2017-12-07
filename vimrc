@@ -408,6 +408,9 @@ nnoremap <silent> <Leader>cl1 ml:execute 'match Search /\%'.line('.').'l/'<CR>
 nnoremap <silent> <Leader>cl2 mm:execute '2match ColorColumn /\%'.line('.').'l/'<CR>
 nnoremap <silent> <Leader>cl3 mn:execute '3match ErrorMsg /\%'.line('.').'l/'<CR>
 
+command! -nargs=* Time r !date \+\%R
+command! -nargs=* Date r !date \+\%F
+command! -nargs=* DateTime r !date \+'\%F \%R'
 
 " 1234 0xFFFFFFFF  '1234' '0xdeaddeef'  0b00101001 
 function! MyConvertNumbers(numb)
