@@ -10,19 +10,17 @@
 ""    empty so far
 
 "" ## TODO {{{2
-"" - vim-math david conrowell" 
 "" - make nice list of available functions and keybindings
 "" - use common style for definitions for searching
 "" - shall we structure into diffenrent files?? 
 ""   if so, follo this path: http://learnvimscriptthehardway.stevelosh.com/chapters/42.html
+""  
 "" - ctags system includes - might get tricky because of size... calculate 
-"" - $2 use cscope as well
+"" - why is cscope showing empty quickix but knows the matches???
 "" - $3 recursive search path=** should 
-"" - $2 conditionally load gutentags and use internal tagging mechanism
-"" - restructure folder layout
+"" - conditionally load gutentags and use internal tagging mechanism
 "" - ssh edit (tee, netrw??)
 "" - discover tmux possibilities
-"" - $4 configure or disable subertab
 "" - snippets
 "" - check keybinding plausibility (recursive mapping, etc)
 "" }}} }}}
