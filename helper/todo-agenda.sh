@@ -2,13 +2,8 @@
 
 options=$@
 
-
-options=$@
-#grep -Pzo "abc(.|\n)*efg" /tmp/tes*
-#grep -Pzl "abc(.|\n)*efg" /tmp/tes*
 ## keywords we want to search for (grep-regexes)
-todo_keywords="(todo|FIXME)(.|\\n)*<<.*>>"
-#todo_keywords="<<.*>>"
+todo_keywords='(todo|fixme)'
 
 ## dirs to include
 dirs=" \
@@ -36,21 +31,9 @@ for s in $ex_files; do
 done
 
 
-#grep -Pzl '(?s)abc.*\n.*efg' <your list of files>
-
-
-find $dirs$exclude -type f -print0 | xargs -0 grep -Pzoi $options $todo_keywords |xargs echo foo  
-
-
-
-
-
-#~/.vim/helper/todo-grep.sh -A 1 | grep \<\< | sort -t\< -k2,2n -k3 | while read -r x;do
-#    foo=$(echo "$x" | cut -d '-' -f 2)
-##    echo $foo
-##    echo $(($foo - 1))
-#    ~/.vim/helper/todo-grep.sh -A 1 | grep -B 1 \<\< | grep -B 1 "\-$foo\-"
-#    echo "--"
-#done
+agstring="$todo_keywords.*\n.*<<.*>>" 
+find $dirs$exclude -type f -print0 \
+    | xargs -0 ag $agstring | sed 'N; s/\(.*:[0-9]*:\)\(.*\)\n.*<<\(.*\)>>/\1 \3: \2/' \
+    | sort -k 2n -k 3n
 
 
