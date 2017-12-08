@@ -363,12 +363,27 @@ function! HLNext (blinktime)
 "    redraw
 endfunction
 
+function! My_GrepAgenda(func)
+  let tmp1=&grepprg
+  let tmp2=&grepformat
+"  set grepformat=%f\ %*[a-zA-Z_0-9]\ %l\ %m
+  set grepformat=%f:%l:%m,%f-%l-%m,%f:%l%m,%f  %l%m
+  set grepprg=~/.vim/helper/todo-agenda.sh 
+  exe "grep! ".a:func
+  let &grepprg=tmp1
+  let &grepformat=tmp2
+  copen
+  redraw!
+endfunction
+command! -nargs=* TodoAgenda :silent call My_GrepAgenda("<args>")
+
 
 function! My_GrepTodo(func)
   let tmp1=&grepprg
   let tmp2=&grepformat
 "  set grepformat=%f\ %*[a-zA-Z_0-9]\ %l\ %m
-  set grepprg=~/.vim/helper/todo-grep.sh
+"  set grepformat=%f:%l:%m,%f-%l-%m,%f:%l%m,%f  %l%m
+  set grepprg=~/.vim/helper/todo-grep.sh 
   exe "grep! ".a:func
   let &grepprg=tmp1
   let &grepformat=tmp2
