@@ -16,13 +16,21 @@
 ""   if so, follo this path: http://learnvimscriptthehardway.stevelosh.com/chapters/42.html
 ""  
 "" - ctags system includes - might get tricky because of size... calculate 
-"" - why is cscope showing empty quickix but knows the matches???
-"" - $3 recursive search path=** should 
 "" - conditionally load gutentags and use internal tagging mechanism
+""   maybe easytag for default indexing and some siwtch to gutentags to use
+""   existing tags files
+""   how to update tag files during writing without gutentags ?? 
 "" - ssh edit (tee, netrw??)
 "" - discover tmux possibilities
 "" - snippets
 "" - check keybinding plausibility (recursive mapping, etc)
+""
+"" - plugins to get rid of
+""   - youcompleteme
+""   - gutentags??? its nice because of autodetecting root..
+""     seems only to be nice when we dont have any tag file
+
+
 "" }}} }}}
 
 "" # pathogen {{{1
