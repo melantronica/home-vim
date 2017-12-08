@@ -13,7 +13,8 @@
 "" - make nice list of available functions and keybindings
 "" - use common style for definitions for searching
 "" - shall we structure into diffenrent files?? 
-""   if so, follo this path: http://learnvimscriptthehardway.stevelosh.com/chapters/42.html
+""   if so, follo this path: 
+""      http://learnvimscriptthehardway.stevelosh.com/chapters/42.html
 ""  
 "" - ctags system includes - might get tricky because of size... calculate 
 "" - conditionally load gutentags and use internal tagging mechanism
