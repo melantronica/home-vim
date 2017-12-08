@@ -368,7 +368,7 @@ function! My_GrepAgenda(func)
   let tmp1=&grepprg
   let tmp2=&grepformat
 "  set grepformat=%f\ %*[a-zA-Z_0-9]\ %l\ %m
-  set grepformat=%f:%l:%m,%f-%l-%m,%f:%l%m,%f  %l%m
+"  set grepformat=%f:%l:%m,%f-%l-%m,%f:%l%m
   set grepprg=~/.vim/helper/todo-agenda.sh 
   exe "grep! ".a:func
   let &grepprg=tmp1
