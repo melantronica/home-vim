@@ -5,6 +5,8 @@ runtime pack/colors/opt/awesome-vim-colorschemes/colors/molokai.vim
 let g:colors_name = "tentacle"
 
 hi Normal                   ctermbg=0
+hi Visual       ctermfg=255 ctermbg=238
+
 
 hi CursorLineNr ctermfg=255 ctermbg=232
 hi LineNr                   ctermbg=232
