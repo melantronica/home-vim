@@ -2,11 +2,12 @@
 runtime pack/colors/opt/awesome-vim-colorschemes/colors/molokai.vim 
 " https://jonasjacek.github.io/colors/
 
-
 let g:colors_name = "tentacle"
 
+hi Normal                   ctermbg=0
 
-hi Normal       ctermbg=0
+hi CursorLineNr ctermfg=255 ctermbg=232
+hi LineNr                   ctermbg=232
 
 hi markdownH1   guifg=#FFB6C1   guibg=NONE      gui=NONE    ctermfg=104     ctermbg=NONE    cterm=NONE
 hi markdownH2   guifg=#FFB6C1   guibg=NONE      gui=NONE    ctermfg=130     ctermbg=NONE    cterm=NONE
