@@ -1,9 +1,12 @@
-runtime colors/Tomorrow-Night-Bright.vim
-
+"runtime colors/Tomorrow-Night-Bright.vim
+runtime pack/colors/opt/awesome-vim-colorschemes/colors/molokai.vim 
 " https://jonasjacek.github.io/colors/
 
 
 let g:colors_name = "tentacle"
+
+
+hi Normal       ctermbg=0
 
 hi markdownH1   guifg=#FFB6C1   guibg=NONE      gui=NONE    ctermfg=104     ctermbg=NONE    cterm=NONE
 hi markdownH2   guifg=#FFB6C1   guibg=NONE      gui=NONE    ctermfg=130     ctermbg=NONE    cterm=NONE
@@ -16,6 +19,8 @@ hi Folded       guibg=NONE      guibg=NONE      gui=NONE    ctermfg=152     cter
 
 hi ColorColumn  ctermbg=127
 hi Todo         ctermfg=196 cterm=bold
+
+
 
 "hi markdownHeadingRule           markdownRule
 "hi markdownH1Delimiter           markdownHeadingDelimiter
