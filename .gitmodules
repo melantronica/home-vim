@@ -117,3 +117,6 @@
 [submodule "pack/editing/start/repeat"]
 	path = pack/editing/start/repeat
 	url = https://github.com/tpope/vim-repeat.git
+[submodule "pack/files/start/nerdtree-git-plugin"]
+	path = pack/files/start/nerdtree-git-plugin
+	url = https://github.com/Xuyuanp/nerdtree-git-plugin.git
