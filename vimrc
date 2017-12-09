@@ -35,6 +35,12 @@
 "" https://www.youtube.com/watch?v=5r6yzFEXajQ
 "" https://www.youtube.com/watch?v=MG91ihb0oZ0
 
+"" plugins to checkout
+"" tpope unimpaired
+"" topoe commentary
+"" topoe sourround
+
+
 "" }}} }}}
 
 "" # pathogen {{{1
