@@ -75,7 +75,7 @@ let g:DefaultPath=&path
 "    \ /usr/include
 
 
-filetype on		            " based on names
+filetype on                 " based on names
 filetype indent on          " load indention ft based
 filetype plugin indent on   " load ft based plugins
 
@@ -159,9 +159,9 @@ set undodir=~/vim/tmp/undo
 "colorscheme Tomorrow-Night-Bright
 colorscheme tentacle
 
-set number		    " line numbering
+set number          " line numbering
 set numberwidth=4   " gutter = 4 columns
-set relativenumber	" relative numbering
+set relativenumber  " relative numbering
 set showcmd         " show command at bottom
 
 "" toggle relative numbers
@@ -173,7 +173,7 @@ highlight ColorColumn ctermbg=127
 call matchadd('ColorColumn', '\%79v', 127)  
 
 "" syntax
-syntax on		            " syntax highlightling
+syntax on                   " syntax highlightling
 
 "" indent
 set nowrap          " no line wrapping
@@ -458,7 +458,7 @@ set cursorcolumn
 "set scrolloff=2    " minimal # of lines around the cursor
 set scrolloff=3     " mininmal # of lines around the cursor
 "set scrolloff=999  " cursor centered
-
+set ttimeoutlen=0
 "" cursor is dash when in insert mode
 let &t_SI = "\e[6 q"
 let &t_EI = "\e[2 q"
