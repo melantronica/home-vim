@@ -120,3 +120,4 @@
 [submodule "pack/files/start/nerdtree-git-plugin"]
 	path = pack/files/start/nerdtree-git-plugin
 	url = https://github.com/Xuyuanp/nerdtree-git-plugin.git
+
