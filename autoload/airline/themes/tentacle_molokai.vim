@@ -55,6 +55,7 @@ let g:airline#themes#tentacle_molokai#palette.normal_modified = {
 " Insert mode
 let g:airline#themes#tentacle_molokai#palette.insert = {
       \ 'airline_a': [s:gui_dark_gray, s:gui_orange, 0, s:cterm_pink_, ''],
+      \ 'airline_b': [s:gui_dark_gray, s:gui_orange, 255, 0, ''],
       \ 'airline_c': [s:gui_red, s:gui_med_gray_hi, s:cterm_red, s:cterm_med_gray_hi, ''],
       \ }
 
@@ -123,11 +124,4 @@ let g:airline#themes#tentacle_molokai#palette.replace.airline_error =
 let g:airline#themes#tentacle_molokai#palette.replace_modified.airline_error =
 \ g:airline#themes#tentacle_molokai#palette.normal.airline_error
 
-" CtrlP
-if !get(g:, 'loaded_ctrlp', 0)
-  finish
-endif
-let g:airline#themes#tentacle_molokai#palette.ctrlp = airline#extensions#ctrlp#generate_color_map(
-      \ [ s:gui_orange, s:gui_med_gray_hi, s:cterm_orange, s:cterm_med_gray_hi, '' ] ,
-      \ [ s:gui_orange, s:gui_med_gray_lo, s:cterm_orange, s:cterm_med_gray_lo, '' ] ,
-      \ [ s:gui_dark_gray, s:gui_green, s:cterm_dark_gray, s:cterm_green, 'bold' ] )
+
