@@ -713,8 +713,14 @@ let g:gutentags_resolve_symlinks=1
 let g:gutentags_enabled=1
 command! GutentagsGetEnabled :echo g:gutentags_enabled
 
+"" we never generate without write
+let g:gutentags_generate_on_missing=0
+let g:gutentags_generate_on_new=0
 
+"" no defualt project roots
+let g:gutentags_add_default_project_roots=0
 
+let g:gutentags_project_root=['tags','cscope.out']
 
 
 "" ###     # YouCompleteMe {{{3
