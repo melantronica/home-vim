@@ -31,6 +31,9 @@
 ""   - gutentags??? its nice because of autodetecting root..
 ""     seems only to be nice when we dont have any tag file
 
+""  TODO we have syntax scripts now. configure them to show nice colors
+
+
 "" tmux 
 "" https://www.youtube.com/watch?v=5r6yzFEXajQ
 "" https://www.youtube.com/watch?v=MG91ihb0oZ0
