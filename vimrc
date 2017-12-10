@@ -361,15 +361,18 @@ endif
 " This rewires n and N to do the blink for the next match
 nnoremap <silent> n   n:call HLNext(0.1)<cr>
 nnoremap <silent> N   N:call HLNext(0.1)<cr>
+nnoremap <silent> <F2> :noh<cr>:call matchdelete(g:last_match)<cr>
 
 
+let g:last_match = 0
 " highlight the match in red
 function! HLNext (blinktime)
+    call matchdelete(g:last_match)
     highlight WhiteOnRed ctermfg=white ctermbg=red
     let [bufnum, lnum, col, off] = getpos('.')
     let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
     let target_pat = '\c\%#\%('.@/.'\)'
-    let last_match = matchadd('WhiteOnRed', target_pat, 101)
+    let g:last_match = matchadd('WhiteOnRed', target_pat, 101)
 "    I dont want the blinking anymore
 "    redraw    
 "    exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
