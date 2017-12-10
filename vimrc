@@ -628,7 +628,7 @@ cmap <C-S-Left> <C-W>
 cmap <C-S-j> <C-W>
 
 "" we have to remap 
-nnoremap <C-S-l> <silent> :redraw!<CR> 
+nnoremap <leader><C-l> :redraw!<CR> :redraw!<CR>:redraw!<CR>
 
 
 "" window management
