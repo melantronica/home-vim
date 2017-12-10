@@ -593,8 +593,8 @@ map <localleader>cn :<C-u>execute 'call MyConvertNumbers(' . expand('<cexpr>') .
 map <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 
 "" global macro in slot p
-map <F7> qp
-map <F8> @p
+map <F7> qq
+map <F8> @q
 
 map <leader>p "1p
 map <leader>P "1P
