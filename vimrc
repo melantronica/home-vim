@@ -16,29 +16,23 @@
 ""   if so, follo this path: 
 ""      http://learnvimscriptthehardway.stevelosh.com/chapters/42.html
 ""  
-"" - ctags system includes - might get tricky because of size... calculate 
-"" - conditionally load gutentags and use internal tagging mechanism
-""   maybe easytag for default indexing and some siwtch to gutentags to use
-""   existing tags files
-""   how to update tag files during writing without gutentags ?? 
+""  we have syntax scripts now. configure them to show nice colors
+
 "" - ssh edit (tee, netrw??)
-"" - discover tmux possibilities
+
 "" - snippets
+
 "" - check keybinding plausibility (recursive mapping, etc)
 ""
 "" - plugins to get rid of
 ""   - youcompleteme
-""   - gutentags??? its nice because of autodetecting root..
-""     seems only to be nice when we dont have any tag file
-
-""  TODO we have syntax scripts now. configure them to show nice colors
 
 
-"" tmux 
+"" TODO tmux 
 "" https://www.youtube.com/watch?v=5r6yzFEXajQ
 "" https://www.youtube.com/watch?v=MG91ihb0oZ0
 
-"" plugins to checkout
+"" TODO plugins learn
 "" tpope unimpaired
 "" topoe commentary
 "" topoe sourround
