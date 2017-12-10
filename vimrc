@@ -232,7 +232,7 @@ function! UpdateTags()
 endfunction
 
 "nmap <C-}> :exe ":tj /" . expand("<cexpr>")<CR>
-nmap <localleader><C-]> :exe ":tj /" . expand("<cexpr>")<CR>
+nmap <localleader>] :exe ":tj /" . expand("<cexpr>")<CR>
 
 
 fu! My_cscope(func)
