@@ -119,10 +119,11 @@ command! -nargs=? -bang B if <q-args> != '' | exe 'buffer '.<q-args> | else | ls
 cmap W!! w !sudo tee > /dev/null %
 
 "" List completions
-set wildmenu
+set nowildmenu
+"set nowildmenu
 set wildignore=.svn,CVS,.git,.hg,*.o,*.a,*.mo,*.la,*.so,*.obj,*.swp,*.xpm,*.exe,*.rar
 "set wildmode=longest:list,full  " completition style
-set wildmode=longest:full,full  " completition style
+set wildmode=list:longest,full  " completition style
 
 "" disable sounds
 set noerrorbells
