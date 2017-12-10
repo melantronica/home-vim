@@ -637,8 +637,26 @@ cmap <C-S-Left> <C-W>
 cmap <C-S-j> <C-W>
 
 
+let g:isFullscreen=0
 
+"" window management
+function! OpenCurrentAsNewTab(preserve)
+    
+    let l:fullscreenPos = getcurpos()
+    if(g:isFullscreen)
+        tabclose
+        let g:isFullscreen=0
+    else
+        tabedit %
+        let g:isFullscreen=1
+    endif
+    if(a:preserve)
+        call setpos(".", l:fullscreenPos)
+    endif
+endfunction
 
+nmap <C-w>e :call OpenCurrentAsNewTab(1)<CR>
+nmap <C-w>E :call OpenCurrentAsNewTab(0)<CR>
 
 "" # abbrev {{{1
 " fast c-style comments
