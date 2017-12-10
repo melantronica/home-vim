@@ -112,6 +112,9 @@ set hidden              " hide abandoned buffers
 "" check if the file was changed on disk
 au CursorHold * checktime
 
+"" if host gets resized we resize as well
+autocmd VimResized * wincmd =
+
 "" :B ghetto bufferlist
 command! -nargs=? -bang B if <q-args> != '' | exe 'buffer '.<q-args> | else | ls<bang> | let buffer_nn=input('Choose buffer: ') | if buffer_nn != '' | exe buffer_nn != 0 ? 'buffer '.buffer_nn : 'enew' | endif | endif
 
