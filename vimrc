@@ -374,7 +374,9 @@ nnoremap <silent> <F2> :noh<cr>:call matchdelete(g:last_match)<cr>
 let g:last_match = 0
 " highlight the match in red
 function! HLNext (blinktime)
-    call matchdelete(g:last_match)
+    if g:last_match > 0
+        call matchdelete(g:last_match)
+    endif
     highlight WhiteOnRed ctermfg=white ctermbg=red
     let [bufnum, lnum, col, off] = getpos('.')
     let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
