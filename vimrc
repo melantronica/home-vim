@@ -627,6 +627,9 @@ imap <C-l> <C-o>l
 cmap <C-S-Left> <C-W>
 cmap <C-S-j> <C-W>
 
+"" we have to remap 
+nnoremap <C-S-l> <silent> :redraw!<CR> 
+
 
 "" window management
 let g:isFullscreen=0
