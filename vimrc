@@ -233,6 +233,10 @@ function! UpdateTags()
     echohl StatusLine | echo "C/C++ tag updated" | echohl None
 endfunction
 
+"nmap <C-}> :exe ":tj /" . expand("<cexpr>")<CR>
+nmap <localleader><C-]> :exe ":tj /" . expand("<cexpr>")<CR>
+
+
 fu! My_cscope(func)
   let tmp1=&grepprg
   let tmp2=&grepformat
