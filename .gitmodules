@@ -123,3 +123,6 @@
 [submodule "pack/ide/start/tmux-navigator"]
 	path = pack/ide/start/tmux-navigator
 	url = https://github.com/christoomey/vim-tmux-navigator.git
+[submodule "pack/ide/start/zoomwin"]
+	path = pack/ide/start/zoomwin
+	url = https://github.com/vim-scripts/ZoomWin.git
