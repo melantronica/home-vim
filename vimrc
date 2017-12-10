@@ -127,9 +127,6 @@ set noerrorbells
 set visualbell
 
 
-
-
-
 "" # backup, history, swap, viminfo, undo {{{1
 set history=10000       " big history
 
@@ -631,11 +628,10 @@ cmap <C-S-Left> <C-W>
 cmap <C-S-j> <C-W>
 
 
-let g:isFullscreen=0
-
 "" window management
-function! OpenCurrentAsNewTab(preserve)
-    
+let g:isFullscreen=0
+function! ToggleCurrentWindowAsTab(preserve)
+
     let l:fullscreenPos = getcurpos()
     if(g:isFullscreen)
         tabclose
@@ -644,13 +640,16 @@ function! OpenCurrentAsNewTab(preserve)
         tabedit %
         let g:isFullscreen=1
     endif
+    
+    "silent ! tmux resize-pane -Z
+    silent ! i3-msg fullscreen    
+    
     if(a:preserve)
         call setpos(".", l:fullscreenPos)
     endif
 endfunction
-
-nmap <C-w>e :call OpenCurrentAsNewTab(1)<CR>
-nmap <C-w>E :call OpenCurrentAsNewTab(0)<CR>
+nmap <C-w>e :call ToggleCurrentWindowAsTab(1)<CR>
+nmap <C-w>E :call ToggleCurrentWindowAsTab(0)<CR>
 
 "" # abbrev {{{1
 " fast c-style comments
