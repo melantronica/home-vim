@@ -52,7 +52,7 @@ set showcmd                 " show command
 
 set lazyredraw
 
-set confirm                 " 
+set confirm                 "
 
 "" path for finding files, etc
 set path+=$HOME/home/**,**
@@ -167,9 +167,9 @@ set showcmd         " show command at bottom
 nnoremap <silent> <leader>l :set rnu!<CR>
 
 " highlight long lines
-"set colorcolumn=80  " highlight col80 
+"set colorcolumn=80  " highlight col80
 highlight ColorColumn ctermbg=127
-call matchadd('ColorColumn', '\%79v', 127)  
+call matchadd('ColorColumn', '\%79v', 127)
 
 "" syntax
 syntax on                   " syntax highlightling
@@ -196,21 +196,21 @@ set matchtime=1     " faster response
 set whichwrap+=h,l,<,>,[,]
 set backspace=indent,eol,start
 
-set hlsearch        " highlight search results 
+set hlsearch        " highlight search results
 nohlsearch          " why is this here??
 set incsearch       " search while typing
-set ignorecase      " 
+set ignorecase      "
 "set smartcase       " somehow annoying
 
 augroup vimrc_todo
-    au! 
+    au!
     " pre          \<\(@\|#\|/\|:\|\"\)
     " patterm
     " past
     au Syntax * syn match MyTodo "\<\(todo\|Todo\|ToDo\|TODO\|FIXME\|NOTE\|OPTIMIZE\|XXX\)\>"
         \ contained containedin=ALL
 augroup END
-hi def link MyTodo Todo   " todo  
+hi def link MyTodo Todo   " todo
 "hi def link MyTodo TodoRegion 
 
 
@@ -262,14 +262,14 @@ if has("cscope")
 
     " add any cscope database in current directory
     if filereadable("cscope.out")
-        cs add cscope.out  
-    " else add the database pointed to by environment variable 
+        cs add cscope.out
+    " else add the database pointed to by environment variable
     elseif $CSCOPE_DB != ""
         cs add $CSCOPE_DB
     endif
 
     " show msg when any other cscope db added
-    set cscopeverbose  
+    set cscopeverbose
 
     """"""""""""" My cscope/vim key mappings
     "
@@ -307,17 +307,17 @@ if has("cscope")
     " To do the first type of search, hit 'CTRL-\', followed by one of the
     " cscope search types above (s,g,c,t,e,f,i,d).  The result of your cscope
     " search will be displayed in the current window.  You can use CTRL-T to
-    " go back to where you were before the search.  
+    " go back to where you were before the search.
     "
 
-    nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>	
+    nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
     nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-    nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>	
+    nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
     set cscopequickfix=s-,c-,d-,i-,t-,e-,a-
     " Using 'CTRL-spacebar' (intepreted as CTRL-@ by vim) then a search type
@@ -326,19 +326,19 @@ if has("cscope")
     "
     " (Note: earlier versions of vim may not have the :scs command, but it
     " can be simulated roughly via:
-    "    nmap <C-@>s <C-W><C-S> :cs find s <C-R>=expand("<cword>")<CR><CR>	
+    "    nmap <C-@>s <C-W><C-S> :cs find s <C-R>=expand("<cword>")<CR><CR>
 
-    nmap <C-@>s :scs find s <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-@>g :scs find g <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-@>c :scs find c <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-@>t :scs find t <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-@>e :scs find e <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-@>f :scs find f <C-R>=expand("<cfile>")<CR><CR>	
-    nmap <C-@>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>	
-    nmap <C-@>d :scs find d <C-R>=expand("<cword>")<CR><CR>	
+    nmap <C-@>s :scs find s <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@>g :scs find g <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@>c :scs find c <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@>t :scs find t <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@>e :scs find e <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@>f :scs find f <C-R>=expand("<cfile>")<CR><CR>
+    nmap <C-@>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+    nmap <C-@>d :scs find d <C-R>=expand("<cword>")<CR><CR>
 
 
-    " Hitting CTRL-space *twice* before the search type does a vertical 
+    " Hitting CTRL-space *twice* before the search type does a vertical
     " split instead of a horizontal one (vim 6 and up only)
     "
     " (Note: you may wish to put a 'set splitright' in your .vimrc
@@ -349,8 +349,8 @@ if has("cscope")
     nmap <C-@><C-@>c :vert scs find c <C-R>=expand("<cword>")<CR><CR>
     nmap <C-@><C-@>t :vert scs find t <C-R>=expand("<cword>")<CR><CR>
     nmap <C-@><C-@>e :vert scs find e <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-@><C-@>f :vert scs find f <C-R>=expand("<cfile>")<CR><CR>	
-    nmap <C-@><C-@>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>	
+    nmap <C-@><C-@>f :vert scs find f <C-R>=expand("<cfile>")<CR><CR>
+    nmap <C-@><C-@>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
     nmap <C-@><C-@>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
 
 endif
@@ -375,7 +375,7 @@ function! HLNext (blinktime)
     let target_pat = '\c\%#\%('.@/.'\)'
     let g:last_match = matchadd('WhiteOnRed', target_pat, 101)
 "    I dont want the blinking anymore
-"    redraw    
+"    redraw
 "    exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
 "    call matchdelete(last_match)
 "    redraw
@@ -386,7 +386,7 @@ function! My_GrepAgenda(func)
   let tmp2=&grepformat
 "  set grepformat=%f\ %*[a-zA-Z_0-9]\ %l\ %m
 "  set grepformat=%f:%l:%m,%f-%l-%m,%f:%l%m
-  set grepprg=~/.vim/helper/todo-agenda.sh 
+  set grepprg=~/.vim/helper/todo-agenda.sh
   exe "grep! ".a:func
   let &grepprg=tmp1
   let &grepformat=tmp2
@@ -401,7 +401,7 @@ function! My_GrepTodo(func)
   let tmp2=&grepformat
 "  set grepformat=%f\ %*[a-zA-Z_0-9]\ %l\ %m
 "  set grepformat=%f:%l:%m,%f-%l-%m,%f:%l%m,%f  %l%m
-  set grepprg=~/.vim/helper/todo-grep.sh 
+  set grepprg=~/.vim/helper/todo-grep.sh
   exe "grep! ".a:func
   let &grepprg=tmp1
   let &grepformat=tmp2
@@ -493,9 +493,9 @@ function! FoldText()
     let line = substitute(line, '\t', onetab, 'g')
 
     let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
-    let fillcharcount = windowwidth - len(line) - len(foldedlinecount) - 9 
+    let fillcharcount = windowwidth - len(line) - len(foldedlinecount) - 9
     return line . '   ' . repeat("-",fillcharcount) . ' [' . foldedlinecount . '] +++  '
-endfunction 
+endfunction
 set foldtext=FoldText()
 
 set nofoldenable        " we start without folding
@@ -527,7 +527,7 @@ set list    " show listchars by default
 " http://vim.wikia.com/wiki/Highlight_unwanted_spaces
 "" function to switch between different listchars
 let g:myWhitespaceMode = 0
-let g:myWhitespaceModes = [ 
+let g:myWhitespaceModes = [
             \ ['nospace notab', 'set listchars=eol:$,tab:\ \ ,trail:·,nbsp:~,precedes:·,extends:·'],
             \ ['nospace',       'set listchars=eol:$,tab:>\ ,trail:·,nbsp:~,precedes:·,extends:·'],
             \ ['noeol',         'set listchars=tab:>\ ,trail:·,nbsp:~,precedes:·,extends:·'],
@@ -543,7 +543,7 @@ endfunction
 exec g:myWhitespaceModes[0][1]
 "" " keybindings
 "" on/off
-map <leader>W :set list!<CR>                        
+map <leader>W :set list!<CR>
 "" toggle visible listchars
 map <leader>w :call MyToggleWhitespace()<CR>
 
@@ -574,9 +574,9 @@ com! MyDiffSaved call s:MyDiffWithSaved()
 "" <silent> wont echo cmd
 
 "" reload vimrc
-map <leader>s :source ~/.vim/vimrc 
+map <leader>s :source ~/.vim/vimrc
 "map <leader>h yiw:help <C-R>"
-map <leader>h :<C-u>execute 'help ' . expand('<cexpr>') 
+map <leader>h :<C-u>execute 'help ' . expand('<cexpr>')
 map <leader>0 Y:<C-R>"<BS>
 
 "" match current line
@@ -588,7 +588,7 @@ command! -nargs=* Time r !date \+\%R
 command! -nargs=* Date r !date \+\%F
 command! -nargs=* DateTime r !date \+'\%F \%R'
 
-" 1234 0xFFFFFFFF  '1234' '0xdeaddeef'  0b00101001 
+" 1234 0xFFFFFFFF  '1234' '0xdeaddeef'  0b00101001
 function! MyConvertNumbers(numb)
     echom printf('dec: %d hex: 0x%x,0%04x,0x%08x bin: 0b%08b', a:numb, a:numb, a:numb, a:numb, a:numb)
 endfunction
@@ -633,7 +633,7 @@ imap <C-l> <C-o>l
 cmap <C-S-Left> <C-W>
 cmap <C-S-j> <C-W>
 
-"" we have to remap 
+"" we have to remap
 nnoremap <leader><C-l> :redraw!<CR> :redraw!<CR>:redraw!<CR>
 
 nnoremap <A-h> <C-w>h
@@ -654,10 +654,10 @@ function! ToggleCurrentWindowAsTab(preserve)
         tabedit %
         let g:isFullscreen=1
     endif
-    
+
     "silent ! tmux resize-pane -Z
-    silent ! i3-msg fullscreen    
-    
+    silent ! i3-msg fullscreen
+
     if(a:preserve)
         call setpos(".", l:fullscreenPos)
     endif
@@ -719,7 +719,7 @@ let g:airline_powerline_fonts = 1
 
 "" ##  # completion {{{2
 "" ###     # gutentags {{{3
-let g:gutentags_define_advanced_commands=1 
+let g:gutentags_define_advanced_commands=1
 let g:gutentags_resolve_symlinks=1
 let g:gutentags_enabled=1
 command! GutentagsGetEnabled :echo g:gutentags_enabled
@@ -759,7 +759,7 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 
 "" open gotos in a vertical split
-""[ 'same-buffer', 'horizontal-split', 'vertical-split', 'new-tab', 'new-or-existing-tab' ] 
+""[ 'same-buffer', 'horizontal-split', 'vertical-split', 'new-tab', 'new-or-existing-tab' ]
 let g:ycm_goto_buffer_command = 'same-buffer'
 "" ####        # identifier sources {{{4
 let g:ycm_collect_identifiers_from_tags_files = 1   " we want tags files to be used
@@ -973,7 +973,7 @@ function! I3mux_show (...)
     if(a:0 == 1)
         let msession=g:i3windows[a:1]
     endif
-    
+
     exec ":!(i3-msg [id=" . msession . "] move container to workspace current) > /dev/null"
     sleep 100m
     redraw!
