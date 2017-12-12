@@ -27,10 +27,7 @@
 "" - plugins to get rid of
 ""   - youcompleteme
 
-
-"" TODO tmux 
-"" https://www.youtube.com/watch?v=5r6yzFEXajQ
-"" https://www.youtube.com/watch?v=MG91ihb0oZ0
+"" rework i3mux
 
 "" TODO plugins learn
 "" tpope unimpaired
