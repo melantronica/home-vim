@@ -500,6 +500,10 @@ set nofoldenable        " we start without folding
 set foldlevel=1         " if enabled we want to have foldlevel 1 expanded
 set foldmethod=marker   " default mode is marker, so {{{ }}} gives us folding
 
+nnoremap <C-z><C-z> za
+inoremap <C-z><C-z> <C-o>za
+vnoremap <C-z><C-z> zf
+
 "" toggle through different foldmethods
 noremap <Leader>zf :call MyToggleFold()<CR>
 
