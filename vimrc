@@ -56,6 +56,8 @@ set nocompatible            " turn off vi compatibility
 set ttyfast                 " faster redeaw
 set showcmd                 " show command
 
+set lazyredraw
+
 set confirm                 " 
 
 "" path for finding files, etc
