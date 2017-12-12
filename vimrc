@@ -723,6 +723,7 @@ let g:gutentags_project_root=['tags','cscope.out']
 
 
 "" ###     # YouCompleteMe {{{3
+if 0
 "" ####        # completion triggers {{{4
 "" keybindings
 let g:ycm_key_invoke_completion = '<C-Space>'
@@ -759,6 +760,9 @@ let g:ycm_global_ycm_extra_conf='~/.vim/templates/ycm_extra_conf.py.kernel'   " 
 
 "" white- and blacklist for conf files (! is blocklist)
 "let g:ycm_extra_conf_globlist = ['~/dev/*','!~/*']
+endif
+
+
 "" ###     # tagbar {{{3
 nmap <F10> :TagbarToggle<CR>
 let g:tagbar_usearrows = 1
