@@ -641,6 +641,11 @@ cmap <C-S-j> <C-W>
 "" we have to remap 
 nnoremap <leader><C-l> :redraw!<CR> :redraw!<CR>:redraw!<CR>
 
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A-l> <C-w>l
+
 
 "" window management
 let g:isFullscreen=0
