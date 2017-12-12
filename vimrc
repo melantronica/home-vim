@@ -125,6 +125,14 @@ set wildmode=list:longest,full  " completition style
 set noerrorbells
 set visualbell
 
+" fix alt keybindings
+let c='a'
+while c <= 'z'
+  exec "set <A-".c.">=\e".c
+  exec "imap \e".c." <A-".c.">"
+  let c = nr2char(1+char2nr(c))
+endw
+
 
 "" # backup, history, swap, viminfo, undo {{{1
 set history=10000       " big history
