@@ -502,7 +502,7 @@ set nofoldenable        " we start without folding
 set foldlevel=1         " if enabled we want to have foldlevel 1 expanded
 set foldmethod=marker   " default mode is marker, so {{{ }}} gives us folding
 
-
+"" Alt-z toggles folds
 nnoremap <A-z> za
 inoremap <A-z> <C-o>za
 vnoremap <A-z> zf
@@ -602,6 +602,7 @@ map <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 map <F7> qq
 map <F8> @q
 
+"" paste register 1 (cycles last 10)
 map <leader>p "1p
 map <leader>P "1P
 
