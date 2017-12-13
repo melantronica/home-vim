@@ -918,22 +918,26 @@ endif
 
 "" # tmux-i3-config {{{1
 
-if g:i3_commander_loaded != 1
-    let g:i3_commander_loaded=1
-    let g:i3_last_window=0
-    let g:i3windows={}
+
+if !exists("g:i3mux#loaded") || ! g:i3mux#loaded
+    let g:i3mux#loaded=1
+    let g:i3mux#last_window=0
+    let g:i3mux#windows={}
 endif
 
-function! I3mux_new (session)
+function! I3mux_new (window)
+    "" get window id of this vim window
     let thisid=systemlist("i3-msg -t get_tree | jq \" recurse(.nodes[]) | select(.focused==true) | .window\"")[0]
-    exec ":!(i3-msg split v;i3-msg exec \"gnome-terminal -- tmux new-session -s vi_dev_" . a:session . "\") > /dev/null"
+    "" i3: split v, start gnome-terminal running tmux
+    exec ":!(i3-msg split v;i3-msg exec \"gnome-terminal -- tmux new-session -s vi_dev_" . a:window . "\") > /dev/null"
     sleep 100m
-    let g:i3_last_window=systemlist("i3-msg -t get_tree | jq \" recurse(.nodes[]) | select(.focused==true) | .window\"")[0]
-    let g:i3windows[a:session]=g:i3_last_window
+    "" get window id of the new window
+    let g:i3mux#windows[a:window]=systemlist("i3-msg -t get_tree | jq \" recurse(.nodes[]) | select(.focused==true) | .window\"")[0]
+    let g:i3mux#last_window=a:window
+    "" focus vim again
     exec ":!(i3-msg [id=" . thisid . "] focus) > /dev/null"
     redraw!
 endfunction
-command! -nargs=* I3new :silent call I3mux_new("<args>")
 
 function! I3mux_cmd(margs)
     exec ":!(tmux send-keys -t vi_dev_" . a:margs . " Enter &) > /dev/null"
@@ -941,45 +945,29 @@ function! I3mux_cmd(margs)
     redraw!
 endfunction
 
-command! -nargs=* I3cmd :silent call I3mux_cmd("<args>")
-
-function! I3mux_redo(margs)
-    exec ":!(tmux send-keys -t vi_dev_" . a:margs . " Up Enter &) > /dev/null"
+function! I3mux_redo(window)
+    exec ":!(tmux send-keys -t vi_dev_" . a:window . " Up Enter &) > /dev/null"
     sleep 100m
     redraw!
 endfunction
 
-command! -nargs=1 I3redo :silent call I3mux_redo("<args>")
 
-
-function! I3mux_hide (...)
-
-    let msession=g:i3_last_window
-
-    if(a:0 == 1)
-        let msession=g:i3windows[a:1]
-    endif
-
-    exec ":!(i3-msg [id=" . msession . "] move container to workspace 99) > /dev/null"
+function! I3mux_hide (window)
+    exec ":!(i3-msg [id=" . g:i3mux#windows[a:window] . "] move container to workspace 99) > /dev/null"
     sleep 100m
     redraw!
 endfunction
-
-command! -nargs=* I3hide :silent call I3mux_hide("<args>")
 
 function! I3mux_show (...)
-
-    let msession=g:i3_last_window
-
-    if(a:0 == 1)
-        let msession=g:i3windows[a:1]
-    endif
-
-    exec ":!(i3-msg [id=" . msession . "] move container to workspace current) > /dev/null"
+    exec ":!(i3-msg [id=" .  g:i3mux#windows[a:window] . "] move container to workspace current) > /dev/null"
     sleep 100m
     redraw!
 endfunction
 
-command! -nargs=* I3show :silent call I3mux_show("<args>")
+command! -nargs=1 I3new :silent call I3mux_new("<args>")
+command! -nargs=* I3cmd :silent call I3mux_cmd("<args>")
+command! -nargs=1 I3redo :silent call I3mux_redo("<args>")
+command! -nargs=1 I3hide :silent call I3mux_hide("<args>")
+command! -nargs=1 I3show :silent call I3mux_show("<args>")
 
 
