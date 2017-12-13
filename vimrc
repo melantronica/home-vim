@@ -73,16 +73,16 @@ set encoding=utf-8          " fix encoding
 set ff=unix                 " set file format
 set shell=/bin/bash         " shell command
 
-let readline_has_bash=1     " bash support for readline
-let g:is_bash=1             " force bash
+"let readline_has_bash=1     " bash support for readline
+"let g:is_bash=1             " force bash
 
 "" color map:
 "" http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
 
 "" leader
 let mapleader=","
-let g:mapleader=","
-let localleader="\\"
+"let g:mapleader=","
+let maplocalleader="\\"
 
 "" options for physical printing
 set printoptions=paper:a4
@@ -120,11 +120,11 @@ set noerrorbells
 set visualbell
 
 " fix alt keybindings
-let c='a'
-while c <= 'z'
-  exec "set <A-".c.">=\e".c
-  exec "imap \e".c." <A-".c.">"
-  let c = nr2char(1+char2nr(c))
+let g:vimrc_fixalt_index='a'
+while g:vimrc_fixalt_index <= 'z'
+  exec "set <A-".g:vimrc_fixalt_index.">=\e".g:vimrc_fixalt_index
+  exec "imap \e".g:vimrc_fixalt_index." <A-".g:vimrc_fixalt_index.">"
+  let g:vimrc_fixalt_index = nr2char(1+char2nr(g:vimrc_fixalt_index))
 endw
 
 
@@ -197,7 +197,7 @@ set whichwrap+=h,l,<,>,[,]
 set backspace=indent,eol,start
 
 set hlsearch        " highlight search results
-nohlsearch          " why is this here??
+"nohlsearch          " why is this here??
 set incsearch       " search while typing
 set ignorecase      "
 "set smartcase       " somehow annoying
@@ -227,7 +227,7 @@ set omnifunc=syntaxcomplete#Complete
 "" close preview after completion done
 autocmd CompleteDone * pclose
 
-function! UpdateTags()
+function! Vimrc_UpdateTags()
     execute ":!ctags -R --languages=C++ --c++-kinds=+p --fields=+iaS --extra=+q ./"
     echohl StatusLine | echo "C/C++ tag updated" | echohl None
 endfunction
@@ -236,7 +236,7 @@ endfunction
 nmap <localleader>] :exe ":tj /" . expand("<cexpr>")<CR>
 
 
-fu! My_cscope(func)
+function! Vimrc_cscope(func)
   let tmp1=&grepprg
   let tmp2=&grepformat
   set grepformat=%f\ %*[a-zA-Z_0-9]\ %l\ %m
@@ -245,8 +245,9 @@ fu! My_cscope(func)
   exe "set grepprg=".escape(tmp1,' ')
   exe "set grepformat=".escape(tmp2, ' ')
   redraw!
-endf
-command! -nargs=* CScope :silent call My_cscope("<args>")
+endfunction
+
+command! -nargs=* MyCscope :silent call Vimrc_cscope("<args>")
 
 "" ## cscope {{{2
 if has("cscope")
@@ -358,22 +359,21 @@ endif
 "" # grep {{{1
 
 " This rewires n and N to do the blink for the next match
-nnoremap <silent> n   n:call HLNext(0.1)<cr>
-nnoremap <silent> N   N:call HLNext(0.1)<cr>
-nnoremap <silent> <F2> :noh<cr>:call matchdelete(g:last_match)<cr>
+nnoremap <silent> n   n:call Vimrc_HLNext(0.1)<cr>
+nnoremap <silent> N   N:call Vimrc_HLNext(0.1)<cr>
+nnoremap <silent> <F2> :noh<cr>:call matchdelete(g:vimrc_last_match)<cr>
 
-
-let g:last_match = 0
+let g:vimrc_last_match = 0
 " highlight the match in red
-function! HLNext (blinktime)
-    if g:last_match > 0
-        call matchdelete(g:last_match)
+function! Vimrc_HLNext (blinktime)
+    if g:vimrc_last_match > 0
+        call matchdelete(g:vimrc_last_match)
     endif
     highlight WhiteOnRed ctermfg=white ctermbg=red
     let [bufnum, lnum, col, off] = getpos('.')
     let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
     let target_pat = '\c\%#\%('.@/.'\)'
-    let g:last_match = matchadd('WhiteOnRed', target_pat, 101)
+    let g:vimrc_last_match = matchadd('WhiteOnRed', target_pat, 101)
 "    I dont want the blinking anymore
 "    redraw
 "    exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
@@ -381,7 +381,7 @@ function! HLNext (blinktime)
 "    redraw
 endfunction
 
-function! My_GrepAgenda(func)
+function! Vimrc_GrepAgenda(func)
   let tmp1=&grepprg
   let tmp2=&grepformat
 "  set grepformat=%f\ %*[a-zA-Z_0-9]\ %l\ %m
@@ -393,10 +393,10 @@ function! My_GrepAgenda(func)
   copen
   redraw!
 endfunction
-command! -nargs=* TodoAgenda :silent call My_GrepAgenda("<args>")
+command! -nargs=* MyTodoAgenda :silent call Vimrc_GrepAgenda("<args>")
 
 
-function! My_GrepTodo(func)
+function! Vimrc_GrepTodo(func)
   let tmp1=&grepprg
   let tmp2=&grepformat
 "  set grepformat=%f\ %*[a-zA-Z_0-9]\ %l\ %m
@@ -408,12 +408,12 @@ function! My_GrepTodo(func)
   copen
   redraw!
 endfunction
-command! -nargs=* TodoGrep :silent call My_GrepTodo("<args>")
+command! -nargs=* MyTodoGrep :silent call Vimrc_GrepTodo("<args>")
 
-command! -nargs=* Notes :drop ~/home/org/incoming/notes.md
-command! -nargs=* Notesv :drop ~/.vim/vimrc | :b +/##\ TODO .vim/vimrc
+command! -nargs=* MyNotes :drop ~/home/org/incoming/notes.md
+command! -nargs=* MyNotesv :drop ~/.vim/vimrc | :b +/##\ TODO .vim/vimrc
 
-function! My_GrepFold(dir)
+function! Vimrc_GrepFold(dir)
     setlocal foldlevel=0
     setlocal foldmethod=expr
     setlocal foldexpr=matchstr(getline(v:lnum),'^[^\|]\\+')==#matchstr(getline(v:lnum+1),'^[^\|]\\+')?1:'<1'
@@ -423,8 +423,8 @@ function! My_GrepFold(dir)
         setlocal foldtext=matchstr(substitute(getline(v:foldstart),'\|.*','',''),'^.*/').'\ ['.(v:foldend-v:foldstart+1).'\ lines]'
     endif
 endfunction
-command! -nargs=* GrepFoldDir :silent call My_GrepFold(1)
-command! -nargs=* GrepFold :silent call My_GrepFold(0)
+command! -nargs=* MyGrepFoldDir :silent call Vimrc_GrepFold(1)
+command! -nargs=* MyGrepFold :silent call Vimrc_GrepFold(0)
 
 
 
@@ -438,21 +438,21 @@ set spl=en spell
 set nospell
 
 
-let g:myLang = 0
-let g:myLangList = ['nospell', 'de', 'en']
+let g:vimrc_spell_lang = 0
+let g:vimrc_spell_lang_list = ['nospell', 'de', 'en']
 
-function! MySpellLang()
-    let g:myLang = g:myLang + 1
-    if g:myLang >= len(g:myLangList) | let g:myLang = 0 | endif
+function! Vimrc_SpellLang()
+    let g:vimrc_spell_lang = g:myLang + 1
+    if g:vimrc_spell_lang >= len(g:myLangList) | let g:myLang = 0 | endif
 
-    if g:myLang == 0 | setlocal nospell | endif
-    if g:myLang == 1 | let &l:spelllang = g:myLangList[g:myLang] | setlocal spell | endif
-    if g:myLang == 2 | let &l:spelllang = g:myLangList[g:myLang] | setlocal spell | endif
-    echomsg 'language:' g:myLangList[g:myLang]
+    if g:vimrc_spell_lang == 0 | setlocal nospell | endif
+    if g:vimrc_spell_lang == 1 | let &l:spelllang = g:myLangList[g:myLang] | setlocal spell | endif
+    if g:vimrc_spell_lang == 2 | let &l:spelllang = g:myLangList[g:myLang] | setlocal spell | endif
+    echomsg 'language:' g:vimrc_spell_lang_list[g:myLang]
 endfunction
 
 " key-mapping:<F3> _Toggle spellcheck / switch languages
-nmap <F3> :<C-U>call MySpellLang()<CR>
+nmap <F3> :<C-U>call Vimrc_SpellLang()<CR>
 
 
 
@@ -481,7 +481,7 @@ let &t_EI = "\e[2 q"
 
 "" # folding {{{1
 "" make folded blocks more readable
-function! FoldText()
+function! Vimrc_FoldText()
     let line = getline(v:foldstart)
 
     let nucolwidth = &fdc + &number * &numberwidth
@@ -496,7 +496,7 @@ function! FoldText()
     let fillcharcount = windowwidth - len(line) - len(foldedlinecount) - 9
     return line . '   ' . repeat("-",fillcharcount) . ' [' . foldedlinecount . '] +++  '
 endfunction
-set foldtext=FoldText()
+set foldtext=Vimrc_FoldText()
 
 set nofoldenable        " we start without folding
 set foldlevel=1         " if enabled we want to have foldlevel 1 expanded
@@ -508,14 +508,14 @@ inoremap <A-z> <C-o>za
 vnoremap <A-z> zf
 
 "" toggle through different foldmethods
-noremap <Leader>zf :call MyToggleFold()<CR>
+noremap <Leader>zf :call Vimrc_ToggleFold()<CR>
 
-let g:myFoldMode = 0
-let g:myFoldModes = ['marker', 'syntax', 'indent', 'diff', 'manual']
-function! MyToggleFold()
-    let g:myFoldMode = g:myFoldMode + 1
-    if g:myFoldMode >= len(g:myFoldModes) | let g:myFoldMode = 0 | endif
-    let &l:foldmethod = g:myFoldModes[g:myFoldMode]
+let g:vimrc_fold_mode = 0
+let g:vimrc_fold_modes = ['marker', 'syntax', 'indent', 'diff', 'manual']
+function! Vimrc_ToggleFold()
+    let g:vimrc_fold_mode = g:myFoldMode + 1
+    if g:vimrc_fold_mode >= len(g:myFoldModes) | let g:myFoldMode = 0 | endif
+    let &l:foldmethod = g:vimrc_fold_modes[g:myFoldMode]
     echo "foldmode: " &l:foldmethod
 endfunction
 
@@ -526,26 +526,26 @@ endfunction
 set list    " show listchars by default
 " http://vim.wikia.com/wiki/Highlight_unwanted_spaces
 "" function to switch between different listchars
-let g:myWhitespaceMode = 0
-let g:myWhitespaceModes = [
+let g:vimrc_whitespace_mode = 0
+let g:vimrc_whitespace_mode_list = [
             \ ['nospace notab', 'set listchars=eol:$,tab:\ \ ,trail:·,nbsp:~,precedes:·,extends:·'],
             \ ['nospace',       'set listchars=eol:$,tab:>\ ,trail:·,nbsp:~,precedes:·,extends:·'],
             \ ['noeol',         'set listchars=tab:>\ ,trail:·,nbsp:~,precedes:·,extends:·'],
             \ ['all',           'set listchars=eol:$,tab:>\ ,trail:·,nbsp:~,precedes:·,extends:·,space:·']]
-function! MyToggleWhitespace()
-    let g:myWhitespaceMode = g:myWhitespaceMode + 1
-    if g:myWhitespaceMode >= len(g:myWhitespaceModes) | let g:myWhitespaceMode = 0 | endif
+function! Vimrc_ToggleWhitespace()
+    let g:vimrc_whitespace_mode = g:myWhitespaceMode + 1
+    if g:vimrc_whitespace_mode >= len(g:myWhitespaceModes) | let g:myWhitespaceMode = 0 | endif
 
-    exec g:myWhitespaceModes[g:myWhitespaceMode][1]
-    echo "whitespace mode: " g:myWhitespaceModes[g:myWhitespaceMode][0]
+    exec g:vimrc_whitespace_mode_list[g:myWhitespaceMode][1]
+    echo "whitespace mode: " g:vimrc_whitespace_mode_list[g:myWhitespaceMode][0]
 endfunction
 
-exec g:myWhitespaceModes[0][1]
+exec g:vimrc_whitespace_mode_list[0][1]
 "" " keybindings
 "" on/off
 map <leader>W :set list!<CR>
 "" toggle visible listchars
-map <leader>w :call MyToggleWhitespace()<CR>
+map <leader>w :call Vimrc_ToggleWhitespace()<CR>
 
 exec 'set fillchars=stl:\ ,stlnc:=,vert:\|,fold:\ ,diff:-'
 
@@ -553,14 +553,14 @@ exec 'set fillchars=stl:\ ,stlnc:=,vert:\|,fold:\ ,diff:-'
 
 "" # diff buffer {{{1
 "" diff local buffer
-function! s:MyDiffWithSaved()
+function! s:Vimrc_DiffWithSaved()
     let filetype=&ft
     diffthis
     vnew | r # | normal! 1Gdd
     diffthis
     exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
 endfunction
-com! MyDiffSaved call s:MyDiffWithSaved()
+com! MyDiffSaved call s:Vimrc_DiffWithSaved()
 
 "" another way of diffing local changes
 "  '!diff  --color=always % -'
@@ -584,16 +584,16 @@ nnoremap <silent> <Leader>cl1 ml:execute 'match Search /\%'.line('.').'l/'<CR>
 nnoremap <silent> <Leader>cl2 mm:execute '2match ColorColumn /\%'.line('.').'l/'<CR>
 nnoremap <silent> <Leader>cl3 mn:execute '3match ErrorMsg /\%'.line('.').'l/'<CR>
 
-command! -nargs=* Time r !date \+\%R
-command! -nargs=* Date r !date \+\%F
-command! -nargs=* DateTime r !date \+'\%F \%R'
+command! -nargs=* MyTime r !date \+\%R
+command! -nargs=* MyDate r !date \+\%F
+command! -nargs=* MyDateTime r !date \+'\%F \%R'
 
 " 1234 0xFFFFFFFF  '1234' '0xdeaddeef'  0b00101001
-function! MyConvertNumbers(numb)
+function! Vimrc_ConvertNumbers(numb)
     echom printf('dec: %d hex: 0x%x,0%04x,0x%08x bin: 0b%08b', a:numb, a:numb, a:numb, a:numb, a:numb)
 endfunction
 "map <localleader>cn yiw:call MyConvertNumbers(<C-R>")<CR>
-map <localleader>cn :<C-u>execute 'call MyConvertNumbers(' . expand('<cexpr>') . ')'<CR>
+map <localleader>cn :<C-u>execute 'call Vimrc_ConvertNumbers(' . expand('<cexpr>') . ')'<CR>
 
 " edit file with current path filled out
 map <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
@@ -636,6 +636,7 @@ cmap <C-S-j> <C-W>
 "" we have to remap
 nnoremap <leader><C-l> :redraw!<CR> :redraw!<CR>:redraw!<CR>
 
+"" move between windows with alt hjkl
 nnoremap <A-h> <C-w>h
 nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
@@ -643,16 +644,16 @@ nnoremap <A-l> <C-w>l
 
 
 "" window management
-let g:isFullscreen=0
-function! ToggleCurrentWindowAsTab(preserve)
+let g:vimrc_is_fullscreen=0
+function! Vimrc_ToggleCurrentWindowAsTab(preserve)
 
     let l:fullscreenPos = getcurpos()
-    if(g:isFullscreen)
+    if(g:vimrc_is_fullscreen)
         tabclose
-        let g:isFullscreen=0
+        let g:vimrc_is_fullscreen=0
     else
         tabedit %
-        let g:isFullscreen=1
+        let g:vimrc_is_fullscreen=1
     endif
 
     "silent ! tmux resize-pane -Z
@@ -662,8 +663,8 @@ function! ToggleCurrentWindowAsTab(preserve)
         call setpos(".", l:fullscreenPos)
     endif
 endfunction
-nmap <C-w>e :call ToggleCurrentWindowAsTab(1)<CR>
-nmap <C-w>E :call ToggleCurrentWindowAsTab(0)<CR>
+nmap <C-w>e :call Vimrc_ToggleCurrentWindowAsTab(1)<CR>
+nmap <C-w>E :call Vimrc_ToggleCurrentWindowAsTab(0)<CR>
 
 "" # abbrev {{{1
 " fast c-style comments
@@ -722,7 +723,7 @@ let g:airline_powerline_fonts = 1
 let g:gutentags_define_advanced_commands=1
 let g:gutentags_resolve_symlinks=1
 let g:gutentags_enabled=1
-command! GutentagsGetEnabled :echo g:gutentags_enabled
+command! MyGutentagsGetEnabled :echo g:gutentags_enabled
 
 "" we never generate without write
 let g:gutentags_generate_on_missing=0
@@ -874,7 +875,7 @@ let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 let g:markdown_fold_style = 'nested' " or 'stacked'
 let g:markdown_fold_override_foldtext = 0
 
-function! My_MarkdownToc()
+function! Vimrc_MarkdownToc()
     silent lvimgrep '^#' %
     vertical lopen
     let &winwidth=(&columns/2)
@@ -892,7 +893,7 @@ function! My_MarkdownToc()
     set nomodified
     set nomodifiable
 endfunction
-command! -nargs=* MyMarkdownToc :silent call My_MarkdownToc()
+command! -nargs=* MyMarkdownToc :silent call Vimrc_MarkdownToc()
 
 
 
@@ -908,66 +909,63 @@ if 0
 endif
 
 "" # some links {{{1
-"" https://raw.githubusercontent.com/rasendubi/dotfiles/master/.vimrc
-"" https://github.com/Valloric/YouCompleteMe#ubuntu-linux-x64
-"" https://github.com/JBakamovic/yavide
-"" https://vim.sourceforge.io/scripts/script.php?script_id=213
-"" https://www.reddit.com/r/vim/comments/5iz4cw/making_a_vim_setup_for_cc/
+"" https://github.com/easymotion/vim-easymotion
+"" https://github.com/SirVer/ultisnips
 "" test
 "" # }}}
 
 "" # tmux-i3-config {{{1
 
 
-if !exists("g:i3mux#loaded") || ! g:i3mux#loaded
-    let g:i3mux#loaded=1
-    let g:i3mux#last_window=0
-    let g:i3mux#windows={}
+if !exists("g:i3mux_loaded") || ! g:i3mux#loaded
+    let g:i3mux_loaded=1
+    let g:i3mux_last_window=0
+    let g:i3mux_windows={}
 endif
 
-function! I3mux_new (window)
+function! I3muxNew (window)
     "" get window id of this vim window
     let thisid=systemlist("i3-msg -t get_tree | jq \" recurse(.nodes[]) | select(.focused==true) | .window\"")[0]
     "" i3: split v, start gnome-terminal running tmux
     exec ":!(i3-msg split v;i3-msg exec \"gnome-terminal -- tmux new-session -s vi_dev_" . a:window . "\") > /dev/null"
     sleep 100m
     "" get window id of the new window
-    let g:i3mux#windows[a:window]=systemlist("i3-msg -t get_tree | jq \" recurse(.nodes[]) | select(.focused==true) | .window\"")[0]
-    let g:i3mux#last_window=a:window
+    let g:i3mux_windows[a:window]=systemlist("i3-msg -t get_tree | jq \" recurse(.nodes[]) | select(.focused==true) | .window\"")[0]
+    let g:i3mux_last_window=a:window
     "" focus vim again
     exec ":!(i3-msg [id=" . thisid . "] focus) > /dev/null"
     redraw!
 endfunction
 
-function! I3mux_cmd(margs)
+function! I3muxCmd(margs)
     exec ":!(tmux send-keys -t vi_dev_" . a:margs . " Enter &) > /dev/null"
     sleep 100m
     redraw!
 endfunction
 
-function! I3mux_redo(window)
+function! I3muxRedo(window)
     exec ":!(tmux send-keys -t vi_dev_" . a:window . " Up Enter &) > /dev/null"
     sleep 100m
     redraw!
 endfunction
 
 
-function! I3mux_hide (window)
-    exec ":!(i3-msg [id=" . g:i3mux#windows[a:window] . "] move container to workspace 99) > /dev/null"
+function! I3muxHide (window)
+    exec ":!(i3-msg [id=" . g:i3mux_windows[a:window] . "] move container to workspace 99) > /dev/null"
     sleep 100m
     redraw!
 endfunction
 
-function! I3mux_show (...)
-    exec ":!(i3-msg [id=" .  g:i3mux#windows[a:window] . "] move container to workspace current) > /dev/null"
+function! I3muxShow (...)
+    exec ":!(i3-msg [id=" .  g:i3mux_windows[a:window] . "] move container to workspace current) > /dev/null"
     sleep 100m
     redraw!
 endfunction
 
-command! -nargs=1 I3new :silent call I3mux_new("<args>")
-command! -nargs=* I3cmd :silent call I3mux_cmd("<args>")
-command! -nargs=1 I3redo :silent call I3mux_redo("<args>")
-command! -nargs=1 I3hide :silent call I3mux_hide("<args>")
-command! -nargs=1 I3show :silent call I3mux_show("<args>")
+command! -nargs=1 MyI3muxNew :silent call I3muxNew("<args>")
+command! -nargs=* MyI3muxCmd :silent call I3muxCmd("<args>")
+command! -nargs=1 MyI3muxRedo :silent call I3muxRedo("<args>")
+command! -nargs=1 MyI3muxHide :silent call I3muxHide("<args>")
+command! -nargs=1 MyI3muxShow :silent call I3muxShow("<args>")
 
 
