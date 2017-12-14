@@ -912,7 +912,8 @@ endif
 "" # some links {{{1
 "" https://github.com/easymotion/vim-easymotion
 "" https://github.com/SirVer/ultisnips
-"" test
+"" https://github.com/tpope/vim-abolish
+"" https://github.com/wellle/targets.vim
 "" # }}}
 
 "" # tmux-i3-config {{{1
