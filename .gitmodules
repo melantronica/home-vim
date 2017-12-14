@@ -1,8 +1,3 @@
-[submodule "pack/editing/start/nerdcommenter"]
-	path = pack/editing/start/nerdcommenter
-	url = https://github.com/scrooloose/nerdcommenter.git
-    branch = master
-    ignore = dirty
 [submodule "pack/files/start/nerdtree"]
 	path = pack/files/start/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
@@ -100,14 +95,6 @@
 [submodule "pack/ide/start/obsession"]
 	path = pack/ide/start/obsession
 	url = https://github.com/tpope/vim-obsession.git
-[submodule "pack/editing/start/tabular"]
-	path = pack/editing/start/tabular
-	url = https://github.com/godlygeek/tabular.git
-[submodule "pack/editing/start/table-mode"]
-	path = pack/editing/start/table-mode
-	url = https://github.com/dhruvasagar/vim-table-mode.git
-
-
 [submodule "pack/editing/start/grepper"]
 	path = pack/grep/start/grepper
 	url = https://github.com/mhinz/vim-grepper.git
@@ -123,9 +110,6 @@
 [submodule "pack/ide/start/tmux-navigator"]
 	path = pack/ide/start/tmux-navigator
 	url = https://github.com/christoomey/vim-tmux-navigator.git
-[submodule "pack/ide/start/zoomwin"]
-	path = pack/ide/start/zoomwin
-	url = https://github.com/vim-scripts/ZoomWin.git
 [submodule "pack/grep/start/qf"]
 	path = pack/grep/start/qf
 	url = https://github.com/romainl/vim-qf.git
