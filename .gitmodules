@@ -29,7 +29,7 @@
 	branch = master
     ignore = dirty
 [submodule "pack/files/start/ctrlp"]
-	path = pack/files/start/ctrlp
+	path = pack/files/opt/ctrlp
 	url = https://github.com/kien/ctrlp.vim.git
 	branch = master
     ignore = dirty
@@ -61,7 +61,7 @@
 	url = https://github.com/nelstrom/vim-markdown-folding.git
     ignore = dirty
 [submodule "pack/ide/opt/syntastic"]
-	path = pack/ide/opt/syntastic
+	path = pack/ide/start/syntastic
 	url = https://github.com/vim-syntastic/syntastic.git
     ignore = dirty
 [submodule "pack/colors/opt/awesome-vim-colorschemes"]
@@ -92,7 +92,7 @@
 	path = pack/git/start/extradite
 	url = https://github.com/int3/vim-extradite.git
 [submodule "pack/editing/start/ack"]
-	path = pack/editing/start/ack
+	path = pack/grep/start/ack
 	url = https://github.com/mileszs/ack.vim.git
 [submodule "pack/editing/start/bracketed-paste"]
 	path = pack/editing/start/bracketed-paste
@@ -109,7 +109,7 @@
 
 
 [submodule "pack/editing/start/grepper"]
-	path = pack/editing/start/grepper
+	path = pack/grep/start/grepper
 	url = https://github.com/mhinz/vim-grepper.git
 [submodule "pack/files/start/eunuch"]
 	path = pack/files/start/eunuch
@@ -126,3 +126,15 @@
 [submodule "pack/ide/start/zoomwin"]
 	path = pack/ide/start/zoomwin
 	url = https://github.com/vim-scripts/ZoomWin.git
+[submodule "pack/grep/start/qf"]
+	path = pack/grep/start/qf
+	url = https://github.com/romainl/vim-qf.git
+[submodule "pack/grep/start/qlist"]
+	path = pack/grep/start/qlist
+	url = https://github.com/romainl/vim-qlist.git
+[submodule "pack/editing/start/commentary"]
+	path = pack/editing/start/commentary
+	url = https://github.com/tpope/vim-commentary.git
+[submodule "pack/editing/start/lion"]
+	path = pack/editing/start/lion
+	url = https://github.com/tommcdo/vim-lion.git
