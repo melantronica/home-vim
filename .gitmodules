@@ -88,9 +88,6 @@
 [submodule "pack/files/start/nerdtree-git-plugin"]
 	path = pack/files/start/nerdtree-git-plugin
 	url = https://github.com/Xuyuanp/nerdtree-git-plugin.git
-[submodule "pack/ide/start/tmux-navigator"]
-	path = pack/ide/start/tmux-navigator
-	url = https://github.com/christoomey/vim-tmux-navigator.git
 [submodule "pack/grep/start/qf"]
 	path = pack/grep/start/qf
 	url = https://github.com/romainl/vim-qf.git
