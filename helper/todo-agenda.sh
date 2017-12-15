@@ -39,6 +39,5 @@ done
 
 agstring="$todo_keywords.*\n.*<<.*>>" 
 find $dirs$exclude -type f -print0 \
-    | xargs -0 ag $agstring | sed 'N; s/\(.*:[0-9]*:\)\(.*\)\n.*<<\(.*\)>>/\1 \3: \2/' \
-    | sort -r -k 2n -k 3n 
-
+    | xargs -0 ag $agstring  | sed 'N; s/\(.*:[0-9]*:\)\(.*\)\n.*<<\(.*\)>>/\1 \3: \2/' \
+    | sort -b -k 2 -k 3 
