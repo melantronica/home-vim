@@ -1,4 +1,4 @@
-"" title:  vimrc
+" title:  vimrc
 "" author: bastian zeller
 ""
 "" for documentation visit this file
@@ -119,22 +119,6 @@ set wildmode=list:longest,full  " completition style
 set noerrorbells
 set visualbell
 
-"" fix alt keybindings
-"let g:vimrc_fixalt_index='a'
-"while g:vimrc_fixalt_index <= 'z'
-"  exec "set <A-".g:vimrc_fixalt_index.">=\e".g:vimrc_fixalt_index
-"  exec "imap \e".g:vimrc_fixalt_index." <A-".g:vimrc_fixalt_index.">"
-"  let g:vimrc_fixalt_index = nr2char(1+char2nr(g:vimrc_fixalt_index))
-"endw
-
-set <A-j>=\ej
-imap \ej <A-j>
-set <A-k>=\ek
-imap \ek <A-k>
-set <A-l>=\el
-imap \el <A-l>
-set <A-m>=\em
-imap \em <A-m>
 
 
 "" # backup, history, swap, viminfo, undo {{{1
@@ -600,9 +584,9 @@ map <leader>h :<C-u>execute 'help ' . expand('<cexpr>')
 map <leader>0 Y:<C-R>"<BS>
 
 "" match current line
-nnoremap <silent> <Leader>cl1 ml:execute 'match Search /\%'.line('.').'l/'<CR>
-nnoremap <silent> <Leader>cl2 mm:execute '2match ColorColumn /\%'.line('.').'l/'<CR>
-nnoremap <silent> <Leader>cl3 mn:execute '3match ErrorMsg /\%'.line('.').'l/'<CR>
+nnoremap <silent> <Leader>m1 ml:execute 'match Search /\%'.line('.').'l/'<CR>
+nnoremap <silent> <Leader>m2 mm:execute '2match ColorColumn /\%'.line('.').'l/'<CR>
+nnoremap <silent> <Leader>m3 mn:execute '3match ErrorMsg /\%'.line('.').'l/'<CR>
 
 command! -nargs=* MyTime r !date \+\%R
 command! -nargs=* MyDate r !date \+\%F
@@ -627,14 +611,14 @@ map <leader>p "1p
 map <leader>P "1P
 
 "" shift+arrow selection
-nmap <S-Up> v<Up>
-nmap <S-Down> v<Down>
-nmap <S-Left> v<Left>
-nmap <S-Right> v<Right>
-vmap <S-Up> <Up>
-vmap <S-Down> <Down>
-vmap <S-Left> <Left>
-vmap <S-Right> <Right>
+nmap <S-Up> vk
+nmap <S-Down> vj
+nmap <S-Left> vh
+nmap <S-Right> vl
+vmap <S-Up> k
+vmap <S-Down> j
+vmap <S-Left> h
+vmap <S-Right> l
 
 imap <S-Up> <Esc>vk
 imap <S-Down> <Esc>vj
@@ -647,6 +631,7 @@ imap <S-Home> <C-o>v<Home>
 imap <S-End> <C-o>v<End>
 nmap <S-Home> v<Home>
 nmap <S-End> v<End>
+
 "" ctrl+hjkl
 imap <C-h> <C-o>h
 imap <C-j> <C-o>j
@@ -661,10 +646,18 @@ cmap <C-S-j> <C-W>
 nnoremap <leader><C-l> :redraw!<CR> :redraw!<CR>:redraw!<CR>
 
 "" move between windows with alt hjkl
-nnoremap <A-h> <C-w>h
-nnoremap <A-j> <C-w>j
-nnoremap <A-k> <C-w>k
-nnoremap <A-l> <C-w>l
+exec "set <A-h>=\eh"
+noremap <A-h> <C-w>h
+inoremap <A-h> <C-o><C-w>h
+exec "set <A-j>=\ej"
+noremap <A-j> <C-w>j
+inoremap <A-j> <C-o><C-w>j
+exec "set <A-k>=\ek"
+noremap <A-k> <C-w>k
+inoremap <A-k> <C-o><C-w>k
+exec "set <A-l>=\el"
+noremap <A-l> <C-w>l
+inoremap <A-l> <C-o><C-w>l
 
 
 "" window management
@@ -942,7 +935,7 @@ endif
 "" # tmux-i3-config {{{1
 
 
-if !exists("g:i3mux_loaded") || ! g:i3mux#loaded
+if !exists("g:i3mux_loaded") 
     let g:i3mux_loaded=1
     let g:i3mux_last_window=0
     let g:i3mux_windows={}
