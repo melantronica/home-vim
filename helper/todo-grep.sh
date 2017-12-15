@@ -13,6 +13,8 @@ dirs=" \
     $HOME/.vim \
     "
 
+dirs+=`find $HOME/work -maxdepth 10 -path "*doc/notes"`
+
 ## dirs to exclude
 ex_dirs=" \
     $HOME/.vim/pack \
