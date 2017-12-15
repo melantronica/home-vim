@@ -9,7 +9,7 @@ todo_keywords="todo\|FIXME"
 
 ## dirs to include
 dirs=" \
-    $HOME/home \
+    $HOME/documents \
     $HOME/.vim \
     "
 
