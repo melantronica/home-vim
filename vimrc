@@ -119,13 +119,22 @@ set wildmode=list:longest,full  " completition style
 set noerrorbells
 set visualbell
 
-" fix alt keybindings
-let g:vimrc_fixalt_index='a'
-while g:vimrc_fixalt_index <= 'z'
-  exec "set <A-".g:vimrc_fixalt_index.">=\e".g:vimrc_fixalt_index
-  exec "imap \e".g:vimrc_fixalt_index." <A-".g:vimrc_fixalt_index.">"
-  let g:vimrc_fixalt_index = nr2char(1+char2nr(g:vimrc_fixalt_index))
-endw
+"" fix alt keybindings
+"let g:vimrc_fixalt_index='a'
+"while g:vimrc_fixalt_index <= 'z'
+"  exec "set <A-".g:vimrc_fixalt_index.">=\e".g:vimrc_fixalt_index
+"  exec "imap \e".g:vimrc_fixalt_index." <A-".g:vimrc_fixalt_index.">"
+"  let g:vimrc_fixalt_index = nr2char(1+char2nr(g:vimrc_fixalt_index))
+"endw
+
+set <A-j>=\ej
+imap \ej <A-j>
+set <A-k>=\ek
+imap \ek <A-k>
+set <A-l>=\el
+imap \el <A-l>
+set <A-m>=\em
+imap \em <A-m>
 
 
 "" # backup, history, swap, viminfo, undo {{{1
@@ -615,10 +624,13 @@ vmap <S-Up> <Up>
 vmap <S-Down> <Down>
 vmap <S-Left> <Left>
 vmap <S-Right> <Right>
-imap <S-Up> <Esc>v<Up>
-imap <S-Down> <Esc>v<Down>
-imap <S-Left> <Esc>v<Left>
-imap <S-Right> <Esc>v<Right>
+
+imap <S-Up> <Esc>vk
+imap <S-Down> <Esc>vj
+imap <S-Left> <Esc>vh
+imap <S-Right> <Esc>vl
+
+
 "" shift+home selection
 imap <S-Home> <C-o>v<Home>
 imap <S-End> <C-o>v<End>
