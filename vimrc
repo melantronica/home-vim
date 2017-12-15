@@ -370,9 +370,20 @@ endif
 " This rewires n and N to do the blink for the next match
 nnoremap <silent> n   n:call Vimrc_HLNext(0.1)<cr>
 nnoremap <silent> N   N:call Vimrc_HLNext(0.1)<cr>
-nnoremap <silent> <F2> :noh<cr>:call matchdelete(g:vimrc_last_match)<cr>
+nnoremap <silent> <F2> :noh<cr>:call Vimrc_HLNext_delete()<cr>
+
 
 let g:vimrc_last_match = 0
+
+nohlsearch
+
+
+function! Vimrc_HLNext_delete()
+    if g:vimrc_last_match > 0
+        call matchdelete(g:vimrc_last_match)
+    endif
+endfunction
+
 " highlight the match in red
 function! Vimrc_HLNext (blinktime)
     if g:vimrc_last_match > 0
