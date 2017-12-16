@@ -446,13 +446,13 @@ let g:vimrc_spell_lang = 0
 let g:vimrc_spell_lang_list = ['nospell', 'de', 'en']
 
 function! Vimrc_SpellLang()
-    let g:vimrc_spell_lang = g:myLang + 1
-    if g:vimrc_spell_lang >= len(g:myLangList) | let g:myLang = 0 | endif
+    let g:vimrc_spell_lang = g:vimrc_spell_lang + 1
+    if g:vimrc_spell_lang >= len(g:vimrc_spell_lang_list) | let g:vimrc_spell_lang= 0 | endif
 
     if g:vimrc_spell_lang == 0 | setlocal nospell | endif
-    if g:vimrc_spell_lang == 1 | let &l:spelllang = g:myLangList[g:myLang] | setlocal spell | endif
-    if g:vimrc_spell_lang == 2 | let &l:spelllang = g:myLangList[g:myLang] | setlocal spell | endif
-    echomsg 'language:' g:vimrc_spell_lang_list[g:myLang]
+    if g:vimrc_spell_lang == 1 | let &l:spelllang = g:vimrc_spell_lang_list[g:vimrc_spell_lang] | setlocal spell | endif
+    if g:vimrc_spell_lang == 2 | let &l:spelllang = g:vimrc_spell_lang_list[g:vimrc_spell_lang] | setlocal spell | endif
+    echomsg 'language:' g:vimrc_spell_lang_list[g:vimrc_spell_lang]
 endfunction
 
 " key-mapping:<F3> _Toggle spellcheck / switch languages
@@ -517,9 +517,9 @@ noremap <Leader>zf :call Vimrc_ToggleFold()<CR>
 let g:vimrc_fold_mode = 0
 let g:vimrc_fold_modes = ['marker', 'syntax', 'indent', 'diff', 'manual']
 function! Vimrc_ToggleFold()
-    let g:vimrc_fold_mode = g:myFoldMode + 1
-    if g:vimrc_fold_mode >= len(g:myFoldModes) | let g:myFoldMode = 0 | endif
-    let &l:foldmethod = g:vimrc_fold_modes[g:myFoldMode]
+    let g:vimrc_fold_mode = g:vimrc_fold_mode + 1
+    if g:vimrc_fold_mode >= len(g:vimrc_fold_modes) | let g:vimrc_fold_mode = 0 | endif
+    let &l:foldmethod = g:vimrc_fold_modes[g:vimrc_fold_mode]
     echo "foldmode: " &l:foldmethod
 endfunction
 
@@ -537,11 +537,11 @@ let g:vimrc_whitespace_mode_list = [
             \ ['noeol',         'set listchars=tab:>\ ,trail:·,nbsp:~,precedes:·,extends:·'],
             \ ['all',           'set listchars=eol:$,tab:>\ ,trail:·,nbsp:~,precedes:·,extends:·,space:·']]
 function! Vimrc_ToggleWhitespace()
-    let g:vimrc_whitespace_mode = g:myWhitespaceMode + 1
-    if g:vimrc_whitespace_mode >= len(g:myWhitespaceModes) | let g:myWhitespaceMode = 0 | endif
+    let g:vimrc_whitespace_mode = g:vimrc_whitespace_mode + 1
+    if g:vimrc_whitespace_mode >= len(g:vimrc_whitespace_modes) | let g:vimrc_whitespace_mode = 0 | endif
 
-    exec g:vimrc_whitespace_mode_list[g:myWhitespaceMode][1]
-    echo "whitespace mode: " g:vimrc_whitespace_mode_list[g:myWhitespaceMode][0]
+    exec g:vimrc_whitespace_mode_list[g:vimrc_whitespace_mode][1]
+    echo "whitespace mode: " g:vimrc_whitespace_mode_list[g:vimrc_whitespace_mode][0]
 endfunction
 
 exec g:vimrc_whitespace_mode_list[0][1]
