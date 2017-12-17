@@ -11,23 +11,13 @@
 
 "" ## TODO {{{2
 "" - make nice list of available functions and keybindings
-"" - use common style for definitions for searching
 "" - check keybinding plausibility (recursive mapping, etc)
 
-"" - shall we structure into diffenrent files??
-""   if so, follo this path: 
-""      http://learnvimscriptthehardway.stevelosh.com/chapters/42.html
-""
 ""  we have syntax scripts now. configure them to show nice colors
 
 "" - ssh edit (tee, netrw??)
 
 "" - snippets
-
-"" - plugins to get rid of
-""   - youcompleteme
-
-"" rework i3mux
 
 "" }}} }}}
 
