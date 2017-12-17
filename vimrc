@@ -31,16 +31,66 @@
 
 "" }}} }}}
 
-"" # pathogen {{{1
-if v:version < 800
-    "" vim < 800 doen't have package management. we fallback to pathogen here
-    "" plugins are stored in packs/{}/start/ or packs/{}/opt/
-    "" opt packages sholdn't be loaded
-    filetype off
-    runtime pack/backports/opt/pathogen/autoload/pathogen.vim
-    silent! call pathogen#infect('pack/{}/start/{}')
-    silent! call pathogen#helptags()
+
+"" # minpac {{{1
+let g:vimrc_packinitialized=0
+function! Vimrc_PackInit()
+    if(g:vimrc_packinitialized == 0)
+        "" minpac is loaded.
+        call minpac#init()
+        call minpac#add('k-takata/minpac', {'type': 'opt'})
+        "" Color
+        call minpac#add('vim-airline/vim-airline-themes')
+        call minpac#add('vim-airline/vim-airline')
+        call minpac#add('rafi/awesome-vim-colorschemes', {'type': 'opt'})
+        "" completion
+        call minpac#add('Valloric/YouCompleteMe', {'type': 'opt'})
+        call minpac#add('ludovicchabant/vim-gutentags')
+        call minpac#add('vim-scripts/OmniCppComplete')
+        call minpac#add('ervandew/supertab')
+        call minpac#add('majutsushi/tagbar')
+        "" editing
+        call minpac#add('ConradIrwin/vim-bracketed-paste')
+        call minpac#add('tpope/vim-commentary')
+        call minpac#add('tommcdo/vim-lion')
+        call minpac#add('tpope/vim-repeat')
+        call minpac#add('tpope/vim-surround')
+        "" files
+        call minpac#add('kien/ctrlp.vim', {'type': 'opt'})
+        call minpac#add('tpope/vim-eunuch')
+        call minpac#add('scrooloose/nerdtree')
+        call minpac#add('Xuyuanp/nerdtree-git-plugin')
+        ""
+        call minpac#add('airblade/vim-gitgutter', {'type': 'opt'})
+        call minpac#add('int3/vim-extradite')
+        call minpac#add('tpope/vim-fugitive')
+        "" grep
+        call minpac#add('mileszs/ack.vim')
+        call minpac#add('mhinz/vim-grepper')
+        call minpac#add('romainl/vim-qf')
+        call minpac#add('romainl/vim-qlist')
+        "" IDE
+        call minpac#add('w0rp/ale')
+        call minpac#add('vim-scripts/Conque-GDB')
+        call minpac#add('tpope/vim-obsession')
+        "" markup
+        call minpac#add('tpope/vim-markdown')
+        call minpac#add('nelstrom/vim-markdown-folding')
+        call minpac#add('Rykka/riv.vim')
+
+        let g:vimrc_packinitialized=1
+    endif
+endfunction
+
+if exists('*minpac#init')
+    call Vimrc_PackInit()
 endif
+
+" Define user commands for updating/cleaning the plugins.
+" Each of them loads minpac, reloads .vimrc to register the
+" information of plugins, then performs the task.
+command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update() | helptags ~/.vim/pack/minpac 
+command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
 
 
 "" # general {{{1
