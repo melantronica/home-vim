@@ -3,6 +3,3 @@
 	path = pack/minpac/opt/minpac
     url = https://github.com/melantronica/minpac.git
     branch = master
-[submodule "pack/melantronica/start/vim-i3mux"]
-	path = pack/melantronica/start/vim-i3mux
-	url = https://github.com/melantronica/vim-i3mux.git
