@@ -1,5 +1,5 @@
 "runtime colors/Tomorrow-Night-Bright.vim
-runtime pack/colors/opt/awesome-vim-colorschemes/colors/molokai.vim 
+runtime colors/molokai.vim 
 " https://jonasjacek.github.io/colors/
 
 let g:colors_name = "tentacle"
