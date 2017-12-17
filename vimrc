@@ -33,49 +33,49 @@
 
 "" # minpac {{{1
 if exists('*minpac#init')
-    "    if(g:vimrc_packinitialized == 0)
-    "" minpac is loaded.
+    "" minpac itself.
     call minpac#init()
     call minpac#add('melantronica/minpac', {'type': 'opt'})
 
     "" Color
-    call minpac#add('vim-airline/vim-airline-themes')
-    call minpac#add('vim-airline/vim-airline')
     call minpac#add('rafi/awesome-vim-colorschemes', {'type': 'opt'})
+    call minpac#add('vim-airline/vim-airline-themes', {'type': 'opt'})
+    call minpac#add('vim-airline/vim-airline')
+
     "" completion
-    call minpac#add('ludovicchabant/vim-gutentags')
-    call minpac#add('vim-scripts/OmniCppComplete')
-    call minpac#add('ervandew/supertab', {'type': 'opt'})
-    call minpac#add('majutsushi/tagbar')
-    call minpac#add('Valloric/YouCompleteMe', {'type': 'opt'})
+    call minpac#add('majutsushi/tagbar')                    " tagbar
+    call minpac#add('ludovicchabant/vim-gutentags')         " automatic tag creation
+    call minpac#add('vim-scripts/OmniCppComplete')          " cpp omni completion
+    call minpac#add('Valloric/YouCompleteMe', {'type': 'opt'}) "completion engine (very overdozed)
+    call minpac#add('ervandew/supertab', {'type': 'opt'})   " make use of tab key
     "" editing
-    call minpac#add('ConradIrwin/vim-bracketed-paste')
-    call minpac#add('tpope/vim-commentary')
-    call minpac#add('tommcdo/vim-lion')
-    call minpac#add('tpope/vim-repeat', {'type': 'opt'})
-    call minpac#add('tpope/vim-surround')
+    call minpac#add('ConradIrwin/vim-bracketed-paste')      " when pasting from X disable formatting
+    call minpac#add('tpope/vim-commentary')                 " comment code
+    call minpac#add('tpope/vim-surround')                   " change surrounding
+    call minpac#add('tpope/vim-repeat', {'type': 'opt'})    " create repeatable commands
+    call minpac#add('tpope/vim-eunuch')                     " bash functions as commands
+    call minpac#add('tommcdo/vim-lion')                     " align by character
     "" files
-    call minpac#add('tpope/vim-eunuch')
-    call minpac#add('scrooloose/nerdtree')
-    call minpac#add('Xuyuanp/nerdtree-git-plugin')
-    call minpac#add('kien/ctrlp.vim', {'type': 'opt'})
+    call minpac#add('kien/ctrlp.vim', {'type': 'opt'})      " fuzzy finder
+    call minpac#add('scrooloose/nerdtree')                  " file browser
+    call minpac#add('Xuyuanp/nerdtree-git-plugin')          " git symbols
     ""
-    call minpac#add('int3/vim-extradite')
-    call minpac#add('tpope/vim-fugitive', {'type': 'opt'})
-    call minpac#add('airblade/vim-gitgutter', {'type': 'opt'})
+    call minpac#add('int3/vim-extradite')                   " git log with diff
+    call minpac#add('tpope/vim-fugitive', {'type': 'opt'})  " everything git
+    call minpac#add('airblade/vim-gitgutter', {'type': 'opt'})  " shot diff in the gutter
     "" grep
-    call minpac#add('mileszs/ack.vim', {'type': 'opt'})
-    call minpac#add('mhinz/vim-grepper')
-    call minpac#add('romainl/vim-qf')
-    call minpac#add('romainl/vim-qlist')
+    call minpac#add('mileszs/ack.vim', {'type': 'opt'})     " search with ack
+    call minpac#add('mhinz/vim-grepper')                    " various grep commands
+    call minpac#add('romainl/vim-qf')                       " quickfix updates
+    call minpac#add('romainl/vim-qlist')                    " quickfix updates
     "" IDE
-    call minpac#add('w0rp/ale')
-    call minpac#add('vim-scripts/Conque-GDB', {'type': 'opt'})
-    call minpac#add('tpope/vim-obsession', {'type': 'opt'})
+    call minpac#add('w0rp/ale')                             " syntax check = linter
+    call minpac#add('vim-scripts/Conque-GDB', {'type': 'opt'})  " gdb integration
+    call minpac#add('tpope/vim-obsession', {'type': 'opt'}) " session management
     "" markup
-    call minpac#add('tpope/vim-markdown', {'type': 'opt'})
-    call minpac#add('nelstrom/vim-markdown-folding', {'type': 'opt'})
-    call minpac#add('Rykka/riv.vim', {'type': 'opt'})
+    call minpac#add('tpope/vim-markdown', {'type': 'opt'})  " mardown 
+    call minpac#add('nelstrom/vim-markdown-folding', {'type': 'opt'})   " fold rules for markdown
+    call minpac#add('Rykka/riv.vim', {'type': 'opt'})       " reStructuredText
 endif
 
 command! MyPackUpdate packadd minpac | source $MYVIMRC | call minpac#update() | helptags ~/.vim/pack/minpac 
