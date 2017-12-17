@@ -74,7 +74,7 @@ if exists('*minpac#init')
     call minpac#add('tpope/vim-obsession', {'type': 'opt'}) " session management
     "" markup
     call minpac#add('tpope/vim-markdown', {'type': 'opt'})  " mardown 
-    call minpac#add('nelstrom/vim-markdown-folding', {'type': 'opt'})   " fold rules for markdown
+    call minpac#add('nelstrom/vim-markdown-folding', {'type': 'opt'}) " fold rules for markdown
     call minpac#add('Rykka/riv.vim', {'type': 'opt'})       " reStructuredText
     ""
     call minpac#add('melantronica/vim-i3mux') " i3mux
