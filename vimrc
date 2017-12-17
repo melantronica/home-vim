@@ -212,7 +212,23 @@ hi def link MyTodo Todo   " todo
 nnoremap <silent> <F2> :noh<CR>
 
 
+function! Vimrc_Retab(tsin, tsout)
 
+    "" Switch to hard tabs:
+    set noexpandtab
+    "" Set the tab stop to the current setting
+    exec "set tabstop=".a:tsin
+    retab!
+    exec "set tabstop=".a:tsout
+    " Go back to soft tabs
+    set expandtab
+    " Replace all the tabs in the current file to spaces
+    retab
+endfunction
+
+
+command! -nargs=* MyRetab24 :silent call Vimrc_Retab(2, 4)
+command! -nargs=* MyRetab42 :silent call Vimrc_Retab(4, 2)
 "" # completion {{{1
 
 set omnifunc=syntaxcomplete#Complete
