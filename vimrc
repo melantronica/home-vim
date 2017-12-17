@@ -39,7 +39,7 @@ if exists('*minpac#init')
 
     "" Color
     call minpac#add('rafi/awesome-vim-colorschemes', {'type': 'opt'})
-    call minpac#add('vim-airline/vim-airline-themes', {'type': 'opt'})
+    call minpac#add('vim-airline/vim-airline-themes')
     call minpac#add('vim-airline/vim-airline')
 
     "" completion
@@ -988,8 +988,6 @@ command! -nargs=* MyMarkdownToc :silent call Vimrc_MarkdownToc()
 
 "" # BREAK }}} }}} }}}
 
-
-
 "" # incoming {{{1
 "" disabled by default
 if 0
@@ -1003,58 +1001,5 @@ endif
 "" https://github.com/wellle/targets.vim
 "" # }}}
 
-"" # tmux-i3-config {{{1
-
-
-if !exists("g:i3mux_loaded") 
-    let g:i3mux_loaded=1
-    let g:i3mux_last_window=0
-    let g:i3mux_windows={}
-endif
-
-function! I3muxNew (window)
-    "" get window id of this vim window
-    let thisid=systemlist("i3-msg -t get_tree | jq \" recurse(.nodes[]) | select(.focused==true) | .window\"")[0]
-    "" i3: split v, start gnome-terminal running tmux
-    exec ":!(i3-msg split v;i3-msg exec \"gnome-terminal -- tmux new-session -s vi_dev_" . a:window . "\") > /dev/null"
-    sleep 100m
-    "" get window id of the new window
-    let g:i3mux_windows[a:window]=systemlist("i3-msg -t get_tree | jq \" recurse(.nodes[]) | select(.focused==true) | .window\"")[0]
-    let g:i3mux_last_window=a:window
-    "" focus vim again
-    exec ":!(i3-msg [id=" . thisid . "] focus) > /dev/null"
-    redraw!
-endfunction
-
-function! I3muxCmd(margs)
-    exec ":!(tmux send-keys -t vi_dev_" . a:margs . " Enter &) > /dev/null"
-    sleep 100m
-    redraw!
-endfunction
-
-function! I3muxRedo(window)
-    exec ":!(tmux send-keys -t vi_dev_" . a:window . " Up Enter &) > /dev/null"
-    sleep 100m
-    redraw!
-endfunction
-
-
-function! I3muxHide (window)
-    exec ":!(i3-msg [id=" . g:i3mux_windows[a:window] . "] move container to workspace 99) > /dev/null"
-    sleep 100m
-    redraw!
-endfunction
-
-function! I3muxShow (...)
-    exec ":!(i3-msg [id=" .  g:i3mux_windows[a:window] . "] move container to workspace current) > /dev/null"
-    sleep 100m
-    redraw!
-endfunction
-
-command! -nargs=1 MyI3muxNew :silent call I3muxNew("<args>")
-command! -nargs=* MyI3muxCmd :silent call I3muxCmd("<args>")
-command! -nargs=1 MyI3muxRedo :silent call I3muxRedo("<args>")
-command! -nargs=1 MyI3muxHide :silent call I3muxHide("<args>")
-command! -nargs=1 MyI3muxShow :silent call I3muxShow("<args>")
 
 
