@@ -1,4 +1,5 @@
 
 [submodule "pack/minpac/opt/minpac"]
 	path = pack/minpac/opt/minpac
-	url = https://github.com/melantronica/minpac.git
+    url = https://github.com/melantronica/minpac.git
+    branch = master
