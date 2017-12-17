@@ -240,7 +240,8 @@ hi def link MyTodo Todo   " todo
 
 "" disable highliting temporary (afterddiwpp search)
 " keymapping:<F2> _clear search highliting
-nnoremap <silent> <F2> :noh<CR>
+noremap <silent> <F2> :noh<CR>
+inoremap <silent> <F2> <C-o>:noh<CR>
 
 
 function! Vimrc_Retab(tsin, tsout)
@@ -261,6 +262,8 @@ endfunction
 command! -nargs=* MyRetab24 :silent call Vimrc_Retab(2, 4)
 command! -nargs=* MyRetab42 :silent call Vimrc_Retab(4, 2)
 "" # completion {{{1
+
+set complete+=kspell
 
 set omnifunc=syntaxcomplete#Complete
 
@@ -401,7 +404,8 @@ endif
 " This rewires n and N to do the blink for the next match
 nnoremap <silent> n   n:call Vimrc_HLNext(0.1)<cr>
 nnoremap <silent> N   N:call Vimrc_HLNext(0.1)<cr>
-nnoremap <silent> <F2> :noh<cr>:call Vimrc_HLNext_delete()<cr>
+noremap <silent> <F2> :noh<cr>:call Vimrc_HLNext_delete()<cr>
+inoremap <silent> <F2> <C-o>:noh<cr>:call Vimrc_HLNext_delete()<cr>
 
 
 let g:vimrc_last_match = 0
@@ -503,7 +507,8 @@ function! Vimrc_SpellLang()
 endfunction
 
 " key-mapping:<F3> _Toggle spellcheck / switch languages
-nmap <F3> :<C-U>call Vimrc_SpellLang()<CR>
+map <F3> :<C-U>call Vimrc_SpellLang()<CR>
+imap <F3> <C-o>:<C-U>call Vimrc_SpellLang()<CR>
 
 
 
@@ -651,7 +656,9 @@ map <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 
 "" global macro in slot p
 map <F7> qq
+imap <F7> <C-o>qq
 map <F8> @q
+imap <F8> <C-o>@q
 
 "" paste register 1 (cycles last 10)
 map <leader>p "1p
@@ -769,8 +776,10 @@ au BufReadPost quickfix normal zq
 
 
 
-nnoremap <F4> :make!<cr>
-nnoremap <F5> :ConqueGDB
+noremap <F5> :ConqueGDB
+inoremap <F5> <C-o>:ConqueGDB
+noremap <F4> :make!<cr>
+inoremap <F4> <C-o>:make!<cr>
 
 "" # plugin settings {{{1
 "" ##  # colors {{{2
@@ -841,7 +850,8 @@ endif
 
 
 "" ###     # tagbar {{{3
-nmap <F10> :TagbarToggle<CR>
+map <F10> :TagbarToggle<CR>
+imap <F10> <C-o>:TagbarToggle<CR>
 let g:tagbar_usearrows = 1
 
 
@@ -862,6 +872,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 
 " keymapping:todo
 nnoremap <silent> <F9> :NERDTreeToggle<CR>
+inoremap <silent> <F9> <C-o>:NERDTreeToggle<CR>
 
 "" ###     # ctrlp {{{3
 " keymapping:<leader>p _ctrlp bufferlist
