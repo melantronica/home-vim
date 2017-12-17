@@ -461,7 +461,7 @@ function! Vimrc_GrepTodo(func)
 endfunction
 command! -nargs=* MyTodoGrep :silent call Vimrc_GrepTodo("<args>")
 
-command! -nargs=* MyNotes :drop ~/home/org/incoming/notes.md
+command! -nargs=* MyNotes :drop ~/doc/notes/incoming/notes.md
 command! -nargs=* MyNotesv :drop ~/.vim/vimrc | :b +/##\ TODO .vim/vimrc
 
 function! Vimrc_GrepFold(dir)
