@@ -1,2 +1,4 @@
 
-= vimrc Bastian Zeller
+# vimrc
+
+
