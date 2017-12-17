@@ -89,8 +89,8 @@ endif
 " Define user commands for updating/cleaning the plugins.
 " Each of them loads minpac, reloads .vimrc to register the
 " information of plugins, then performs the task.
-command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update() | helptags ~/.vim/pack/minpac 
-command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
+command! MyPackUpdate packadd minpac | source $MYVIMRC | call minpac#update() | helptags ~/.vim/pack/minpac 
+command! MyPackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
 
 
 "" # general {{{1
