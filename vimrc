@@ -1,4 +1,4 @@
-" title:  vimrc
+"" title:  vimrc
 "" author: bastian zeller
 ""
 "" for documentation visit this file
@@ -76,9 +76,9 @@ command! MyPackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
 "" }}}
 
 "" # general {{{1
-let name = "Bastian Zeller"
+let g:name = 'Bastian Zeller'
 
-set nocompatible            " turn off vi compatibility
+"set nocompatible            " turn off vi compatibility
 set ttyfast                 " faster redeaw
 set showcmd                 " show command
 
@@ -102,7 +102,8 @@ filetype indent on          " load indention ft based
 filetype plugin indent on   " load ft based plugins
 
 set encoding=utf-8          " fix encoding
-set ff=unix                 " set file format
+scriptencoding utf-8
+set fileformat=unix                 " set file format
 set shell=/bin/bash         " shell command
 
 "let readline_has_bash=1     " bash support for readline
@@ -112,9 +113,8 @@ set shell=/bin/bash         " shell command
 "" http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
 
 "" leader
-let mapleader=","
-"let g:mapleader=","
-let maplocalleader="\\"
+let g:mapleader=','
+let g:maplocalleader='\\'
 
 "" options for physical printing
 set printoptions=paper:a4
@@ -129,11 +129,14 @@ set mouse=a|b           " enable mouse in all modes
 set hidden              " hide abandoned buffers
 
 "" check if the file was changed on disk
+augroup MyCheckFileChanged
 au CursorHold * if getcmdwintype() == '' | checktime % | endif
+augroup END
 
 "" if host gets resized we resize as well
-autocmd VimResized * wincmd =
-
+augroup MyOnResize
+    autocmd VimResized * wincmd =
+augroup END
 "" :B ghetto bufferlist
 command! -nargs=? -bang B if <q-args> != '' | exe 'buffer '.<q-args> | else | ls<bang> | let buffer_nn=input('Choose buffer: ') | if buffer_nn != '' | exe buffer_nn != 0 ? 'buffer '.buffer_nn : 'enew' | endif | endif
 
@@ -188,12 +191,12 @@ set numberwidth=4   " gutter = 4 columns
 set relativenumber  " relative numbering
 set showcmd         " show command at bottom
 
-autocmd InsertEnter * setlocal norelativenumber 
-autocmd InsertLeave * setlocal relativenumber
-
-autocmd WinLeave * setlocal norelativenumber 
-autocmd WinEnter * setlocal relativenumber
-
+augroup MyRelativeOnWinEnter
+    autocmd InsertEnter * setlocal norelativenumber 
+    autocmd InsertLeave * setlocal relativenumber
+    autocmd WinLeave * setlocal norelativenumber 
+    autocmd WinEnter * setlocal relativenumber
+augrou END
 
 "" toggle relative numbers
 nnoremap <silent> <leader>l :set rnu!<CR>
@@ -257,9 +260,9 @@ function! Vimrc_Retab(tsin, tsout)
     "" Switch to hard tabs:
     set noexpandtab
     "" Set the tab stop to the current setting
-    exec "set tabstop=".a:tsin
+    exec 'set tabstop='.a:tsin
     retab!
-    exec "set tabstop=".a:tsout
+    exec 'set tabstop='.a:tsout
     " Go back to soft tabs
     set expandtab
     " Replace all the tabs in the current file to spaces
@@ -276,13 +279,16 @@ set complete+=kspell
 set omnifunc=syntaxcomplete#Complete
 
 "" close preview after completion done
+augroup MyOnCompletionDone
 autocmd CompleteDone * pclose | set relativenumber
+augroup END
+
 inoremap <expr> <C-n>      pumvisible() ? "\<C-n>" : "\<C-r>=execute('set norelativenumber')\<CR>\<C-n>"
 
 
 function! Vimrc_UpdateTags()
-    execute ":!ctags -R --languages=C++ --c++-kinds=+p --fields=+iaS --extra=+q ./"
-    echohl StatusLine | echo "C/C++ tag updated" | echohl None
+    execute ':!ctags -R --languages=C++ --c++-kinds=+p --fields=+iaS --extra=+q ./'
+    echohl StatusLine | echo 'C/C++ tag updated' | echohl None
 endfunction
 
 "nmap <C-}> :exe ":tj /" . expand("<cexpr>")<CR>
@@ -290,20 +296,20 @@ nmap <localleader>] :exe ":tj /" . expand("<cexpr>")<CR>
 
 
 function! Vimrc_cscope(func)
-  let tmp1=&grepprg
-  let tmp2=&grepformat
+  let l:tmp1=&grepprg
+  let l:tmp2=&grepformat
   set grepformat=%f\ %*[a-zA-Z_0-9]\ %l\ %m
   set grepprg=cscope\ -R\ -L\ -3
-  exe "grep ".a:func
-  exe "set grepprg=".escape(tmp1,' ')
-  exe "set grepformat=".escape(tmp2, ' ')
+  exe 'grep '.a:func
+  exe 'set grepprg='.escape(l:tmp1,' ')
+  exe 'set grepformat='.escape(l:tmp2, ' ')
   redraw!
 endfunction
 
 command! -nargs=* MyCscope :silent call Vimrc_cscope("<args>")
 
 "" ## cscope {{{2
-if has("cscope")
+if has('cscope')
 
     """"""""""""" Standard cscope/vim boilerplate
 
@@ -312,13 +318,13 @@ if has("cscope")
 
     " check cscope for definition of a symbol before checking ctags: set to 1
     " if you want the reverse search order.
-    set csto=1
+    set cscopetagorder=1
 
     " add any cscope database in current directory
-    if filereadable("cscope.out")
+    if filereadable('cscope.out')
         cs add cscope.out
     " else add the database pointed to by environment variable
-    elseif $CSCOPE_DB != ""
+    elseif $CSCOPE_DB !=# ''
         cs add $CSCOPE_DB
     endif
 
@@ -435,10 +441,10 @@ function! Vimrc_HLNext (blinktime)
         call matchdelete(g:vimrc_last_match)
     endif
     highlight WhiteOnRed ctermfg=white ctermbg=red
-    let [bufnum, lnum, col, off] = getpos('.')
-    let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
-    let target_pat = '\c\%#\%('.@/.'\)'
-    let g:vimrc_last_match = matchadd('WhiteOnRed', target_pat, 101)
+    let [l:bufnum, l:lnum, l:col, l:off] = getpos('.')
+    let l:matchlen = strlen(matchstr(strpart(getline('.'),l:col-1),@/))
+    let l:target_pat = '\c\%#\%('.@/.'\)'
+    let g:vimrc_last_match = matchadd('WhiteOnRed', l:target_pat, 101)
 "    I dont want the blinking anymore
 "    redraw
 "    exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
@@ -447,14 +453,14 @@ function! Vimrc_HLNext (blinktime)
 endfunction
 
 function! Vimrc_GrepAgenda(func)
-  let tmp1=&grepprg
-  let tmp2=&grepformat
+  let l:tmp1=&grepprg
+  let l:tmp2=&grepformat
 "  set grepformat=%f\ %*[a-zA-Z_0-9]\ %l\ %m
 "  set grepformat=%f:%l:%m,%f-%l-%m,%f:%l%m
   set grepprg=~/.vim/helper/todo-agenda.sh
-  exe "grep! ".a:func
-  let &grepprg=tmp1
-  let &grepformat=tmp2
+  exe 'grep! '.a:func
+  let &grepprg=l:tmp1
+  let &grepformat=l:tmp2
   copen
   redraw!
 endfunction
@@ -462,14 +468,14 @@ command! -nargs=* MyTodoAgenda :silent call Vimrc_GrepAgenda("<args>")
 
 
 function! Vimrc_GrepTodo(func)
-  let tmp1=&grepprg
-  let tmp2=&grepformat
+  let l:tmp1=&grepprg
+  let l:tmp2=&grepformat
 "  set grepformat=%f\ %*[a-zA-Z_0-9]\ %l\ %m
 "  set grepformat=%f:%l:%m,%f-%l-%m,%f:%l%m,%f  %l%m
   set grepprg=~/.vim/helper/todo-grep.sh
-  exe "grep! ".a:func
-  let &grepprg=tmp1
-  let &grepformat=tmp2
+  exe 'grep! '.a:func
+  let &grepprg=l:tmp1
+  let &grepformat=l:tmp2
   copen
   redraw!
 endfunction
@@ -497,7 +503,7 @@ command! -nargs=* MyGrepFold :silent call Vimrc_GrepFold(0)
 highlight SpellBad term=underline gui=undercurl guisp=Red
 
 " English spellchecking
-set spl=en spell
+set spelllang=en spell
 
 " disable by default
 set nospell
@@ -541,31 +547,31 @@ let &t_EI = "\e[2 q"
 "au!
 "autocmd VimEnter * silent !echo -ne "\e[2 q"
 "augroup END
-
+augroup MySetCursorColumn
 "au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
 au VimEnter,WinEnter,BufWinEnter * setlocal cursorcolumn
 "au WinLeave * setlocal nocursorline
 au WinLeave * setlocal nocursorcolumn
-
+augroup END
 
 
 
 "" # folding {{{1
 "" make folded blocks more readable
 function! Vimrc_FoldText()
-    let line = getline(v:foldstart)
+    let l:line = getline(v:foldstart)
 
-    let nucolwidth = &fdc + &number * &numberwidth
-    let windowwidth = winwidth(0) - nucolwidth - 3
-    let foldedlinecount = v:foldend - v:foldstart
+    let l:nucolwidth = &foldcolumn + &number * &numberwidth
+    let l:windowwidth = winwidth(0) - l:nucolwidth - 3
+    let l:foldedlinecount = v:foldend - v:foldstart
 
     " expand tabs into spaces
-    let onetab = strpart('          ', 0, &tabstop)
-    let line = substitute(line, '\t', onetab, 'g')
+    let l:onetab = strpart('          ', 0, &tabstop)
+    let l:line = substitute(l:line, '\t', l:onetab, 'g')
 
-    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
-    let fillcharcount = windowwidth - len(line) - len(foldedlinecount) - 9
-    return line . '   ' . repeat("-",fillcharcount) . ' [' . foldedlinecount . '] +++  '
+    let l:line = strpart(l:line, 0, l:windowwidth - 2 -len(l:foldedlinecount))
+    let l:fillcharcount = l:windowwidth - len(l:line) - len(l:foldedlinecount) - 9
+    return l:line . '   ' . repeat('-',l:fillcharcount) . ' [' . l:foldedlinecount . '] +++  '
 endfunction
 set foldtext=Vimrc_FoldText()
 
@@ -587,7 +593,7 @@ function! Vimrc_ToggleFold()
     let g:vimrc_fold_mode = g:vimrc_fold_mode + 1
     if g:vimrc_fold_mode >= len(g:vimrc_fold_modes) | let g:vimrc_fold_mode = 0 | endif
     let &l:foldmethod = g:vimrc_fold_modes[g:vimrc_fold_mode]
-    echo "foldmode: " &l:foldmethod
+    echo 'foldmode: ' &l:foldmethod
 endfunction
 
 
@@ -608,7 +614,7 @@ function! Vimrc_ToggleWhitespace()
     if g:vimrc_whitespace_mode >= len(g:vimrc_whitespace_modes) | let g:vimrc_whitespace_mode = 0 | endif
 
     exec g:vimrc_whitespace_mode_list[g:vimrc_whitespace_mode][1]
-    echo "whitespace mode: " g:vimrc_whitespace_mode_list[g:vimrc_whitespace_mode][0]
+    echo 'whitespace mode: ' g:vimrc_whitespace_mode_list[g:vimrc_whitespace_mode][0]
 endfunction
 
 exec g:vimrc_whitespace_mode_list[0][1]
@@ -625,11 +631,11 @@ exec 'set fillchars=stl:\ ,stlnc:=,vert:\|,fold:\ ,diff:-'
 "" # diff buffer {{{1
 "" diff local buffer
 function! s:Vimrc_DiffWithSaved()
-    let filetype=&ft
+    let l:filetype=&filetype
     diffthis
     vnew | r # | normal! 1Gdd
     diffthis
-    exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
+    exe 'setlocal bt=nofile bh=wipe nobl noswf ro ft=' . l:filetype
 endfunction
 com! MyDiffSaved call s:Vimrc_DiffWithSaved()
 
@@ -746,7 +752,7 @@ function! Vimrc_ToggleCurrentWindowAsTab(preserve)
     silent ! i3-msg fullscreen
 
     if(a:preserve)
-        call setpos(".", l:fullscreenPos)
+        call setpos('.', l:fullscreenPos)
     endif
 endfunction
 nmap <C-w>e :call Vimrc_ToggleCurrentWindowAsTab(1)<CR>
@@ -761,15 +767,18 @@ nmap <C-w>E :call Vimrc_ToggleCurrentWindowAsTab(0)<CR>
 
 "" # language-specific {{{1
 "" ##    python {{{2
+augroup MyOnFileTypePython
 "autocmd FileType python set omnifunc=pythoncomplete#Complete
 autocmd FileType python set omnifunc=python3complete#Complete
+autocmd FileType python nnoremap <buffer> K :<C-u>execute "!pydoc " . expand("<cword>") <CR>
+augroup END
 
 """ syntastic
 let g:syntastic_python_checkers=['pyflakes', 'flake8', 'pylint']
 " let g:syntastic_python_flake8_args='--ignore=E501'  " E501 - long lines
 
 " pydoc on 'K'
-autocmd FileType python nnoremap <buffer> K :<C-u>execute "!pydoc " . expand("<cword>") <CR>
+
 
 """ isort
 let g:vim_isort_map = '<C-i>'
@@ -782,12 +791,13 @@ let g:vim_isort_map = '<C-i>'
 "" # make, execute {{{1
 "set makeprg=make\ -C\ ../build\ -j4
 " Folding of (gnu)make output.
+augroup MyOnQuickFixMake
 au BufReadPost quickfix setlocal foldmethod=marker
 au BufReadPost quickfix setlocal foldmarker=Entering\ directory,Leaving\ directory
 au BufReadPost quickfix map <buffer> <silent> zq zM:g/error:/normal zv<CR>
 au BufReadPost quickfix map <buffer> <silent> zw zq:g/warning:/normal zv<CR>
 au BufReadPost quickfix normal zq
-
+augroup END
 
 
 
@@ -879,7 +889,6 @@ vmap <leader>t <ESC>:Tabular /
 
 "" ##  # files {{{2
 "" ###     # nerdtree {{{3
-let NERDTreeHijackNetrw=1
 let g:NERDTreeQuitOnOpen = 1
 
 autocmd vimenter * if !argc() | NERDTree | endif
@@ -987,14 +996,14 @@ function! Vimrc_MarkdownToc()
     let &winwidth=(&columns/2)
     set modifiable
     %s/\v^([^|]*\|){2,2} #//
-    for i in range(1, line('$'))
-        let l:line = getline(i)
+    for l:i in range(1, line('$'))
+        let l:line = getline(l:i)
         let l:header =  matchstr(l:line, '^#*')
         let l:length = len(l:header)
         let l:line = substitute(l:line, '\v^#*[ ]*', '', '')
         let l:line = substitute(l:line, '\v[ ]*#*$', '', '')
         let l:line = repeat(' ', (2 * l:length)) . l:line
-        call setline(i, l:line)
+        call setline(l:i, l:line)
     endfor
     set nomodified
     set nomodifiable
