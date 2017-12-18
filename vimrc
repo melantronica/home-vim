@@ -58,7 +58,7 @@ if exists('*minpac#init')
     call minpac#add('scrooloose/nerdtree',          {'type': 'opt'}) " file browser
     call minpac#add('Xuyuanp/nerdtree-git-plugin',  {'type': 'opt'}) " git symbols
     "" markup
-    call minpac#add('tpope/vim-markdown',           {'type': 'opt'}) " mardown 
+    call minpac#add('tpope/vim-markdown',           {'type': 'opt'}) " mardown
     call minpac#add('nelstrom/vim-markdown-folding', {'type': 'opt'}) " fold rules for markdown
     call minpac#add('Rykka/riv.vim',                {'type': 'opt'}) " reStructuredText
     "" tools
@@ -68,7 +68,13 @@ if exists('*minpac#init')
      ""
 endif
 
-command! MyPackUpdate packadd minpac | source $MYVIMRC | call minpac#update() | helptags ~/.vim/pack/minpac 
+function! Vimrc_AddPackagesDelayed(channel)
+    packadd vim-gutentags
+    packadd YouCompleteMe
+endfunction
+call job_start('sleep 1', {'close_cb': 'Vimrc_AddPackagesDelayed', 'out_io': 'null'})
+
+command! MyPackUpdate packadd minpac | source $MYVIMRC | call minpac#update() | helptags ~/.vim/pack/minpac
 command! MyPackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
 "" }}}
 
@@ -192,9 +198,9 @@ set showcmd         " show command at bottom
 
 augroup MyRelativeOnWinEnter
     au!
-    autocmd InsertEnter * setlocal norelativenumber 
+    autocmd InsertEnter * setlocal norelativenumber
     autocmd InsertLeave * setlocal relativenumber
-    autocmd WinLeave * setlocal norelativenumber 
+    autocmd WinLeave * setlocal norelativenumber
     autocmd WinEnter * setlocal relativenumber
 augrou END
 
@@ -246,7 +252,7 @@ augroup MyHilightTodo
         \ contained containedin=ALL
 augroup END
 hi def link MyTodo Todo   " todo
-"hi def link MyTodo TodoRegion 
+"hi def link MyTodo TodoRegion
 
 
 "" disable highliting temporary (afterddiwpp search)
