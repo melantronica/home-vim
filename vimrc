@@ -36,7 +36,8 @@ if exists('*minpac#init')
     call minpac#add('majutsushi/tagbar')                    " tagbar
     call minpac#add('ludovicchabant/vim-gutentags')         " automatic tag creation
     call minpac#add('vim-scripts/OmniCppComplete')          " cpp omni completion
-    call minpac#add('Valloric/YouCompleteMe', {'type': 'opt'}) "completion engine (very overdozed)
+                                                            " completion engine (very overdozed)
+    call minpac#add('Valloric/YouCompleteMe')
     call minpac#add('ervandew/supertab', {'type': 'opt'})   " make use of tab key
     "" editing
     call minpac#add('ConradIrwin/vim-bracketed-paste')      " when pasting from X disable formatting
@@ -809,7 +810,7 @@ let g:gutentags_project_root=['tags','cscope.out']
 
 
 "" ###     # YouCompleteMe {{{3
-if 0
+if 1
 "" ####        # completion triggers {{{4
 "" keybindings
 let g:ycm_key_invoke_completion = '<C-Space>'
