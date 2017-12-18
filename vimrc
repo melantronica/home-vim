@@ -128,7 +128,7 @@ set mouse=a|b           " enable mouse in all modes
 set hidden              " hide abandoned buffers
 
 "" check if the file was changed on disk
-au CursorHold * checktime
+au CursorHold * if getcmdwintype() == '' | checktime % | endif
 
 "" if host gets resized we resize as well
 autocmd VimResized * wincmd =
