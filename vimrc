@@ -54,6 +54,7 @@ if exists('*minpac#init')
     call minpac#add('int3/vim-extradite')                   " git log with diff
     call minpac#add('tpope/vim-fugitive', {'type': 'opt'})  " everything git
     call minpac#add('airblade/vim-gitgutter', {'type': 'opt'})  " shot diff in the gutter
+    call minpac#add('chrisbra/vim-diff-enhanced', {'type': 'opt'})
     "" grep
     call minpac#add('mileszs/ack.vim', {'type': 'opt'})     " search with ack
     call minpac#add('mhinz/vim-grepper')                    " various grep commands
@@ -821,6 +822,9 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='tentacle_molokai'
 let g:airline#extensions#tabline#show_buffers = 1
 let g:airline_powerline_fonts = 1
+let g:airline_highlighting_cache = 0
+
+let g:airline#extensions#ale#enabled = 1
 
 
 "" ##  # completion {{{2
@@ -898,12 +902,28 @@ vmap <leader>t <ESC>:Tabular /
 "" ###     # nerdtree {{{3
 let g:NERDTreeQuitOnOpen = 1
 
-autocmd vimenter * if !argc() | NERDTree | endif
+let g:vimrc_NERDTreeLoaded=0
+
+function! Vimrc_NERDTreeToggle()
+
+    if g:vimrc_NERDTreeLoaded == 0
+        packadd nerdtree
+        packadd nerdtree-git-plugin
+        let g:vimrc_NERDTreeLoaded = 1
+    endif
+    execute 'NERDTreeToggle'
+endfunction
+
+
+:call Vimrc_HLNext_delete()
+
+
+autocmd vimenter * if !argc() | if g:vimrc_NERDTreeLoaded == 0 | packadd nerdtree | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " keymapping:todo
-nnoremap <silent> <F9> :NERDTreeToggle<CR>
-inoremap <silent> <F9> <C-o>:NERDTreeToggle<CR>
+nnoremap <silent> <F9> :call Vimrc_NERDTreeToggle()<CR>
+inoremap <silent> <F9> <C-o>:call Vimrc_NERDTreeToggle()<CR>
 
 "" ###     # ctrlp {{{3
 " keymapping:<leader>p _ctrlp bufferlist
