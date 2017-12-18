@@ -188,6 +188,13 @@ set numberwidth=4   " gutter = 4 columns
 set relativenumber  " relative numbering
 set showcmd         " show command at bottom
 
+autocmd InsertEnter * setlocal norelativenumber 
+autocmd InsertLeave * setlocal relativenumber
+
+autocmd WinLeave * setlocal norelativenumber 
+autocmd WinEnter * setlocal relativenumber
+
+
 "" toggle relative numbers
 nnoremap <silent> <leader>l :set rnu!<CR>
 
@@ -532,6 +539,11 @@ let &t_EI = "\e[2 q"
 "au!
 "autocmd VimEnter * silent !echo -ne "\e[2 q"
 "augroup END
+
+"au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+au VimEnter,WinEnter,BufWinEnter * setlocal cursorcolumn
+"au WinLeave * setlocal nocursorline
+au WinLeave * setlocal nocursorcolumn
 
 
 
