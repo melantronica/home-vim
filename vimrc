@@ -130,11 +130,13 @@ set hidden              " hide abandoned buffers
 
 "" check if the file was changed on disk
 augroup MyCheckFileChanged
-au CursorHold * if getcmdwintype() == '' | checktime % | endif
+    au!
+    au CursorHold * if getcmdwintype() == '' | checktime % | endif
 augroup END
 
 "" if host gets resized we resize as well
 augroup MyOnResize
+    au!
     autocmd VimResized * wincmd =
 augroup END
 "" :B ghetto bufferlist
@@ -192,6 +194,7 @@ set relativenumber  " relative numbering
 set showcmd         " show command at bottom
 
 augroup MyRelativeOnWinEnter
+    au!
     autocmd InsertEnter * setlocal norelativenumber 
     autocmd InsertLeave * setlocal relativenumber
     autocmd WinLeave * setlocal norelativenumber 
@@ -237,7 +240,7 @@ set incsearch       " search while typing
 set ignorecase      "
 "set smartcase       " somehow annoying
 
-augroup vimrc_todo
+augroup MyHilightTodo
     au!
     " pre          \<\(@\|#\|/\|:\|\"\)
     " patterm
@@ -280,7 +283,8 @@ set omnifunc=syntaxcomplete#Complete
 
 "" close preview after completion done
 augroup MyOnCompletionDone
-autocmd CompleteDone * pclose | set relativenumber
+    au!
+    autocmd CompleteDone * pclose | set relativenumber
 augroup END
 
 inoremap <expr> <C-n>      pumvisible() ? "\<C-n>" : "\<C-r>=execute('set norelativenumber')\<CR>\<C-n>"
@@ -548,10 +552,11 @@ let &t_EI = "\e[2 q"
 "autocmd VimEnter * silent !echo -ne "\e[2 q"
 "augroup END
 augroup MySetCursorColumn
-"au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-au VimEnter,WinEnter,BufWinEnter * setlocal cursorcolumn
-"au WinLeave * setlocal nocursorline
-au WinLeave * setlocal nocursorcolumn
+    au!
+    "au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+    au VimEnter,WinEnter,BufWinEnter * setlocal cursorcolumn
+    "au WinLeave * setlocal nocursorline
+    au WinLeave * setlocal nocursorcolumn
 augroup END
 
 
@@ -768,9 +773,10 @@ nmap <C-w>E :call Vimrc_ToggleCurrentWindowAsTab(0)<CR>
 "" # language-specific {{{1
 "" ##    python {{{2
 augroup MyOnFileTypePython
-"autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType python set omnifunc=python3complete#Complete
-autocmd FileType python nnoremap <buffer> K :<C-u>execute "!pydoc " . expand("<cword>") <CR>
+    au!
+    "autocmd FileType python set omnifunc=pythoncomplete#Complete
+    autocmd FileType python set omnifunc=python3complete#Complete
+    autocmd FileType python nnoremap <buffer> K :<C-u>execute "!pydoc " . expand("<cword>") <CR>
 augroup END
 
 """ syntastic
@@ -792,11 +798,12 @@ let g:vim_isort_map = '<C-i>'
 "set makeprg=make\ -C\ ../build\ -j4
 " Folding of (gnu)make output.
 augroup MyOnQuickFixMake
-au BufReadPost quickfix setlocal foldmethod=marker
-au BufReadPost quickfix setlocal foldmarker=Entering\ directory,Leaving\ directory
-au BufReadPost quickfix map <buffer> <silent> zq zM:g/error:/normal zv<CR>
-au BufReadPost quickfix map <buffer> <silent> zw zq:g/warning:/normal zv<CR>
-au BufReadPost quickfix normal zq
+    au!
+    au BufReadPost quickfix setlocal foldmethod=marker
+    au BufReadPost quickfix setlocal foldmarker=Entering\ directory,Leaving\ directory
+    au BufReadPost quickfix map <buffer> <silent> zq zM:g/error:/normal zv<CR>
+    au BufReadPost quickfix map <buffer> <silent> zw zq:g/warning:/normal zv<CR>
+    au BufReadPost quickfix normal zq
 augroup END
 
 
