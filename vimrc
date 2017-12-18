@@ -276,7 +276,9 @@ set complete+=kspell
 set omnifunc=syntaxcomplete#Complete
 
 "" close preview after completion done
-autocmd CompleteDone * pclose
+autocmd CompleteDone * pclose | set relativenumber
+inoremap <expr> <C-n>      pumvisible() ? "\<C-n>" : "\<C-r>=execute('set norelativenumber')\<CR>\<C-n>"
+
 
 function! Vimrc_UpdateTags()
     execute ":!ctags -R --languages=C++ --c++-kinds=+p --fields=+iaS --extra=+q ./"
