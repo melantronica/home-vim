@@ -28,29 +28,27 @@ let g:name = 'Bastian Zeller'
 set ttyfast                 " faster redeaw
 set showcmd                 " show command
 
-set lazyredraw
+set lazyredraw              " no redraw during macro
+set confirm                 " confirm unsaved files on quit
 
-set confirm                 "
+set encoding=utf-8          " fix encoding
+scriptencoding utf-8
+set fileformat=unix         " set file format
+set shell=/bin/bash         " shell command
+
 
 "" path for finding files, etc
 set path+=$HOME/home/**,**
 let g:DefaultPath=&path
-
 ",include,inc,
 "    \ ..,../include,../inc,
 "    \ ...,.../include,.../inc,
 "    \ ...,.../include,.../inc,
 "    \ /usr/include
 
-
 filetype on                 " based on names
 filetype indent on          " load indention ft based
-filetype plugin indent on   " load ft based plugins
-
-set encoding=utf-8          " fix encoding
-scriptencoding utf-8
-set fileformat=unix                 " set file format
-set shell=/bin/bash         " shell command
+filetype plugin indent on " load ft based plugins
 
 "let readline_has_bash=1     " bash support for readline
 "let g:is_bash=1             " force bash
@@ -243,14 +241,14 @@ nmap <localleader>] :exe ":tj /" . expand("<cexpr>")<CR>
 
 
 function! Vimrc_cscope(func)
-  let l:tmp1=&grepprg
-  let l:tmp2=&grepformat
-  set grepformat=%f\ %*[a-zA-Z_0-9]\ %l\ %m
-  set grepprg=cscope\ -R\ -L\ -3
-  exe 'grep '.a:func
-  exe 'set grepprg='.escape(l:tmp1,' ')
-  exe 'set grepformat='.escape(l:tmp2, ' ')
-  redraw!
+    let l:tmp1=&grepprg
+    let l:tmp2=&grepformat
+    set grepformat=%f\ %*[a-zA-Z_0-9]\ %l\ %m
+    set grepprg=cscope\ -R\ -L\ -3
+    exe 'grep '.a:func
+    exe 'set grepprg='.escape(l:tmp1,' ')
+    exe 'set grepformat='.escape(l:tmp2, ' ')
+    redraw!
 endfunction
 
 command! -nargs=* MyCscope :silent call Vimrc_cscope("<args>")
@@ -400,31 +398,31 @@ function! Vimrc_HLNext (blinktime)
 endfunction
 
 function! Vimrc_GrepAgenda(func)
-  let l:tmp1=&grepprg
-  let l:tmp2=&grepformat
-"  set grepformat=%f\ %*[a-zA-Z_0-9]\ %l\ %m
-"  set grepformat=%f:%l:%m,%f-%l-%m,%f:%l%m
-  set grepprg=~/.vim/helper/todo-agenda.sh
-  exe 'grep! '.a:func
-  let &grepprg=l:tmp1
-  let &grepformat=l:tmp2
-  copen
-  redraw!
+    let l:tmp1=&grepprg
+    let l:tmp2=&grepformat
+"    set grepformat=%f\ %*[a-zA-Z_0-9]\ %l\ %m
+"    set grepformat=%f:%l:%m,%f-%l-%m,%f:%l%m
+    set grepprg=~/.vim/helper/todo-agenda.sh
+    exe 'grep! '.a:func
+    let &grepprg=l:tmp1
+    let &grepformat=l:tmp2
+    copen
+    redraw!
 endfunction
 command! -nargs=* MyTodoAgenda :silent call Vimrc_GrepAgenda("<args>")
 
 
 function! Vimrc_GrepTodo(func)
-  let l:tmp1=&grepprg
-  let l:tmp2=&grepformat
-"  set grepformat=%f\ %*[a-zA-Z_0-9]\ %l\ %m
-"  set grepformat=%f:%l:%m,%f-%l-%m,%f:%l%m,%f  %l%m
-  set grepprg=~/.vim/helper/todo-grep.sh
-  exe 'grep! '.a:func
-  let &grepprg=l:tmp1
-  let &grepformat=l:tmp2
-  copen
-  redraw!
+    let l:tmp1=&grepprg
+    let l:tmp2=&grepformat
+"    set grepformat=%f\ %*[a-zA-Z_0-9]\ %l\ %m
+"    set grepformat=%f:%l:%m,%f-%l-%m,%f:%l%m,%f  %l%m
+    set grepprg=~/.vim/helper/todo-grep.sh
+    exe 'grep! '.a:func
+    let &grepprg=l:tmp1
+    let &grepformat=l:tmp2
+    copen
+    redraw!
 endfunction
 command! -nargs=* MyTodoGrep :silent call Vimrc_GrepTodo("<args>")
 
