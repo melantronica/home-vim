@@ -1070,6 +1070,10 @@ function! Vimrc_AddPackagesDelayed(channel)
 "    call Vimrc_ConfigurePackages(g:DelayedPackages)
     packadd ale
     packadd vim-gutentags
+    packadd vim-airline
+    packadd vim-airline-themes
+    split
+    close
 endfunction
 call job_start('sleep 2', {'close_cb': 'Vimrc_AddPackagesDelayed', 'out_io': 'null'})
 
@@ -1085,8 +1089,8 @@ augrou END
 
 augroup MyOnFiletypeCppPackadd
     au!
-    autocmd FileType c packadd OmniCppComplete:
-    autocmd FileType cpp packadd OmniCppComplete:
+    autocmd FileType c packadd OmniCppComplete
+    autocmd FileType cpp packadd OmniCppComplete
 augrou END
 
 
