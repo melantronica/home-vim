@@ -229,6 +229,7 @@ augroup MyOnCompletionDone
 augroup END
 
 inoremap <expr> <C-n>      pumvisible() ? "\<C-n>" : "\<C-r>=execute('set norelativenumber')\<CR>\<C-n>"
+inoremap <expr> <C-p>      pumvisible() ? "\<C-p>" : "\<C-r>=execute('set norelativenumber')\<CR>\<C-p>"
 
 
 function! Vimrc_UpdateTags()
@@ -721,7 +722,7 @@ augroup MyOnFileTypePython
 augroup END
 
 """ syntastic
-let g:syntastic_python_checkers=['pyflakes', 'flake8', 'pylint']
+"let g:syntastic_python_checkers=['pyflakes', 'flake8', 'pylint']
 " let g:syntastic_python_flake8_args='--ignore=E501'  " E501 - long lines
 
 " pydoc on 'K'
@@ -813,7 +814,7 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_goto_buffer_command = 'same-buffer'
 "" ####        # identifier sources {{{4
 let g:ycm_collect_identifiers_from_tags_files = 1   " we want tags files to be used
-let g:ycm_seed_identifiers_with_syntax = 0          " use vims syntax file to get language identifiers
+let g:ycm_seed_identifiers_with_syntax = 1          " use vims syntax file to get language identifiers
 "" ####        # ycm_extra_conf {{{4
 let g:ycm_confirm_extra_conf = 0                    " automatically load extra conf when found recursively
 let g:ycm_global_ycm_extra_conf='~/.vim/templates/ycm_extra_conf.py.kernel'   " otherwise load this
@@ -827,18 +828,8 @@ endif
 
 "" ###     # tagbar {{{3
 
-let g:vimrc_tagbar_loaded=0
-
-function! Vimrc_TagbarToggle()
-    if g:vimrc_tagbar_loaded == 0
-        packadd tagbar
-        let g:vimrc_tagbar_oaded = 1
-    endif
-    execute 'TagbarToggle'
-endfunction
-
-map <F10> :call Vimrc_TagbarToggle()<CR>
-imap <F10> <C-o>:call Vimrc_TagbarToggle()<CR>
+map <F10> :TagbarToggle<CR>
+imap <F10> <C-o>:TagbarToggle<CR>
 let g:tagbar_usearrows = 1
 
 
@@ -853,28 +844,12 @@ vmap <leader>t <ESC>:Tabular /
 "" ###     # nerdtree {{{3
 let g:NERDTreeQuitOnOpen = 1
 
-let g:vimrc_NERDTreeLoaded=0
-
-function! Vimrc_NERDTreeToggle()
-
-    if g:vimrc_NERDTreeLoaded == 0
-        packadd nerdtree
-        packadd nerdtree-git-plugin
-        let g:vimrc_NERDTreeLoaded = 1
-    endif
-    execute 'NERDTreeToggle'
-endfunction
-
-
-:call Vimrc_HLNext_delete()
-
-
-autocmd vimenter * if !argc() | if g:vimrc_NERDTreeLoaded == 0 | packadd nerdtree | NERDTree | endif
+autocmd vimenter * if !argc() | NERDTreeToggle
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " keymapping:todo
-nnoremap <silent> <F9> :call Vimrc_NERDTreeToggle()<CR>
-inoremap <silent> <F9> <C-o>:call Vimrc_NERDTreeToggle()<CR>
+nnoremap <silent> <F9> :NERDTreeToggle<CR>
+inoremap <silent> <F9> <C-o>:NERDTreeToggle<CR>
 
 "" ###     # ctrlp {{{3
 " keymapping:<leader>p _ctrlp bufferlist
@@ -1083,6 +1058,7 @@ command! CtrlP packadd ctrlp.vim | CtrlP
 command! -nargs=1 I3muxNew packadd vim-i3mux | I3muxNew <args>
 command! -nargs=* ConqueGdb packadd Conque-GDB | ConqueGdb <args>
 command! GitGutter delcommand GitGutter | packadd vim-gitgutter | GitGutterEnable
-
+command! NERDTreeToggle delcommand NERDTreeToggle | packadd nerdtree | packadd nerdtree-git-plugin | NERDTreeToggle
+command! TagbarToggle delcommand TagbarToggle | packadd tagbar | TagbarToggle
 "" }}} }}}
 
