@@ -1,3 +1,4 @@
+
 "" title:  vimrc
 "" author: bastian zeller
 ""
@@ -930,6 +931,25 @@ let g:ale_lint_on_save = 0
 
 
 "" ##  # markup {{{2
+"" ###     # riv {{{2
+let g:riv_fold_level=1      " only fold sections
+let g:riv_fuzzy_help=1
+
+let g:riv_default_path='~/doc'
+
+
+let g:riv_projects=[]
+let g:riv_projects += [{ 'name': 'doc', 'path': '~/doc/',}]
+let g:riv_projects += [{ 'name': 'work', 'path': '~/work/doc/',}]
+let g:riv_projects += [{ 'name': 'projects', 'path': '~/work/projects',}]
+
+
+augroup MyRivGroup
+    au!
+    autocmd FileType rst  nmap <buffer><F10> :RivHelpSection<CR> 
+augroup END
+
+
 "" ###     # markdown-fold {{{3
 let g:markdown_fold_style = 'nested' " or 'stacked'
 let g:markdown_fold_override_foldtext = 0
@@ -1010,6 +1030,8 @@ call Vimrc_MinpacAdd('mhinz/vim-grepper')    " various grep commands
 call Vimrc_MinpacAdd('romainl/vim-qf')       " quickfix updates
 call Vimrc_MinpacAdd('romainl/vim-qlist')    " quickfix updates
 call Vimrc_MinpacAdd('int3/vim-extradite') " git log with diff
+"" notes
+call Vimrc_MinpacAdd('Rykka/riv.vim') " reStructuredText notes
 
 "" ---------------------------------------------------------------
 " delayed packages
@@ -1028,7 +1050,6 @@ call Vimrc_MinpacAdd('airblade/vim-gitgutter',       {'type': 'opt'}) " shot dif
 " loaded on filetype
 call Vimrc_MinpacAdd('tpope/vim-markdown',           {'type': 'opt'}) " mardown
 call Vimrc_MinpacAdd('nelstrom/vim-markdown-folding', {'type': 'opt'}) " fold rules for markdown
-call Vimrc_MinpacAdd('Rykka/riv.vim',                {'type': 'opt'}) " reStructuredText
 call Vimrc_MinpacAdd('vim-scripts/OmniCppComplete',  {'type': 'opt'}) " cpp omni completion
 
 " load manually
@@ -1040,6 +1061,7 @@ call Vimrc_MinpacAdd('tpope/vim-repeat',             {'type': 'opt'}) " create r
 
 
 "" ## lazy loading {{{2
+"" ### unused {{{
 " let g:DelayedPackages=[]
 " let g:DelayedPackages+=[{'package': 'vim-gutentags'
 "             \ , 'preload': ['echom "test"', 'echom "foo"']
@@ -1066,7 +1088,7 @@ call Vimrc_MinpacAdd('tpope/vim-repeat',             {'type': 'opt'}) " create r
 "         endif
 "     endfor
 " endfunction
-
+"" }}}
 function! Vimrc_AddPackagesDelayed(channel)
 "    call Vimrc_ConfigurePackages(g:DelayedPackages)
     packadd ale
@@ -1081,11 +1103,6 @@ call job_start('sleep 2', {'close_cb': 'Vimrc_AddPackagesDelayed', 'out_io': 'nu
 augroup MyOnFiletypeMarkdownPackadd
     au!
     autocmd FileType markdown packadd vim-markdown | packadd vim-markdown-folding
-augrou END
-
-augroup MyOnFiletypeRstPackadd
-    au!
-    autocmd FileType rst packadd riv.vim
 augrou END
 
 augroup MyOnFiletypeCppPackadd
