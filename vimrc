@@ -995,8 +995,8 @@ endif
 call Vimrc_MinpacAdd('melantronica/minpac', {'type': 'opt'})
 "" Color
 call Vimrc_MinpacAdd('rafi/awesome-vim-colorschemes', {'type': 'opt'})
-call Vimrc_MinpacAdd('vim-airline/vim-airline-themes')
-call Vimrc_MinpacAdd('vim-airline/vim-airline')
+call Vimrc_MinpacAdd('vim-airline/vim-airline-themes', {'type': 'opt'})
+call Vimrc_MinpacAdd('vim-airline/vim-airline',       {'type': 'opt'})
 "" editing
 call Vimrc_MinpacAdd('tpope/vim-fugitive')   " everything git
 call Vimrc_MinpacAdd('tpope/vim-commentary') " comment code
