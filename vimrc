@@ -184,15 +184,15 @@ set incsearch       " search while typing
 set ignorecase      "
 "set smartcase       " somehow annoying
 
-augroup MyHilightTodo
-    au!
-    " pre          \<\(@\|#\|/\|:\|\"\)
-    " patterm
-    " past
-    au Syntax * syn match MyTodo "\<\(todo\|Todo\|ToDo\|TODO\|FIXME\|NOTE\|OPTIMIZE\|XXX\)\>"
-        \ contained containedin=ALL
-augroup END
-hi def link MyTodo Todo   " todo
+" augroup MyHilightTodo
+"     au!
+"     " pre          \<\(@\|#\|/\|:\|\"\)
+"     " patterm
+"     " past
+"     au Syntax * syn match MyTodo "\<\(todo\|Todo\|ToDo\|TODO\|FIXME\|NOTE\|OPTIMIZE\|XXX\)\>"
+"         \ contained containedin=ALL
+" augroup END
+" hi def link MyTodo Todo   " todo
 "hi def link MyTodo TodoRegion
 
 
