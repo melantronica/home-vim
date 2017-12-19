@@ -179,6 +179,7 @@ set whichwrap+=h,l,<,>,[,]
 set backspace=indent,eol,start
 
 set hlsearch        " highlight search results
+noh
 set incsearch       " search while typing
 set ignorecase      "
 "set smartcase       " somehow annoying
