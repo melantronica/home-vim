@@ -553,7 +553,7 @@ let g:vimrc_whitespace_mode_list = [
             \ ['all',           'set listchars=eol:$,tab:>\ ,trail:·,nbsp:~,precedes:·,extends:·,space:·']]
 function! Vimrc_ToggleWhitespace()
     let g:vimrc_whitespace_mode = g:vimrc_whitespace_mode + 1
-    if g:vimrc_whitespace_mode >= len(g:vimrc_whitespace_modes) | let g:vimrc_whitespace_mode = 0 | endif
+    if g:vimrc_whitespace_mode >= len(g:vimrc_whitespace_mode_list) | let g:vimrc_whitespace_mode = 0 | endif
 
     exec g:vimrc_whitespace_mode_list[g:vimrc_whitespace_mode][1]
     echo 'whitespace mode: ' g:vimrc_whitespace_mode_list[g:vimrc_whitespace_mode][0]
