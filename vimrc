@@ -1082,7 +1082,7 @@ augrou END
 command! CtrlP packadd ctrlp.vim | CtrlP
 command! -nargs=1 I3muxNew packadd vim-i3mux | I3muxNew <args>
 command! -nargs=* ConqueGdb packadd Conque-GDB | ConqueGdb <args>
-command! GitGutteR packadd vim-gitgutter | GitGutterEnable | delcommand GitGutteR
+command! GitGutter delcommand GitGutter | packadd vim-gitgutter | GitGutterEnable
 
 "" }}} }}}
 
