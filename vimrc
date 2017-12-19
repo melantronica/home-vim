@@ -57,8 +57,8 @@ filetype plugin indent on " load ft based plugins
 "" http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
 
 "" leader
-let g:mapleader=','
-let g:maplocalleader='\\'
+let mapleader=','
+let maplocalleader='\\'
 
 "" options for physical printing
 set printoptions=paper:a4
@@ -179,7 +179,6 @@ set whichwrap+=h,l,<,>,[,]
 set backspace=indent,eol,start
 
 set hlsearch        " highlight search results
-nohlsearch          " disable the highlight from the last session
 set incsearch       " search while typing
 set ignorecase      "
 "set smartcase       " somehow annoying
@@ -238,7 +237,7 @@ function! Vimrc_UpdateTags()
 endfunction
 
 "nmap <C-}> :exe ":tj /" . expand("<cexpr>")<CR>
-nmap <localleader>] :exe ":tj /" . expand("<cexpr>")<CR>
+nmap <Leader>] :exe ":ptjump /" . expand("<cexpr>")<CR>
 
 
 function! Vimrc_cscope(func)
