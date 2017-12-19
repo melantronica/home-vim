@@ -217,14 +217,11 @@ function! Vimrc_Retab(tsin, tsout)
     " Replace all the tabs in the current file to spaces
     retab
 endfunction
+command! -nargs=* MyRetab :silent call Vimrc_Retab(<f-args>)
 
-
-command! -nargs=* MyRetab24 :silent call Vimrc_Retab(2, 4)
-command! -nargs=* MyRetab42 :silent call Vimrc_Retab(4, 2)
 "" # completion {{{1
 
 set complete+=kspell
-
 set omnifunc=syntaxcomplete#Complete
 
 "" close preview after completion done
