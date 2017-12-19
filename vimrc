@@ -1014,7 +1014,6 @@ call Vimrc_MinpacAdd('int3/vim-extradite') " git log with diff
 "" ---------------------------------------------------------------
 " delayed packages
 call Vimrc_MinpacAdd('w0rp/ale',                     {'type': 'opt'}) " syntax check = linter
-call Vimrc_MinpacAdd('Valloric/YouCompleteMe',       {'type': 'opt'}) " completion engine (very overdozed)
 call Vimrc_MinpacAdd('ludovicchabant/vim-gutentags', {'type': 'opt'}) " automatic tag creation
 
 " loaded on first command
@@ -1033,6 +1032,7 @@ call Vimrc_MinpacAdd('Rykka/riv.vim',                {'type': 'opt'}) " reStruct
 call Vimrc_MinpacAdd('vim-scripts/OmniCppComplete',  {'type': 'opt'}) " cpp omni completion
 
 " load manually
+call Vimrc_MinpacAdd('Valloric/YouCompleteMe',       {'type': 'opt'}) " completion engine (very overdozed)
 call Vimrc_MinpacAdd('ervandew/supertab',            {'type': 'opt'}) " make use of tab key
 call Vimrc_MinpacAdd('chrisbra/vim-diff-enhanced',   {'type': 'opt'}) " diff enhancer
 call Vimrc_MinpacAdd('tpope/vim-obsession',          {'type': 'opt'}) " session management
@@ -1040,22 +1040,58 @@ call Vimrc_MinpacAdd('tpope/vim-repeat',             {'type': 'opt'}) " create r
 
 
 "" ## lazy loading {{{2
+" let g:DelayedPackages=[]
+" let g:DelayedPackages+=[{'package': 'vim-gutentags'
+"             \ , 'preload': ['echom "test"', 'echom "foo"']
+"             \ }]
+" 
+"
+" " let g:DelayedPackages+=[{'package': 'ale'}]
+" 
+" function! Vimrc_ConfigurePackages(packages)
+"     for l:pack in a:packages 
+"         "" preload hooks
+"         if exists('l:pack.preload')
+"             for l:cmd in l:pack.preload
+"                 exec l:cmd
+"             endfor
+"         endif
+"         "" load package
+"         exec 'packadd '.l:pack.package
+"         "" postload hooks
+"         if exists('l:pack.postload')
+"             for l:cmd in l:pack.postload
+"                 exec l:cmd
+"             endfor
+"         endif
+"     endfor
+" endfunction
+
 function! Vimrc_AddPackagesDelayed(channel)
+"    call Vimrc_ConfigurePackages(g:DelayedPackages)
+    packadd ale
     packadd vim-gutentags
-    packadd YouCompleteMe
-    packadd ale 
 endfunction
 call job_start('sleep 2', {'close_cb': 'Vimrc_AddPackagesDelayed', 'out_io': 'null'})
 
-augroup MyOnFileTypePackadd
+augroup MyOnFiletypeMarkdownPackadd
     au!
     autocmd FileType markdown packadd vim-markdown | packadd vim-markdown-folding
+augrou END
+
+augroup MyOnFiletypeRstPackadd
+    au!
     autocmd FileType rst packadd riv.vim
+augrou END
+
+augroup MyOnFiletypeCppPackadd
+    au!
     autocmd FileType c packadd OmniCppComplete:
     autocmd FileType cpp packadd OmniCppComplete:
 augrou END
 
-"" load plugins on first command
+
+" load plugins on first command
 command! CtrlP packadd ctrlp.vim | CtrlP
 command! -nargs=1 I3muxNew packadd vim-i3mux | I3muxNew <args>
 command! -nargs=* ConqueGdb packadd Conque-GDB | ConqueGdb <args>
