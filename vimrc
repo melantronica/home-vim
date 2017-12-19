@@ -1039,7 +1039,7 @@ call job_start('sleep 2', {'close_cb': 'Vimrc_AddPackagesDelayed', 'out_io': 'nu
 augroup MyOnFileTypePackadd
     au!
     autocmd FileType markdown packadd vim-markdown | packadd vim-markdown-folding
-    autocmd FileType rst packadd riv
+    autocmd FileType rst packadd riv.vim
     autocmd FileType c packadd OmniCppComplete:
     autocmd FileType cpp packadd OmniCppComplete:
 augrou END
