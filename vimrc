@@ -535,7 +535,7 @@ com! MyDiffSaved call s:Vimrc_DiffWithSaved()
 
 "" # jumplist {{{1
 
-function! JumpInFile(back, forw)
+function! Vimrc_JumpInFile(back, forw)
     let [n, i] = [bufnr('%'), 1]
     let p = [n] + getpos('.')[1:]
     sil! exe 'norm!1' . a:forw
@@ -552,9 +552,9 @@ function! JumpInFile(back, forw)
 endfunction
 
 exec "set <A-o>=\eo"
-nnoremap <silent> <A-o> :call JumpInFile("\<c-i>", "\<c-o>")<cr>
+nnoremap <silent> <A-o> :call Vimrc_JumpInFile("\<c-i>", "\<c-o>")<cr>
 exec "set <A-i>=\ei"
-nnoremap <silent> <A-i> :call JumpInFile("\<c-o>", "\<c-i>")<cr>
+nnoremap <silent> <A-i> :call Vimrc_JumpInFile("\<c-o>", "\<c-i>")<cr>
 
 
 
@@ -798,12 +798,6 @@ map <F10> :TagbarToggle<CR>
 imap <F10> <C-o>:TagbarToggle<CR>
 let g:tagbar_usearrows = 1
 
-
-
-"" ##  # editing {{{2
-"" ###     # tabular {{{3
-nmap <leader>t :Tabular /
-vmap <leader>t <ESC>:Tabular /
 
 
 "" ##  # files {{{2
