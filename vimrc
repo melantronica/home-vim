@@ -940,11 +940,10 @@ let g:riv_fuzzy_help=1
 
 let g:riv_default_path='~/doc'
 
-
 let g:riv_projects=[]
-let g:riv_projects += [{ 'name': 'doc', 'path': '~/doc/', 'build': '~/doc/build',}]
-let g:riv_projects += [{ 'name': 'work', 'path': '~/work/doc/', 'build': '~/doc/build',}]
-let g:riv_projects += [{ 'name': 'projects', 'path': '~/work/projects', 'build': '~/doc/build',}]
+let g:riv_projects += [{ 'name': 'doc',      'path': '~/doc/',          }]
+let g:riv_projects += [{ 'name': 'work',     'path': '~/work/doc/',     }]
+let g:riv_projects += [{ 'name': 'projects', 'path': '~/work/projects', }]
 
 
 augroup MyRivGroup
