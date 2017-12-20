@@ -257,7 +257,6 @@ endfunction
 command! -nargs=* MyCscope :silent call Vimrc_cscope("<args>")
 
 "" ## cscope {{{2
-if has('cscope')
 set cscopetag         " use both cscope and ctag for 'ctrl-]', ':ta', and 'vim -t'
 set cscopetagorder=1  " first search tag, then cscope
 set cscopequickfix=s-,c-,d-,i-,t-,e-,a-
