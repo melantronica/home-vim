@@ -743,6 +743,10 @@ call Vimrc_MinpacAdd('int3/vim-extradite') " git log with diff
 "" ---------------------------------------------------------------
 " delayed packages
 call Vimrc_MinpacAdd('w0rp/ale',                      {'type': 'opt'}) " syntax check = linter {{{3
+if !exists('g:Vimrc_PacksLoaded')
+    call job_start('sleep 2', {'close_cb': {msg->execute(
+                \ "packadd ale")}, 'out_io': 'null' })
+endif
 
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
@@ -755,6 +759,12 @@ let g:ale_lint_on_save = 0
 
 
 call Vimrc_MinpacAdd('ludovicchabant/vim-gutentags',  {'type': 'opt'}) " automatic tag creation {{{3
+if !exists('g:Vimrc_PacksLoaded')
+    call job_start('sleep 2', {'close_cb': {msg->execute(
+                \ "packadd vim-gutentags")}, 'out_io': 'null' })
+endif
+
+
 let g:gutentags_define_advanced_commands=1
 let g:gutentags_resolve_symlinks=1
 let g:gutentags_enabled=1
@@ -770,6 +780,13 @@ let g:gutentags_add_default_project_roots=0
 let g:gutentags_project_root=['tags','cscope.out']
 "" }}}
 call Vimrc_MinpacAdd('vim-airline/vim-airline',       {'type': 'opt'}) " {{{3
+if !exists('g:Vimrc_PacksLoaded')
+    set showtabline=2
+    hi TablineFill ctermfg=0
+    call job_start('sleep 2', {'close_cb': {msg->execute(
+                \ "packadd vim-airline | packadd vim-airline-themes | split | close")}, 'out_io': 'null' })
+endif
+
 "let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 1
@@ -1009,6 +1026,10 @@ let g:ycm_global_ycm_extra_conf='~/.vim/templates/ycm_extra_conf.py.kernel'   " 
 "" white- and blacklist for conf files (! is blocklist)
 "let g:ycm_extra_conf_globlist = ['~/dev/*','!~/*']
 "" }}} }}}
+"" ## lazy loading helper {{{2
+if !exists('g:Vimrc_PacksLoaded')
+    let g:Vimrc_PacksLoaded=1
+endif
 
 "" ## unused(backup) {{{2
 "" ###     # syntastic {{{3
@@ -1027,61 +1048,7 @@ let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 
 
 
-"" ## lazy loading {{{2
-"" ### unused {{{
-" let g:DelayedPackages=[]
-
-" let g:DelayedPackages+=[{'package': 'ale'}]
-" let g:DelayedPackages+=[{'package': 'vim-gutentags'}]
-" let g:DelayedPackages+=[{'package': 'vim-airline'},
-"             \           {'package': 'vim-airline-themes'
-"             \             , 'postload': ['split', 'close']
-"             \          }]
-
- 
-" function! Vimrc_ConfigurePackages(packages)
-"     for l:pack in a:packages 
-"         "" preload hooks
-"         if exists('l:pack.preload')
-"             for l:cmd in l:pack.preload
-"                 exec l:cmd
-"             endfor
-"         endif
-"         "" load package
-"         exec 'packadd '.l:pack.package
-"         "" postload hooks
-"         if exists('l:pack.postload')
-"             for l:cmd in l:pack.postload
-"                 exec l:cmd
-"             endfor
-"         endif
-"     endfor
-" endfunction
-
-"" }}}
-
-"" mimic airline until its loaded 
-set showtabline=2
-hi TablineFill ctermfg=0
-
-function! Vimrc_AddPackagesDelayed(channel)
-"    call Vimrc_ConfigurePackages(g:DelayedPackages)
-    packadd ale
-    packadd vim-gutentags
-    packadd vim-airline
-    packadd vim-airline-themes
-    split
-    close
-endfunction
-
-if !exists('g:Vimrc_PacksLoaded')
-    let g:Vimrc_PacksLoaded=1
-    call job_start('sleep 2', {'close_cb': 'Vimrc_AddPackagesDelayed', 'out_io': 'null'})
-endif
-
-
-"
-"" BREAK }}} }}}
+"" BREAK }}} }}} }}}
 
 "" # incoming {{{1
 "" disabled by default
@@ -1095,6 +1062,5 @@ endif
 "" https://github.com/tpope/vim-abolish
 "" https://github.com/wellle/targets.vim
 "" # }}}
-
 
 
