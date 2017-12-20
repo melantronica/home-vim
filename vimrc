@@ -19,7 +19,6 @@
 "" - ssh edit (tee, netrw??)
 
 "" - snippets
-
 "" }}} }}}
 
 "" # general {{{1
@@ -785,7 +784,10 @@ let g:airline_theme='tentacle_molokai'
 " }}}
 " loaded on first command
 call Vimrc_MinpacAdd('kien/ctrlp.vim',                {'type': 'opt'}) " fuzzy finder {{{3
-command! CtrlP packadd ctrlp.vim | CtrlP
+if !exists(':CtrlP')
+    command! CtrlP packadd ctrlp.vim | CtrlP
+endif
+
 " keymapping:<leader>p _ctrlp bufferlist
 "nnoremap <leader>p :CtrlPBuffer<CR>
 " keymapping:<leader>o _ctrlp open file
@@ -814,8 +816,9 @@ let g:ctrlp_max_height=15
 
 
 call Vimrc_MinpacAdd('majutsushi/tagbar',             {'type': 'opt'}) " tagbar {{{3
-
-command! TagbarToggle delcommand TagbarToggle | packadd tagbar | TagbarToggle
+if !exists(':TagbarToggle')
+    command! TagbarToggle delcommand TagbarToggle | packadd tagbar | TagbarToggle
+endif
 map <F10> :TagbarToggle<CR>
 imap <F10> <C-o>:TagbarToggle<CR>
 let g:tagbar_usearrows = 1
@@ -823,7 +826,9 @@ let g:tagbar_usearrows = 1
 
 
 call Vimrc_MinpacAdd('scrooloose/nerdtree',           {'type': 'opt'}) " file browser {{{3
-command! NERDTreeToggle delcommand NERDTreeToggle | packadd nerdtree | packadd nerdtree-git-plugin | NERDTreeToggle
+if !exists(':NERDTreeToggle')
+    command! NERDTreeToggle delcommand NERDTreeToggle | packadd nerdtree | packadd nerdtree-git-plugin | NERDTreeToggle
+endif
 
 let g:NERDTreeQuitOnOpen = 1
 
@@ -838,11 +843,15 @@ inoremap <silent> <F9> <C-o>:NERDTreeToggle<CR>
 call Vimrc_MinpacAdd('Xuyuanp/nerdtree-git-plugin',   {'type': 'opt'}) " git symbols {{{3
 
 call Vimrc_MinpacAdd('melantronica/vim-i3mux',        {'type': 'opt'}) " i3mux {{{3
-command! -nargs=1 I3muxNew packadd vim-i3mux | I3muxNew <args>
+if !exists(':I3muxNew')
+    command! -nargs=1 I3muxNew packadd vim-i3mux | I3muxNew <args>
+endif
 
 call Vimrc_MinpacAdd('vim-scripts/Conque-GDB',        {'type': 'opt'}) " gdb integration {{{3
+if !exists(':ConqueGdb')
+    command! -nargs=* ConqueGdb packadd Conque-GDB | ConqueGdb <args>
+endif
 
-command! -nargs=* ConqueGdb packadd Conque-GDB | ConqueGdb <args>
 let g:ConqueTerm_StartMessages = 0
 let g:ConqueTerm_CloseOnEnd = 1
 let g:ConqueTerm_Interrupt = '<C-g><C-c>'
@@ -869,7 +878,10 @@ map <localleader>bp :call conque_gdb#print_word(expand("<cexpr>"))<CR>
 
 
 call Vimrc_MinpacAdd('airblade/vim-gitgutter',        {'type': 'opt'}) " shot diff in the gutter {{{3
-command! GitGutter delcommand GitGutter | packadd vim-gitgutter | GitGutterEnable
+if !exists(':GitGutter')
+    command! GitGutter delcommand GitGutter | packadd vim-gitgutter | GitGutterEnable
+endif
+
 "" }}}
 " loaded on filetype 
 call Vimrc_MinpacAdd('melantronica/riv.vim',          {'type': 'opt'}) " reStructuredText notes {{{3
@@ -1061,7 +1073,13 @@ function! Vimrc_AddPackagesDelayed(channel)
     split
     close
 endfunction
-call job_start('sleep 2', {'close_cb': 'Vimrc_AddPackagesDelayed', 'out_io': 'null'})
+
+if !exists('g:Vimrc_PacksLoaded')
+    let g:Vimrc_PacksLoaded=1
+    call job_start('sleep 2', {'close_cb': 'Vimrc_AddPackagesDelayed', 'out_io': 'null'})
+endif
+
+
 "
 "" BREAK }}} }}}
 
@@ -1077,5 +1095,6 @@ endif
 "" https://github.com/tpope/vim-abolish
 "" https://github.com/wellle/targets.vim
 "" # }}}
+
 
 
