@@ -225,7 +225,7 @@ set omnifunc=syntaxcomplete#Complete
 "" close preview after completion done
 augroup MyOnCompletionDone
     au!
-    autocmd CompleteDone * pclose 
+    autocmd CompleteDone * pclose
 "                \ | set relativenumber
 augroup END
 
@@ -900,7 +900,7 @@ if !exists(':GitGutter')
 endif
 
 "" }}}
-" loaded on filetype 
+" loaded on filetype
 call Vimrc_MinpacAdd('melantronica/riv.vim',          {'type': 'opt'}) " reStructuredText notes {{{3
 augroup MyOnFiletypeRstPackadd
     au!
@@ -925,7 +925,7 @@ let g:riv_projects += [{ 'name': 'projects', 'path': '~/work/projects', }]
 
 augroup MyRivGroup
     au!
-    autocmd FileType rst  nmap <buffer><F10> :RivHelpSection<CR> 
+    autocmd FileType rst  nmap <buffer><F10> :RivHelpSection<CR>
 augroup END
 
 
