@@ -939,9 +939,9 @@ let g:riv_default_path='~/doc'
 
 
 let g:riv_projects=[]
-let g:riv_projects += [{ 'name': 'doc', 'path': '~/doc/',}]
-let g:riv_projects += [{ 'name': 'work', 'path': '~/work/doc/',}]
-let g:riv_projects += [{ 'name': 'projects', 'path': '~/work/projects',}]
+let g:riv_projects += [{ 'name': 'doc', 'path': '~/doc/', 'build': '~/doc/build',}]
+let g:riv_projects += [{ 'name': 'work', 'path': '~/work/doc/', 'build': '~/doc/build',}]
+let g:riv_projects += [{ 'name': 'projects', 'path': '~/work/projects', 'build': '~/doc/build',}]
 
 
 augroup MyRivGroup
@@ -1031,7 +1031,7 @@ call Vimrc_MinpacAdd('romainl/vim-qf')       " quickfix updates
 call Vimrc_MinpacAdd('romainl/vim-qlist')    " quickfix updates
 call Vimrc_MinpacAdd('int3/vim-extradite') " git log with diff
 "" notes
-call Vimrc_MinpacAdd('Rykka/riv.vim') " reStructuredText notes
+call Vimrc_MinpacAdd('melantronica/riv.vim') " reStructuredText notes
 
 "" ---------------------------------------------------------------
 " delayed packages
