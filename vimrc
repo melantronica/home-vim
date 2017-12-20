@@ -497,7 +497,10 @@ augroup MySetCursorColumn
     au WinLeave * setlocal nocursorcolumn
 augroup END
 
-
+augroup MyNOHLBufEnter
+    au!
+    au BufEnter * noh
+augroup END
 
 "" # folding {{{1
 "" make folded blocks more readable
