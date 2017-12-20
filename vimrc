@@ -226,11 +226,12 @@ set omnifunc=syntaxcomplete#Complete
 "" close preview after completion done
 augroup MyOnCompletionDone
     au!
-    autocmd CompleteDone * pclose | set relativenumber
+    autocmd CompleteDone * pclose 
+"                \ | set relativenumber
 augroup END
 
-inoremap <expr> <C-n>      pumvisible() ? "\<C-n>" : "\<C-r>=execute('set norelativenumber')\<CR>\<C-n>"
-inoremap <expr> <C-p>      pumvisible() ? "\<C-p>" : "\<C-r>=execute('set norelativenumber')\<CR>\<C-p>"
+"inoremap <expr> <C-n>      pumvisible() ? "\<C-n>" : "\<C-r>=execute('set norelativenumber')\<CR>\<C-n>"
+"inoremap <expr> <C-p>      pumvisible() ? "\<C-p>" : "\<C-r>=execute('set norelativenumber')\<CR>\<C-p>"
 
 
 function! Vimrc_UpdateTags()
@@ -1140,11 +1141,9 @@ augroup MyOnFiletypeRstPackadd
     au!
     autocmd FileType rst silent packadd riv.vim
             \ | exec 'command! RivFoldUpdate norma! zx'
-            \ | exec 'augroup MyOnFiletypeRstPackadd | au!   | augroup END'
+            \ | exec 'augroup MyOnFiletypeRstPackadd | au! | augroup END'
             \ | silent exec "RivReload"
             \ | silent source $MYVIMRC
-"            \ | let g:vimrc_whichwrap = &whichwrap
-"            \ | let &whichwrap = g:vimrc_whichwrap
 augroup END
 
 augroup MyOnFiletypeCppPackadd
