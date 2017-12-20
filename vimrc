@@ -956,71 +956,6 @@ endif
 "" # }}}
 
 "" # minpac {{{1
-"" ## package installation{{{2
-command! MyPackUpdate packadd minpac | source $MYVIMRC | call minpac#update() | helptags ~/.vim/pack/minpac
-command! MyPackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
-
-function! Vimrc_MinpacAdd(plugname, ...)
-endfunction
-
-if exists('*minpac#init')
-    call minpac#init()
-    function! Vimrc_MinpacAdd(plugname, ...)
-        if(a:0 == 0)
-            call minpac#add(a:plugname)
-        else
-            call minpac#add(a:plugname, a:1)
-        endif
-    endfunction
-endif
-
-"" minpac itself.
-call Vimrc_MinpacAdd('melantronica/minpac', {'type': 'opt'})
-"" Color
-call Vimrc_MinpacAdd('rafi/awesome-vim-colorschemes', {'type': 'opt'})
-call Vimrc_MinpacAdd('vim-airline/vim-airline-themes', {'type': 'opt'})
-call Vimrc_MinpacAdd('vim-airline/vim-airline',       {'type': 'opt'})
-"" editing
-call Vimrc_MinpacAdd('tpope/vim-fugitive')   " everything git
-call Vimrc_MinpacAdd('tpope/vim-commentary') " comment code
-call Vimrc_MinpacAdd('tpope/vim-surround')   " change surrounding
-call Vimrc_MinpacAdd('tpope/vim-eunuch')     " bash functions as commands
-call Vimrc_MinpacAdd('tommcdo/vim-lion')     " align by character
-call Vimrc_MinpacAdd('ConradIrwin/vim-bracketed-paste') " when pasting from X disable formatting
-"" grep
-call Vimrc_MinpacAdd('mileszs/ack.vim')      " search with ack
-call Vimrc_MinpacAdd('mhinz/vim-grepper')    " various grep commands
-call Vimrc_MinpacAdd('romainl/vim-qf')       " quickfix updates
-call Vimrc_MinpacAdd('romainl/vim-qlist')    " quickfix updates
-call Vimrc_MinpacAdd('int3/vim-extradite') " git log with diff
-"" ---------------------------------------------------------------
-" delayed packages
-call Vimrc_MinpacAdd('w0rp/ale',                     {'type': 'opt'}) " syntax check = linter
-call Vimrc_MinpacAdd('ludovicchabant/vim-gutentags', {'type': 'opt'}) " automatic tag creation
-
-" loaded on first command
-call Vimrc_MinpacAdd('kien/ctrlp.vim',               {'type': 'opt'}) " fuzzy finder
-call Vimrc_MinpacAdd('majutsushi/tagbar',            {'type': 'opt'}) " tagbar
-call Vimrc_MinpacAdd('scrooloose/nerdtree',          {'type': 'opt'}) " file browser
-call Vimrc_MinpacAdd('Xuyuanp/nerdtree-git-plugin',  {'type': 'opt'}) " git symbols
-call Vimrc_MinpacAdd('melantronica/vim-i3mux',       {'type': 'opt'}) " i3mux
-call Vimrc_MinpacAdd('vim-scripts/Conque-GDB',       {'type': 'opt'}) " gdb integration
-call Vimrc_MinpacAdd('airblade/vim-gitgutter',       {'type': 'opt'}) " shot diff in the gutter
-
-" loaded on filetype
-call Vimrc_MinpacAdd('melantronica/riv.vim') " reStructuredText notes
-call Vimrc_MinpacAdd('tpope/vim-markdown',           {'type': 'opt'}) " mardown
-call Vimrc_MinpacAdd('nelstrom/vim-markdown-folding', {'type': 'opt'}) " fold rules for markdown
-call Vimrc_MinpacAdd('vim-scripts/OmniCppComplete',  {'type': 'opt'}) " cpp omni completion
-
-" load manually
-call Vimrc_MinpacAdd('Valloric/YouCompleteMe',       {'type': 'opt'}) " completion engine (very overdozed)
-call Vimrc_MinpacAdd('ervandew/supertab',            {'type': 'opt'}) " make use of tab key
-call Vimrc_MinpacAdd('chrisbra/vim-diff-enhanced',   {'type': 'opt'}) " diff enhancer
-call Vimrc_MinpacAdd('tpope/vim-obsession',          {'type': 'opt'}) " session management
-call Vimrc_MinpacAdd('tpope/vim-repeat',             {'type': 'opt'}) " create repeatable commands
-
-
 "" ## lazy loading {{{2
 "" ### unused {{{
 " let g:DelayedPackages=[]
@@ -1101,4 +1036,69 @@ command! GitGutter delcommand GitGutter | packadd vim-gitgutter | GitGutterEnabl
 command! NERDTreeToggle delcommand NERDTreeToggle | packadd nerdtree | packadd nerdtree-git-plugin | NERDTreeToggle
 command! TagbarToggle delcommand TagbarToggle | packadd tagbar | TagbarToggle
 "" }}} }}}
+"" ## package installation{{{2
+command! MyPackUpdate packadd minpac | source $MYVIMRC | call minpac#update() | helptags ~/.vim/pack/minpac
+command! MyPackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
+
+function! Vimrc_MinpacAdd(plugname, ...)
+endfunction
+
+if exists('*minpac#init')
+    call minpac#init()
+    function! Vimrc_MinpacAdd(plugname, ...)
+        if(a:0 == 0)
+            call minpac#add(a:plugname)
+        else
+            call minpac#add(a:plugname, a:1)
+        endif
+    endfunction
+endif
+
+"" minpac itself.
+call Vimrc_MinpacAdd('melantronica/minpac', {'type': 'opt'})
+"" Color
+call Vimrc_MinpacAdd('rafi/awesome-vim-colorschemes', {'type': 'opt'})
+call Vimrc_MinpacAdd('vim-airline/vim-airline-themes', {'type': 'opt'})
+call Vimrc_MinpacAdd('vim-airline/vim-airline',       {'type': 'opt'})
+"" editing
+call Vimrc_MinpacAdd('tpope/vim-fugitive')   " everything git
+call Vimrc_MinpacAdd('tpope/vim-commentary') " comment code
+call Vimrc_MinpacAdd('tpope/vim-surround')   " change surrounding
+call Vimrc_MinpacAdd('tpope/vim-eunuch')     " bash functions as commands
+call Vimrc_MinpacAdd('tommcdo/vim-lion')     " align by character
+call Vimrc_MinpacAdd('ConradIrwin/vim-bracketed-paste') " when pasting from X disable formatting
+"" grep
+call Vimrc_MinpacAdd('mileszs/ack.vim')      " search with ack
+call Vimrc_MinpacAdd('mhinz/vim-grepper')    " various grep commands
+call Vimrc_MinpacAdd('romainl/vim-qf')       " quickfix updates
+call Vimrc_MinpacAdd('romainl/vim-qlist')    " quickfix updates
+call Vimrc_MinpacAdd('int3/vim-extradite') " git log with diff
+"" ---------------------------------------------------------------
+" delayed packages
+call Vimrc_MinpacAdd('w0rp/ale',                     {'type': 'opt'}) " syntax check = linter
+call Vimrc_MinpacAdd('ludovicchabant/vim-gutentags', {'type': 'opt'}) " automatic tag creation
+
+" loaded on first command
+call Vimrc_MinpacAdd('kien/ctrlp.vim',               {'type': 'opt'}) " fuzzy finder
+call Vimrc_MinpacAdd('majutsushi/tagbar',            {'type': 'opt'}) " tagbar
+call Vimrc_MinpacAdd('scrooloose/nerdtree',          {'type': 'opt'}) " file browser
+call Vimrc_MinpacAdd('Xuyuanp/nerdtree-git-plugin',  {'type': 'opt'}) " git symbols
+call Vimrc_MinpacAdd('melantronica/vim-i3mux',       {'type': 'opt'}) " i3mux
+call Vimrc_MinpacAdd('vim-scripts/Conque-GDB',       {'type': 'opt'}) " gdb integration
+call Vimrc_MinpacAdd('airblade/vim-gitgutter',       {'type': 'opt'}) " shot diff in the gutter
+
+" loaded on filetype
+call Vimrc_MinpacAdd('melantronica/riv.vim') " reStructuredText notes
+call Vimrc_MinpacAdd('tpope/vim-markdown',           {'type': 'opt'}) " mardown
+call Vimrc_MinpacAdd('nelstrom/vim-markdown-folding', {'type': 'opt'}) " fold rules for markdown
+call Vimrc_MinpacAdd('vim-scripts/OmniCppComplete',  {'type': 'opt'}) " cpp omni completion
+
+" load manually
+call Vimrc_MinpacAdd('Valloric/YouCompleteMe',       {'type': 'opt'}) " completion engine (very overdozed)
+call Vimrc_MinpacAdd('ervandew/supertab',            {'type': 'opt'}) " make use of tab key
+call Vimrc_MinpacAdd('chrisbra/vim-diff-enhanced',   {'type': 'opt'}) " diff enhancer
+call Vimrc_MinpacAdd('tpope/vim-obsession',          {'type': 'opt'}) " session management
+call Vimrc_MinpacAdd('tpope/vim-repeat',             {'type': 'opt'}) " create repeatable commands
+
+
 
