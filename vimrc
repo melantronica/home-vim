@@ -233,7 +233,7 @@ augroup END
 "inoremap <expr> <C-n>      pumvisible() ? "\<C-n>" : "\<C-r>=execute('set norelativenumber')\<CR>\<C-n>"
 "inoremap <expr> <C-p>      pumvisible() ? "\<C-p>" : "\<C-r>=execute('set norelativenumber')\<CR>\<C-p>"
 
-
+"" # tags {{{1
 function! Vimrc_UpdateTags()
     execute ':!ctags -R --languages=C++ --c++-kinds=+p --fields=+iaS --extra=+q ./'
     echohl StatusLine | echo 'C/C++ tag updated' | echohl None
@@ -243,20 +243,7 @@ endfunction
 nmap <Leader>] :exe ":ptjump /" . expand("<cexpr>")<CR>
 
 
-function! Vimrc_cscope(func)
-    let l:tmp1=&grepprg
-    let l:tmp2=&grepformat
-    set grepformat=%f\ %*[a-zA-Z_0-9]\ %l\ %m
-    set grepprg=cscope\ -R\ -L\ -3
-    exe 'grep '.a:func
-    exe 'set grepprg='.escape(l:tmp1,' ')
-    exe 'set grepformat='.escape(l:tmp2, ' ')
-    redraw!
-endfunction
-
-command! -nargs=* MyCscope :silent call Vimrc_cscope("<args>")
-
-"" ## cscope {{{2
+"" # cscope {{{1
 set cscopetag         " use both cscope and ctag for 'ctrl-]', ':ta', and 'vim -t'
 set cscopetagorder=1  " first search tag, then cscope
 set cscopequickfix=s-,c-,d-,i-,t-,e-,a-
@@ -306,6 +293,22 @@ nmap <C-@><C-@>e :vert scs find e <C-R>=expand("<cword>")<CR><CR>
 nmap <C-@><C-@>f :vert scs find f <C-R>=expand("<cfile>")<CR><CR>
 nmap <C-@><C-@>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <C-@><C-@>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
+
+function! Vimrc_cscope(func)
+    let l:tmp1=&grepprg
+    let l:tmp2=&grepformat
+    set grepformat=%f\ %*[a-zA-Z_0-9]\ %l\ %m
+    set grepprg=cscope\ -R\ -L\ -3
+    exe 'grep '.a:func
+    exe 'set grepprg='.escape(l:tmp1,' ')
+    exe 'set grepformat='.escape(l:tmp2, ' ')
+    redraw!
+endfunction
+
+command! -nargs=* MyCscope :silent call Vimrc_cscope("<args>")
+
+
+
 
 "" # grep {{{1
 
@@ -687,24 +690,9 @@ augroup MyOnFileTypePython
     autocmd FileType python nnoremap <buffer> K :<C-u>execute "!pydoc " . expand("<cword>") <CR>
 augroup END
 
-""" syntastic
-"let g:syntastic_python_checkers=['pyflakes', 'flake8', 'pylint']
-" let g:syntastic_python_flake8_args='--ignore=E501'  " E501 - long lines
-
-" pydoc on 'K'
-
-
-""" isort
-let g:vim_isort_map = '<C-i>'
-
-
-
-
-
-
-"" # make, execute {{{1
+"" # make {{{1
 "set makeprg=make\ -C\ ../build\ -j4
-" Folding of (gnu)make output.
+"" Folding of (gnu)make output.
 augroup MyOnQuickFixMake
     au!
     au BufReadPost quickfix setlocal foldmethod=marker
@@ -714,20 +702,13 @@ augroup MyOnQuickFixMake
     au BufReadPost quickfix normal zq
 augroup END
 
-
-
-noremap <F5> :ConqueGDB
-inoremap <F5> <C-o>:ConqueGDB
 noremap <F4> :make!<cr>
 inoremap <F4> <C-o>:make!<cr>
-
-
-
 
 "" # BREAK }}} }}} }}}
 
 "" # minpac {{{1
-"" ## packae manager {{{2
+"" ## package manager {{{2
 command! MyPackUpdate packadd minpac | source $MYVIMRC | call minpac#update() | helptags ~/.vim/pack/minpac
 command! MyPackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
 
@@ -746,8 +727,7 @@ if exists('*minpac#init')
 endif
 
 "" ## package installation{{{2
-call Vimrc_MinpacAdd('melantronica/minpac',           {'type': 'opt'}) " package manager {{{3
-"" }}}
+call Vimrc_MinpacAdd('melantronica/minpac',           {'type': 'opt'}) " package manager
 "" editing
 call Vimrc_MinpacAdd('tpope/vim-fugitive')   " everything git
 call Vimrc_MinpacAdd('tpope/vim-commentary') " comment code
@@ -871,6 +851,9 @@ let g:ConqueGdb_Leader = '\\'
 
 let g:ConqueGdb_ToggleBreak = g:ConqueGdb_Leader . 'b'
 
+noremap <F5> :ConqueGDB
+inoremap <F5> <C-o>:ConqueGDB
+
 map <localleader>b :<C-u>execute 'ConqueGdbCommand b ' . expand('%:p') . ':' . line('.') <CR>
 
 map <localleader>bb :call conque_gdb#toggle_breakpoint(expand("%:p"), line("."))<CR>
@@ -888,7 +871,6 @@ map <localleader>bp :call conque_gdb#print_word(expand("<cexpr>"))<CR>
 call Vimrc_MinpacAdd('airblade/vim-gitgutter',        {'type': 'opt'}) " shot diff in the gutter {{{3
 command! GitGutter delcommand GitGutter | packadd vim-gitgutter | GitGutterEnable
 "" }}}
-
 " loaded on filetype 
 call Vimrc_MinpacAdd('melantronica/riv.vim',          {'type': 'opt'}) " reStructuredText notes {{{3
 augroup MyOnFiletypeRstPackadd
