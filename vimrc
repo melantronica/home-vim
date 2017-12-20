@@ -1,10 +1,5 @@
-
 "" title:  vimrc
 "" author: bastian zeller
-""
-"" for documentation visit this file
-"" - [](vim.md)
-""
 
 "" # notes and TODOs {{{1
 "" ## notes {{{2
@@ -26,9 +21,9 @@ let g:name = 'Bastian Zeller'
 
 "set nocompatible            " turn off vi compatibility
 set ttyfast                 " faster redeaw
-set showcmd                 " show command
-
 set lazyredraw              " no redraw during macro
+
+
 set confirm                 " confirm unsaved files on quit
 
 set encoding=utf-8          " fix encoding
@@ -48,13 +43,7 @@ let g:DefaultPath=&path
 
 filetype on                 " based on names
 filetype indent on          " load indention ft based
-filetype plugin indent on " load ft based plugins
-
-"let readline_has_bash=1     " bash support for readline
-"let g:is_bash=1             " force bash
-
-"" color map:
-"" http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
+filetype plugin indent on   " load ft based plugins
 
 "" leader
 let mapleader=','
@@ -86,16 +75,6 @@ augroup END
 "" :B ghetto bufferlist
 command! -nargs=? -bang B if <q-args> != '' | exe 'buffer '.<q-args> | else | ls<bang> | let buffer_nn=input('Choose buffer: ') | if buffer_nn != '' | exe buffer_nn != 0 ? 'buffer '.buffer_nn : 'enew' | endif | endif
 
-"" Allow saving of files as sudo when I forgot to start vim using sudo.
-cmap W!! w !sudo tee > /dev/null %
-
-"" List completions
-set nowildmenu
-"set nowildmenu
-set wildignore=.svn,CVS,.git,.hg,*.o,*.a,*.mo,*.la,*.so,*.obj,*.swp,*.xpm,*.exe,*.rar
-"set wildmode=longest:list,full  " completition style
-set wildmode=list:longest,full  " completition style
-
 "" disable sounds
 set noerrorbells
 set visualbell
@@ -124,18 +103,63 @@ set undoreload=10000        " number of lines
 set undodir=~/vim/tmp/undo
 
 
+"" # cmdline {{{1
+set showcmd         " show command at bottom
+set ignorecase      " case insendsitive search
+"set smartcase       " somehow annoying
+
+"" Allow saving of files as sudo when I forgot to start vim using sudo.
+cmap W!! w !sudo tee > /dev/null %
+
+"" List completions
+set nowildmenu
+"set nowildmenu
+set wildignore=.svn,CVS,.git,.hg,*.o,*.a,*.mo,*.la,*.so,*.obj,*.swp,*.xpm,*.exe,*.rar
+"set wildmode=longest:list,full  " completition style
+set wildmode=list:longest,full  " completition style
 
 
-"" # syntax, highlight {{{1
-"https://jonasjacek.github.io/colors/
+"" # search {{{1
 
-"colorscheme Tomorrow-Night-Bright
-colorscheme tentacle
+set hlsearch        " highlight search results
+set incsearch       " search while typing
+noh
 
+" This rewires n and N to do the blink for the next match
+nnoremap <silent> n   n:call Vimrc_HLNext(0.1)<cr>
+nnoremap <silent> N   N:call Vimrc_HLNext(0.1)<cr>
+noremap <silent> <F2> :noh<cr>:call Vimrc_HLNext_delete()<cr>
+inoremap <silent> <F2> <C-o>:noh<cr>:call Vimrc_HLNext_delete()<cr>
+
+let g:vimrc_last_match = 0
+function! Vimrc_HLNext_delete()
+    if g:vimrc_last_match > 0
+        call matchdelete(g:vimrc_last_match)
+    endif
+endfunction
+
+" highlight the match in red
+function! Vimrc_HLNext (blinktime)
+    if g:vimrc_last_match > 0
+        call matchdelete(g:vimrc_last_match)
+    endif
+    highlight WhiteOnRed ctermfg=white ctermbg=red
+    let [l:bufnum, l:lnum, l:col, l:off] = getpos('.')
+    let l:matchlen = strlen(matchstr(strpart(getline('.'),l:col-1),@/))
+    let l:target_pat = '\c\%#\%('.@/.'\)'
+    let g:vimrc_last_match = matchadd('WhiteOnRed', l:target_pat, 101)
+"    I dont want the blinking anymore
+"    redraw
+"    exec 'sleep ' . float1nr(a:blinktime * 1000) . 'm'
+"    call matchdelete(last_match)
+"    redraw
+endfunction
+
+
+"" # line numbers {{{1
 set number          " line numbering
 set numberwidth=4   " gutter = 4 columns
 set relativenumber  " relative numbering
-set showcmd         " show command at bottom
 
 augroup MyRelativeOnWinEnter
     au!
@@ -148,15 +172,8 @@ augrou END
 "" toggle relative numbers
 nnoremap <silent> <leader>l :set rnu!<CR>
 
-" highlight long lines
-"set colorcolumn=80  " highlight col80
-highlight ColorColumn ctermbg=127
-call matchadd('ColorColumn', '\%79v', 127)
 
-"" syntax
-syntax on                   " syntax highlightling
-
-"" indent
+"" # indent {{{1 
 set nowrap          " no line wrapping
 set tabstop=4       " tab = 4 columnsi
 set softtabstop=4
@@ -169,38 +186,6 @@ set textwidth=0     " TODO not sure if thats correct, but its prevents autolewli
 """ don't lose visual selection after doing indents
 vnoremap > >gv
 vnoremap < <gv
-
-set showmatch       " show matching brackets
-set matchpairs+=<:> " add < >
-set matchtime=1     " faster response
-
-"" we want to wrap around lines with movement and backspace
-set whichwrap+=h,l,<,>,[,]
-set backspace=indent,eol,start
-
-set hlsearch        " highlight search results
-noh
-set incsearch       " search while typing
-set ignorecase      "
-"set smartcase       " somehow annoying
-
-" augroup MyHilightTodo
-"     au!
-"     " pre          \<\(@\|#\|/\|:\|\"\)
-"     " patterm
-"     " past
-"     au Syntax * syn match MyTodo "\<\(todo\|Todo\|ToDo\|TODO\|FIXME\|NOTE\|OPTIMIZE\|XXX\)\>"
-"         \ contained containedin=ALL
-" augroup END
-" hi def link MyTodo Todo   " todo
-"hi def link MyTodo TodoRegion
-
-
-"" disable highliting temporary (afterddiwpp search)
-" keymapping:<F2> _clear search highliting
-noremap <silent> <F2> :noh<CR>
-inoremap <silent> <F2> <C-o>:noh<CR>
-
 
 function! Vimrc_Retab(tsin, tsout)
 
@@ -216,6 +201,70 @@ function! Vimrc_Retab(tsin, tsout)
     retab
 endfunction
 command! -nargs=* MyRetab :silent call Vimrc_Retab(<f-args>)
+
+"" # syntax {{{1
+""https://jonasjacek.github.io/colors/
+
+"colorscheme Tomorrow-Night-Bright
+colorscheme tentacle
+
+syntax on                   " syntax highlightling
+
+"" highlight long lines
+"set colorcolumn=80  " highlight col80
+highlight ColorColumn ctermbg=127
+call matchadd('ColorColumn', '\%79v', 127)
+
+set showmatch       " show matching brackets
+set matchpairs+=<:> " add < >
+set matchtime=1     " faster response
+
+"" we want to wrap around lines with movement and backspace
+set whichwrap+=h,l,<,>,[,]
+set backspace=indent,eol,start
+
+" augroup MyHilightTodo
+"     au!
+"     " pre          \<\(@\|#\|/\|:\|\"\)
+"     " patterm
+"     " past
+"     au Syntax * syn match MyTodo "\<\(todo\|Todo\|ToDo\|TODO\|FIXME\|NOTE\|OPTIMIZE\|XXX\)\>"
+"         \ contained containedin=ALL
+" augroup END
+" hi def link MyTodo Todo   " todo
+"hi def link MyTodo TodoRegion
+
+"" # cursor {{{1
+set cursorline
+set cursorcolumn
+
+""" lines around the cursor
+"set scrolloff=2    " minimal # of lines around the cursor
+set scrolloff=3     " mininmal # of lines around the cursor
+"set scrolloff=999  " cursor centered
+set ttimeoutlen=0
+"" cursor is dash when in insert mode
+let &t_SI = "\e[6 q"
+let &t_EI = "\e[2 q"
+
+"" optional reset cursor on start:
+"augroup myCmds
+"au!
+"autocmd VimEnter * silent !echo -ne "\e[2 q"
+"augroup END
+"
+augroup MySetCursorColumn
+    au!
+    "au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+    au VimEnter,WinEnter,BufWinEnter * setlocal cursorcolumn
+    "au WinLeave * setlocal nocursorline
+    au WinLeave * setlocal nocursorcolumn
+augroup END
+
+augroup MyNOHLBufEnter
+    au!
+    au BufEnter * noh
+augroup END
 
 "" # completion {{{1
 
@@ -307,39 +356,20 @@ endfunction
 command! -nargs=* MyCscope :silent call Vimrc_cscope("<args>")
 
 
-
-
 "" # grep {{{1
-
-" This rewires n and N to do the blink for the next match
-nnoremap <silent> n   n:call Vimrc_HLNext(0.1)<cr>
-nnoremap <silent> N   N:call Vimrc_HLNext(0.1)<cr>
-noremap <silent> <F2> :noh<cr>:call Vimrc_HLNext_delete()<cr>
-inoremap <silent> <F2> <C-o>:noh<cr>:call Vimrc_HLNext_delete()<cr>
-
-let g:vimrc_last_match = 0
-function! Vimrc_HLNext_delete()
-    if g:vimrc_last_match > 0
-        call matchdelete(g:vimrc_last_match)
+function! Vimrc_GrepFold(dir)
+    setlocal foldlevel=0
+    setlocal foldmethod=expr
+    setlocal foldexpr=matchstr(getline(v:lnum),'^[^\|]\\+')==#matchstr(getline(v:lnum+1),'^[^\|]\\+')?1:'<1'
+    setlocal foldtext=matchstr(getline(v:foldstart),'^[^\|]\\+').'\ ['.(v:foldend-v:foldstart+1).'\ lines]'
+    if a:dir
+        setlocal foldexpr=matchstr(substitute(getline(v:lnum),'\|.*','',''),'^.*/')==#matchstr(substitute(getline(v:lnum+1),'\|.*','',''),'^.*/')?1:'<1'
+        setlocal foldtext=matchstr(substitute(getline(v:foldstart),'\|.*','',''),'^.*/').'\ ['.(v:foldend-v:foldstart+1).'\ lines]'
     endif
 endfunction
+command! -nargs=* MyGrepFoldDir :silent call Vimrc_GrepFold(1)
+command! -nargs=* MyGrepFold :silent call Vimrc_GrepFold(0)
 
-" highlight the match in red
-function! Vimrc_HLNext (blinktime)
-    if g:vimrc_last_match > 0
-        call matchdelete(g:vimrc_last_match)
-    endif
-    highlight WhiteOnRed ctermfg=white ctermbg=red
-    let [l:bufnum, l:lnum, l:col, l:off] = getpos('.')
-    let l:matchlen = strlen(matchstr(strpart(getline('.'),l:col-1),@/))
-    let l:target_pat = '\c\%#\%('.@/.'\)'
-    let g:vimrc_last_match = matchadd('WhiteOnRed', l:target_pat, 101)
-"    I dont want the blinking anymore
-"    redraw
-"    exec 'sleep ' . float1nr(a:blinktime * 1000) . 'm'
-"    call matchdelete(last_match)
-"    redraw
-endfunction
 
 function! Vimrc_GrepAgenda(func)
     let l:tmp1=&grepprg
@@ -373,22 +403,23 @@ command! -nargs=* MyTodoGrep :silent call Vimrc_GrepTodo("<args>")
 command! -nargs=* MyNotes :drop ~/doc/notes/incoming/notes.md
 command! -nargs=* MyNotesv :drop ~/.vim/vimrc | :b +/##\ TODO .vim/vimrc
 
-function! Vimrc_GrepFold(dir)
-    setlocal foldlevel=0
-    setlocal foldmethod=expr
-    setlocal foldexpr=matchstr(getline(v:lnum),'^[^\|]\\+')==#matchstr(getline(v:lnum+1),'^[^\|]\\+')?1:'<1'
-    setlocal foldtext=matchstr(getline(v:foldstart),'^[^\|]\\+').'\ ['.(v:foldend-v:foldstart+1).'\ lines]'
-    if a:dir
-        setlocal foldexpr=matchstr(substitute(getline(v:lnum),'\|.*','',''),'^.*/')==#matchstr(substitute(getline(v:lnum+1),'\|.*','',''),'^.*/')?1:'<1'
-        setlocal foldtext=matchstr(substitute(getline(v:foldstart),'\|.*','',''),'^.*/').'\ ['.(v:foldend-v:foldstart+1).'\ lines]'
-    endif
-endfunction
-command! -nargs=* MyGrepFoldDir :silent call Vimrc_GrepFold(1)
-command! -nargs=* MyGrepFold :silent call Vimrc_GrepFold(0)
 
+"" # make {{{1
+"set makeprg=make\ -C\ ../build\ -j4
+"" Folding of (gnu)make output.
+augroup MyOnQuickFixMake
+    au!
+    au BufReadPost quickfix setlocal foldmethod=marker
+    au BufReadPost quickfix setlocal foldmarker=Entering\ directory,Leaving\ directory
+    au BufReadPost quickfix map <buffer> <silent> zq zM:g/error:/normal zv<CR>
+    au BufReadPost quickfix map <buffer> <silent> zw zq:g/warning:/normal zv<CR>
+    au BufReadPost quickfix normal zq
+augroup END
 
+noremap <F4> :make!<cr>
+inoremap <F4> <C-o>:make!<cr>
 
-"" # spelling {{{1
+"" # spell {{{1
 highlight SpellBad term=underline gui=undercurl guisp=Red
 
 " English spellchecking
@@ -418,36 +449,6 @@ imap <F3> <C-o>:<C-U>call Vimrc_SpellLang()<CR>
 
 
 
-
-"" # cursor {{{1
-set cursorline
-set cursorcolumn
-
-""" lines around the cursor
-"set scrolloff=2    " minimal # of lines around the cursor
-set scrolloff=3     " mininmal # of lines around the cursor
-"set scrolloff=999  " cursor centered
-set ttimeoutlen=0
-"" cursor is dash when in insert mode
-let &t_SI = "\e[6 q"
-let &t_EI = "\e[2 q"
-"" optional reset cursor on start:
-"augroup myCmds
-"au!
-"autocmd VimEnter * silent !echo -ne "\e[2 q"
-"augroup END
-augroup MySetCursorColumn
-    au!
-    "au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-    au VimEnter,WinEnter,BufWinEnter * setlocal cursorcolumn
-    "au WinLeave * setlocal nocursorline
-    au WinLeave * setlocal nocursorcolumn
-augroup END
-
-augroup MyNOHLBufEnter
-    au!
-    au BufEnter * noh
-augroup END
 
 "" # folding {{{1
 "" make folded blocks more readable
@@ -680,7 +681,7 @@ nmap <C-w>E :call Vimrc_ToggleCurrentWindowAsTab(0)<CR>
 
 
 
-"" # language-specific {{{1
+"" # filetype specific {{{1
 "" ##    python {{{2
 augroup MyOnFileTypePython
     au!
@@ -688,23 +689,7 @@ augroup MyOnFileTypePython
     autocmd FileType python set omnifunc=python3complete#Complete
     autocmd FileType python nnoremap <buffer> K :<C-u>execute "!pydoc " . expand("<cword>") <CR>
 augroup END
-
-"" # make {{{1
-"set makeprg=make\ -C\ ../build\ -j4
-"" Folding of (gnu)make output.
-augroup MyOnQuickFixMake
-    au!
-    au BufReadPost quickfix setlocal foldmethod=marker
-    au BufReadPost quickfix setlocal foldmarker=Entering\ directory,Leaving\ directory
-    au BufReadPost quickfix map <buffer> <silent> zq zM:g/error:/normal zv<CR>
-    au BufReadPost quickfix map <buffer> <silent> zw zq:g/warning:/normal zv<CR>
-    au BufReadPost quickfix normal zq
-augroup END
-
-noremap <F4> :make!<cr>
-inoremap <F4> <C-o>:make!<cr>
-
-"" # BREAK }}} }}} }}}
+"" }}} }}}
 
 "" # minpac {{{1
 "" ## package manager {{{2
@@ -904,6 +889,11 @@ endif
 call Vimrc_MinpacAdd('melantronica/riv.vim',          {'type': 'opt'}) " reStructuredText notes {{{3
 augroup MyOnFiletypeRstPackadd
     au!
+    "" this one is a bit tricky
+    "" we have to cal RivReload to init the plugn
+    "" doing it in the autogroup is resulting in local buffer settings in the
+    "" last buffer. we try to prevent this by overwriting that through
+    "" sourcing vimrc again
     autocmd FileType rst silent packadd riv.vim
             \ | exec 'command! RivFoldUpdate norma! zx'
             \ | exec 'augroup MyOnFiletypeRstPackadd | au! | augroup END'
@@ -1050,12 +1040,6 @@ let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 
 "" BREAK }}} }}} }}}
 
-"" # incoming {{{1
-"" disabled by default
-if 0
-
-endif
-
 "" # some links {{{1
 "" https://github.com/easymotion/vim-easymotion
 "" https://github.com/SirVer/ultisnips
@@ -1063,4 +1047,4 @@ endif
 "" https://github.com/wellle/targets.vim
 "" # }}}
 
-
+"" vimrc end
