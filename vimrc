@@ -765,7 +765,7 @@ let g:airline_powerline_fonts = 1
 let g:airline_highlighting_cache = 0
 
 let g:airline#extensions#ale#enabled = 1
-
+let g:airline#extensions#tabline#fnamemod = ':t'
 
 "" ##  # completion {{{2
 "" ###     # gutentags {{{3
@@ -1063,13 +1063,15 @@ call Vimrc_MinpacAdd('tpope/vim-repeat',             {'type': 'opt'}) " create r
 "" ## lazy loading {{{2
 "" ### unused {{{
 " let g:DelayedPackages=[]
-" let g:DelayedPackages+=[{'package': 'vim-gutentags'
-"             \ , 'preload': ['echom "test"', 'echom "foo"']
-"             \ }]
-" 
-"
-" " let g:DelayedPackages+=[{'package': 'ale'}]
-" 
+
+" let g:DelayedPackages+=[{'package': 'ale'}]
+" let g:DelayedPackages+=[{'package': 'vim-gutentags'}]
+" let g:DelayedPackages+=[{'package': 'vim-airline'},
+"             \           {'package': 'vim-airline-themes'
+"             \             , 'postload': ['split', 'close']
+"             \          }]
+
+ 
 " function! Vimrc_ConfigurePackages(packages)
 "     for l:pack in a:packages 
 "         "" preload hooks
@@ -1088,7 +1090,13 @@ call Vimrc_MinpacAdd('tpope/vim-repeat',             {'type': 'opt'}) " create r
 "         endif
 "     endfor
 " endfunction
+
 "" }}}
+
+"" mimic airline until its loaded 
+set showtabline=2
+hi TablineFill ctermfg=0
+
 function! Vimrc_AddPackagesDelayed(channel)
 "    call Vimrc_ConfigurePackages(g:DelayedPackages)
     packadd ale
