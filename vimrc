@@ -1111,24 +1111,26 @@ call job_start('sleep 2', {'close_cb': 'Vimrc_AddPackagesDelayed', 'out_io': 'nu
 augroup MyOnFiletypeMarkdownPackadd
     au!
     autocmd FileType markdown packadd vim-markdown | packadd vim-markdown-folding
+            \ | exec 'augroup MyOnFiletypeMarkdownPackadd | au! | augroup END'
 augrou END
-
-
-command! RivFoldUpdate silent packadd riv.vim
-            \ | silent exec 'command! RivFoldUpdate normal! zx'
-            \ | silent exec 'augroup MyOnFiletypeRstPackadd | au! | augroup END'
-            \ | silent exec 'RivReload'
 
 augroup MyOnFiletypeRstPackadd
     au!
-    autocmd FileType rst RivFoldUpdate
+    autocmd FileType rst silent packadd riv.vim
+            \ | exec 'command! RivFoldUpdate norma! zx'
+            \ | exec 'augroup MyOnFiletypeRstPackadd | au!   | augroup END'
+            \ | silent exec "RivReload"
+            \ | silent source $MYVIMRC
+"            \ | let g:vimrc_whichwrap = &whichwrap
+"            \ | let &whichwrap = g:vimrc_whichwrap
 augroup END
-
 
 augroup MyOnFiletypeCppPackadd
     au!
     autocmd FileType c packadd OmniCppComplete
+          \ | exec 'augroup MyOnFiletypeCppPackadd | au! | augroup END'
     autocmd FileType cpp packadd OmniCppComplete
+          \ | exec 'augroup MyOnFiletypeCppPackadd | au! | augroup END'
 augrou END
 
 
