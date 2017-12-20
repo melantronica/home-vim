@@ -17,49 +17,41 @@
 "" }}} }}}
 
 "" # general {{{1
-let g:name = 'Bastian Zeller'
-
-"set nocompatible            " turn off vi compatibility
-set ttyfast                 " faster redeaw
-set lazyredraw              " no redraw during macro
-
-
-set confirm                 " confirm unsaved files on quit
-
 set encoding=utf-8          " fix encoding
 scriptencoding utf-8
-set fileformat=unix         " set file format
-set shell=/bin/bash         " shell command
-
 
 "" path for finding files, etc
 set path+=$HOME/home/**,**
-let g:DefaultPath=&path
 ",include,inc,
 "    \ ..,../include,../inc,
 "    \ ...,.../include,.../inc,
 "    \ ...,.../include,.../inc,
 "    \ /usr/include
+let g:name='Bastian Zeller'
+let g:DefaultPath=&path     " backup path
 
-filetype on                 " based on names
-filetype indent on          " load indention ft based
-filetype plugin indent on   " load ft based plugins
+filetype on                 " load ftplugins
+filetype indent on          " ft based indent
+filetype plugin indent on   " ft based plugins
 
-"" leader
 let mapleader=','
 let maplocalleader='\\'
 
+set fileformat=unix         " set file format
+set shell=/bin/bash         " shell command
+set ttyfast                 " faster redeaw
+set lazyredraw              " no redraw during macro
+set confirm                 " confirm unsaved files on quit
+set hidden                  " hide abandoned buffers
+set noerrorbells            " disable sounds
+set visualbell
+set mouse=a|b               " enable mouse in all modes
+"set virtualedit=all         " move around freely
+"set clipboard=unnamedplus   " copy/paste from x clipboard
+
 "" options for physical printing
 set printoptions=paper:a4
-set printoptions=number:y " put line numbers on hardcopy
-
-"" copy paste from x clipboard
-"set clipboard=unnamedplus
-
-set mouse=a|b           " enable mouse in all modes
-"set virtualedit=all    " move around freely
-
-set hidden              " hide abandoned buffers
+set printoptions=number:y   " put line numbers on hardcopy
 
 "" check if the file was changed on disk
 augroup MyCheckFileChanged
@@ -74,11 +66,6 @@ augroup MyOnResize
 augroup END
 "" :B ghetto bufferlist
 command! -nargs=? -bang B if <q-args> != '' | exe 'buffer '.<q-args> | else | ls<bang> | let buffer_nn=input('Choose buffer: ') | if buffer_nn != '' | exe buffer_nn != 0 ? 'buffer '.buffer_nn : 'enew' | endif | endif
-
-"" disable sounds
-set noerrorbells
-set visualbell
-
 
 
 "" # backup, history, swap, viminfo, undo {{{1
@@ -172,8 +159,7 @@ augrou END
 "" toggle relative numbers
 nnoremap <silent> <leader>l :set rnu!<CR>
 
-
-"" # indent {{{1 
+"" # indent {{{1
 set nowrap          " no line wrapping
 set tabstop=4       " tab = 4 columnsi
 set softtabstop=4
@@ -238,10 +224,9 @@ set backspace=indent,eol,start
 set cursorline
 set cursorcolumn
 
-""" lines around the cursor
-"set scrolloff=2    " minimal # of lines around the cursor
 set scrolloff=3     " mininmal # of lines around the cursor
 "set scrolloff=999  " cursor centered
+
 set ttimeoutlen=0
 "" cursor is dash when in insert mode
 let &t_SI = "\e[6 q"
