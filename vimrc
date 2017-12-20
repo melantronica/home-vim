@@ -1032,9 +1032,6 @@ call Vimrc_MinpacAdd('mhinz/vim-grepper')    " various grep commands
 call Vimrc_MinpacAdd('romainl/vim-qf')       " quickfix updates
 call Vimrc_MinpacAdd('romainl/vim-qlist')    " quickfix updates
 call Vimrc_MinpacAdd('int3/vim-extradite') " git log with diff
-"" notes
-call Vimrc_MinpacAdd('melantronica/riv.vim') " reStructuredText notes
-
 "" ---------------------------------------------------------------
 " delayed packages
 call Vimrc_MinpacAdd('w0rp/ale',                     {'type': 'opt'}) " syntax check = linter
@@ -1050,6 +1047,7 @@ call Vimrc_MinpacAdd('vim-scripts/Conque-GDB',       {'type': 'opt'}) " gdb inte
 call Vimrc_MinpacAdd('airblade/vim-gitgutter',       {'type': 'opt'}) " shot diff in the gutter
 
 " loaded on filetype
+call Vimrc_MinpacAdd('melantronica/riv.vim') " reStructuredText notes
 call Vimrc_MinpacAdd('tpope/vim-markdown',           {'type': 'opt'}) " mardown
 call Vimrc_MinpacAdd('nelstrom/vim-markdown-folding', {'type': 'opt'}) " fold rules for markdown
 call Vimrc_MinpacAdd('vim-scripts/OmniCppComplete',  {'type': 'opt'}) " cpp omni completion
@@ -1106,6 +1104,18 @@ augroup MyOnFiletypeMarkdownPackadd
     au!
     autocmd FileType markdown packadd vim-markdown | packadd vim-markdown-folding
 augrou END
+
+
+command! RivFoldUpdate silent packadd riv.vim
+            \ | silent exec 'command! RivFoldUpdate normal! zx'
+            \ | silent exec 'augroup MyOnFiletypeRstPackadd | au! | augroup END'
+            \ | silent exec 'RivReload'
+
+augroup MyOnFiletypeRstPackadd
+    au!
+    autocmd FileType rst RivFoldUpdate
+augroup END
+
 
 augroup MyOnFiletypeCppPackadd
     au!
