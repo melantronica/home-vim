@@ -588,6 +588,28 @@ com! MyDiffSaved call s:Vimrc_DiffWithSaved()
 "" another way of diffing local changes
 "  '!diff  --color=always % -'
 
+"" # jumplist {{{1
+
+function! JumpInFile(back, forw)
+    let [n, i] = [bufnr('%'), 1]
+    let p = [n] + getpos('.')[1:]
+    sil! exe 'norm!1' . a:forw
+    while 1
+        let p1 = [bufnr('%')] + getpos('.')[1:]
+        if n == p1[0] | break | endif
+        if p == p1
+            sil! exe 'norm!' . (i-1) . a:back
+            break
+        endif
+        let [p, i] = [p1, i+1]
+        sil! exe 'norm!1' . a:forw
+    endwhile
+endfunction
+
+exec "set <A-o>=\eo"
+nnoremap <silent> <A-o> :call JumpInFile("\<c-i>", "\<c-o>")<cr>
+exec "set <A-i>=\ei"
+nnoremap <silent> <A-i> :call JumpInFile("\<c-o>", "\<c-i>")<cr>
 
 
 
