@@ -721,21 +721,61 @@ inoremap <F5> <C-o>:ConqueGDB
 noremap <F4> :make!<cr>
 inoremap <F4> <C-o>:make!<cr>
 
-"" # plugin settings {{{1
-"" ##  # colors {{{2
-"" ###     # airline {{{3
-"let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='tentacle_molokai'
-let g:airline#extensions#tabline#show_buffers = 1
-let g:airline_powerline_fonts = 1
-let g:airline_highlighting_cache = 0
 
-let g:airline#extensions#ale#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':t'
 
-"" ##  # completion {{{2
-"" ###     # gutentags {{{3
+
+"" # BREAK }}} }}} }}}
+
+"" # minpac {{{1
+"" ## packae manager {{{2
+command! MyPackUpdate packadd minpac | source $MYVIMRC | call minpac#update() | helptags ~/.vim/pack/minpac
+command! MyPackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
+
+function! Vimrc_MinpacAdd(plugname, ...)
+endfunction
+
+if exists('*minpac#init')
+    call minpac#init()
+    function! Vimrc_MinpacAdd(plugname, ...)
+        if(a:0 == 0)
+            call minpac#add(a:plugname)
+        else
+            call minpac#add(a:plugname, a:1)
+        endif
+    endfunction
+endif
+
+"" ## package installation{{{2
+call Vimrc_MinpacAdd('melantronica/minpac',           {'type': 'opt'}) " package manager {{{3
+"" }}}
+"" editing
+call Vimrc_MinpacAdd('tpope/vim-fugitive')   " everything git
+call Vimrc_MinpacAdd('tpope/vim-commentary') " comment code
+call Vimrc_MinpacAdd('tpope/vim-surround')   " change surrounding
+call Vimrc_MinpacAdd('tpope/vim-eunuch')     " bash functions as commands
+call Vimrc_MinpacAdd('tommcdo/vim-lion')     " align by character
+call Vimrc_MinpacAdd('ConradIrwin/vim-bracketed-paste') " when pasting from X disable formatting
+"" grep
+call Vimrc_MinpacAdd('mileszs/ack.vim')      " search with ack
+call Vimrc_MinpacAdd('mhinz/vim-grepper')    " various grep commands
+call Vimrc_MinpacAdd('romainl/vim-qf')       " quickfix updates
+call Vimrc_MinpacAdd('romainl/vim-qlist')    " quickfix updates
+call Vimrc_MinpacAdd('int3/vim-extradite') " git log with diff
+"" ---------------------------------------------------------------
+" delayed packages
+call Vimrc_MinpacAdd('w0rp/ale',                      {'type': 'opt'}) " syntax check = linter {{{3
+
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_save = 0
+
+"let g:ale_fixers = {
+"\   'cpp': ['clang-format'],
+"\   'c': ['clang-format'],
+"\ }
+
+
+call Vimrc_MinpacAdd('ludovicchabant/vim-gutentags',  {'type': 'opt'}) " automatic tag creation {{{3
 let g:gutentags_define_advanced_commands=1
 let g:gutentags_resolve_symlinks=1
 let g:gutentags_enabled=1
@@ -749,10 +789,195 @@ let g:gutentags_generate_on_new=0
 let g:gutentags_add_default_project_roots=0
 
 let g:gutentags_project_root=['tags','cscope.out']
+"" }}}
+call Vimrc_MinpacAdd('vim-airline/vim-airline',       {'type': 'opt'}) " {{{3
+"let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_buffers = 1
+let g:airline_powerline_fonts = 1
+let g:airline_highlighting_cache = 0
+
+let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+
+call Vimrc_MinpacAdd('vim-airline/vim-airline-themes', {'type': 'opt'}) " {{{3
+let g:airline_theme='tentacle_molokai'
+" }}}
+" loaded on first command
+call Vimrc_MinpacAdd('kien/ctrlp.vim',                {'type': 'opt'}) " fuzzy finder {{{3
+command! CtrlP packadd ctrlp.vim | CtrlP
+" keymapping:<leader>p _ctrlp bufferlist
+"nnoremap <leader>p :CtrlPBuffer<CR>
+" keymapping:<leader>o _ctrlp open file
+"nnoremap <leader>o :CtrlP<CR>
+" let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:10,results:10'
+let g:ctrlp_map='<c-p>'
+let g:ctrlp_cmd='CtrlPBuffer'
+" show hidden files
+let g:ctrlp_show_hidden=1
+" ignore paths
+let g:ctrlp_custom_ignore='\v[\/]\.(git|hg|svn)$'
+" reuse windows
+let g:ctrlp_reuse_window='netrw\|help\|quickfix'
+" don't reuse cache
+let g:ctrlp_clear_cache_on_exit=1
+" ctrlp cache dir
+let g:ctrlp_cache_dir=$HOME.'/.vim/tmp/ctrlp'
+" ctrlp history
+let g:ctrlp_max_history=&history
+" ctrlp follow symlinks
+let g:ctrlp_follow_symlinks=1
+" ctrlp regex search by default
+let g:ctrlp_regexp_search=1
+" ctrlp height 15
+let g:ctrlp_max_height=15
 
 
-"" ###     # YouCompleteMe {{{3
-if 1
+call Vimrc_MinpacAdd('majutsushi/tagbar',             {'type': 'opt'}) " tagbar {{{3
+
+command! TagbarToggle delcommand TagbarToggle | packadd tagbar | TagbarToggle
+map <F10> :TagbarToggle<CR>
+imap <F10> <C-o>:TagbarToggle<CR>
+let g:tagbar_usearrows = 1
+
+
+
+call Vimrc_MinpacAdd('scrooloose/nerdtree',           {'type': 'opt'}) " file browser {{{3
+command! NERDTreeToggle delcommand NERDTreeToggle | packadd nerdtree | packadd nerdtree-git-plugin | NERDTreeToggle
+
+let g:NERDTreeQuitOnOpen = 1
+
+autocmd vimenter * if !argc() | NERDTreeToggle
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+" keymapping:todo
+nnoremap <silent> <F9> :NERDTreeToggle<CR>
+inoremap <silent> <F9> <C-o>:NERDTreeToggle<CR>
+
+
+call Vimrc_MinpacAdd('Xuyuanp/nerdtree-git-plugin',   {'type': 'opt'}) " git symbols {{{3
+
+call Vimrc_MinpacAdd('melantronica/vim-i3mux',        {'type': 'opt'}) " i3mux {{{3
+command! -nargs=1 I3muxNew packadd vim-i3mux | I3muxNew <args>
+
+call Vimrc_MinpacAdd('vim-scripts/Conque-GDB',        {'type': 'opt'}) " gdb integration {{{3
+
+command! -nargs=* ConqueGdb packadd Conque-GDB | ConqueGdb <args>
+let g:ConqueTerm_StartMessages = 0
+let g:ConqueTerm_CloseOnEnd = 1
+let g:ConqueTerm_Interrupt = '<C-g><C-c>'
+let g:ConqueTerm_ReadUnfocused = 1
+let g:ConqueGdb_Leader = '\\'
+
+let g:ConqueGdb_ToggleBreak = g:ConqueGdb_Leader . 'b'
+
+map <localleader>b :<C-u>execute 'ConqueGdbCommand b ' . expand('%:p') . ':' . line('.') <CR>
+
+map <localleader>bb :call conque_gdb#toggle_breakpoint(expand("%:p"), line("."))<CR>
+"map <localleader>b :call conque_gdb#command("break " . expand("%:p") . ":" . line("."))<CR>
+"map <localleader>b :call conque_gdb#command("clear " . expand("%:p") . ":" . line("."))<CR>
+map <localleader>bc :call conque_gdb#command("continue")<CR>
+map <localleader>br :call conque_gdb#command("run")<CR>
+map <localleader>bn :call conque_gdb#command("next")<CR>
+map <localleader>bs :call conque_gdb#command("step")<CR>
+map <localleader>bf :call conque_gdb#command("finish")<CR>
+map <localleader>bt :call conque_gdb#command("backtrace")<CR>
+map <localleader>bp :call conque_gdb#print_word(expand("<cexpr>"))<CR>
+
+
+call Vimrc_MinpacAdd('airblade/vim-gitgutter',        {'type': 'opt'}) " shot diff in the gutter {{{3
+command! GitGutter delcommand GitGutter | packadd vim-gitgutter | GitGutterEnable
+"" }}}
+
+" loaded on filetype 
+call Vimrc_MinpacAdd('melantronica/riv.vim',          {'type': 'opt'}) " reStructuredText notes {{{3
+augroup MyOnFiletypeRstPackadd
+    au!
+    autocmd FileType rst silent packadd riv.vim
+            \ | exec 'command! RivFoldUpdate norma! zx'
+            \ | exec 'augroup MyOnFiletypeRstPackadd | au! | augroup END'
+            \ | silent exec "RivReload"
+            \ | silent source $MYVIMRC
+augroup END
+
+
+let g:riv_fold_level=1      " only fold sections
+let g:riv_fuzzy_help=1
+
+let g:riv_default_path='~/doc'
+
+let g:riv_projects=[]
+let g:riv_projects += [{ 'name': 'doc',      'path': '~/doc/',          }]
+let g:riv_projects += [{ 'name': 'work',     'path': '~/work/doc/',     }]
+let g:riv_projects += [{ 'name': 'projects', 'path': '~/work/projects', }]
+
+
+augroup MyRivGroup
+    au!
+    autocmd FileType rst  nmap <buffer><F10> :RivHelpSection<CR> 
+augroup END
+
+
+
+
+call Vimrc_MinpacAdd('tpope/vim-markdown',            {'type': 'opt'}) " mardown {{{3
+augroup MyOnFiletypeMarkdownPackadd
+    au!
+    autocmd FileType markdown packadd vim-markdown
+            \ | exec 'augroup MyOnFiletypeMarkdownPackadd | au! | augroup END'
+augrou END
+
+function! Vimrc_MarkdownToc()
+    silent lvimgrep '^#' %
+    vertical lopen
+    let &winwidth=(&columns/2)
+    set modifiable
+    %s/\v^([^|]*\|){2,2} #//
+    for l:i in range(1, line('$'))
+        let l:line = getline(l:i)
+        let l:header =  matchstr(l:line, '^#*')
+        let l:length = len(l:header)
+        let l:line = substitute(l:line, '\v^#*[ ]*', '', '')
+        let l:line = substitute(l:line, '\v[ ]*#*$', '', '')
+        let l:line = repeat(' ', (2 * l:length)) . l:line
+        call setline(l:i, l:line)
+    endfor
+    set nomodified
+    set nomodifiable
+endfunction
+command! -nargs=* MyMarkdownToc :silent call Vimrc_MarkdownToc()
+
+
+
+
+call Vimrc_MinpacAdd('nelstrom/vim-markdown-folding', {'type': 'opt'}) " fold rules for markdown {{{3
+augroup MyOnFiletypeMarkdownPackaddFolding
+    au!
+    autocmd FileType markdown packadd vim-markdown-folding
+            \ | exec 'augroup MyOnFiletypeMarkdownPackaddFolding | au! | augroup END'
+augrou END
+
+
+let g:markdown_fold_style = 'nested' " or 'stacked'
+let g:markdown_fold_override_foldtext = 0
+
+
+call Vimrc_MinpacAdd('vim-scripts/OmniCppComplete',   {'type': 'opt'}) " cpp omni completion {{{3
+augroup MyOnFiletypeCppPackadd
+    au!
+    autocmd FileType c packadd OmniCppComplete
+          \ | exec 'augroup MyOnFiletypeCppPackadd | au! | augroup END'
+    autocmd FileType cpp packadd OmniCppComplete
+          \ | exec 'augroup MyOnFiletypeCppPackadd | au! | augroup END'
+augrou END
+"" }}}
+" load manually
+call Vimrc_MinpacAdd('rafi/awesome-vim-colorschemes', {'type': 'opt'})
+call Vimrc_MinpacAdd('ervandew/supertab',             {'type': 'opt'}) " make use of tab key
+call Vimrc_MinpacAdd('chrisbra/vim-diff-enhanced',    {'type': 'opt'}) " diff enhancer
+call Vimrc_MinpacAdd('tpope/vim-obsession',           {'type': 'opt'}) " session management
+call Vimrc_MinpacAdd('tpope/vim-repeat',              {'type': 'opt'}) " create repeatable commands
+call Vimrc_MinpacAdd('Valloric/YouCompleteMe',        {'type': 'opt'}) " completion engine (very overdozed) {{{3
 "" ####        # completion triggers {{{4
 "" keybindings
 let g:ycm_key_invoke_completion = '<C-Space>'
@@ -789,83 +1014,9 @@ let g:ycm_global_ycm_extra_conf='~/.vim/templates/ycm_extra_conf.py.kernel'   " 
 
 "" white- and blacklist for conf files (! is blocklist)
 "let g:ycm_extra_conf_globlist = ['~/dev/*','!~/*']
-endif
+"" }}} }}}
 
-
-"" ###     # tagbar {{{3
-
-map <F10> :TagbarToggle<CR>
-imap <F10> <C-o>:TagbarToggle<CR>
-let g:tagbar_usearrows = 1
-
-
-
-"" ##  # files {{{2
-"" ###     # nerdtree {{{3
-let g:NERDTreeQuitOnOpen = 1
-
-autocmd vimenter * if !argc() | NERDTreeToggle
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
-" keymapping:todo
-nnoremap <silent> <F9> :NERDTreeToggle<CR>
-inoremap <silent> <F9> <C-o>:NERDTreeToggle<CR>
-
-"" ###     # ctrlp {{{3
-" keymapping:<leader>p _ctrlp bufferlist
-"nnoremap <leader>p :CtrlPBuffer<CR>
-" keymapping:<leader>o _ctrlp open file
-"nnoremap <leader>o :CtrlP<CR>
-" let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:10,results:10'
-let g:ctrlp_map='<c-p>'
-let g:ctrlp_cmd='CtrlPBuffer'
-" show hidden files
-let g:ctrlp_show_hidden=1
-" ignore paths
-let g:ctrlp_custom_ignore='\v[\/]\.(git|hg|svn)$'
-" reuse windows
-let g:ctrlp_reuse_window='netrw\|help\|quickfix'
-" don't reuse cache
-let g:ctrlp_clear_cache_on_exit=1
-" ctrlp cache dir
-let g:ctrlp_cache_dir=$HOME.'/.vim/tmp/ctrlp'
-" ctrlp history
-let g:ctrlp_max_history=&history
-" ctrlp follow symlinks
-let g:ctrlp_follow_symlinks=1
-" ctrlp regex search by default
-let g:ctrlp_regexp_search=1
-" ctrlp height 15
-let g:ctrlp_max_height=15
-
-
-"" ##  # git {{{2
-"" ###     # git-gutter {{{3
-let g:gitgutter_enabled = 0
-
-"" ##  # ide {{{2
-"" ###     # conque-gdb {{{3
-let g:ConqueTerm_StartMessages = 0
-let g:ConqueTerm_CloseOnEnd = 1
-let g:ConqueTerm_Interrupt = '<C-g><C-c>'
-let g:ConqueTerm_ReadUnfocused = 1
-let g:ConqueGdb_Leader = '\\'
-
-let g:ConqueGdb_ToggleBreak = g:ConqueGdb_Leader . 'b'
-
-map <localleader>b :<C-u>execute 'ConqueGdbCommand b ' . expand('%:p') . ':' . line('.') <CR>
-
-map <localleader>bb :call conque_gdb#toggle_breakpoint(expand("%:p"), line("."))<CR>
-"map <localleader>b :call conque_gdb#command("break " . expand("%:p") . ":" . line("."))<CR>
-"map <localleader>b :call conque_gdb#command("clear " . expand("%:p") . ":" . line("."))<CR>
-map <localleader>bc :call conque_gdb#command("continue")<CR>
-map <localleader>br :call conque_gdb#command("run")<CR>
-map <localleader>bn :call conque_gdb#command("next")<CR>
-map <localleader>bs :call conque_gdb#command("step")<CR>
-map <localleader>bf :call conque_gdb#command("finish")<CR>
-map <localleader>bt :call conque_gdb#command("backtrace")<CR>
-map <localleader>bp :call conque_gdb#print_word(expand("<cexpr>"))<CR>
-
+"" ## unused(backup) {{{2
 "" ###     # syntastic {{{3
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -880,82 +1031,8 @@ let g:syntastic_warning_symbol = '⚠'
 
 let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 
-"" ###     # ALE syntax check {{{3
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_enter = 0
-let g:ale_lint_on_save = 0
-
-"let g:ale_fixers = {
-"\   'cpp': ['clang-format'],
-"\   'c': ['clang-format'],
-"\ }
 
 
-
-
-
-"" ##  # markup {{{2
-"" ###     # riv {{{2
-let g:riv_fold_level=1      " only fold sections
-let g:riv_fuzzy_help=1
-
-let g:riv_default_path='~/doc'
-
-let g:riv_projects=[]
-let g:riv_projects += [{ 'name': 'doc',      'path': '~/doc/',          }]
-let g:riv_projects += [{ 'name': 'work',     'path': '~/work/doc/',     }]
-let g:riv_projects += [{ 'name': 'projects', 'path': '~/work/projects', }]
-
-
-augroup MyRivGroup
-    au!
-    autocmd FileType rst  nmap <buffer><F10> :RivHelpSection<CR> 
-augroup END
-
-
-"" ###     # markdown-fold {{{3
-let g:markdown_fold_style = 'nested' " or 'stacked'
-let g:markdown_fold_override_foldtext = 0
-
-function! Vimrc_MarkdownToc()
-    silent lvimgrep '^#' %
-    vertical lopen
-    let &winwidth=(&columns/2)
-    set modifiable
-    %s/\v^([^|]*\|){2,2} #//
-    for l:i in range(1, line('$'))
-        let l:line = getline(l:i)
-        let l:header =  matchstr(l:line, '^#*')
-        let l:length = len(l:header)
-        let l:line = substitute(l:line, '\v^#*[ ]*', '', '')
-        let l:line = substitute(l:line, '\v[ ]*#*$', '', '')
-        let l:line = repeat(' ', (2 * l:length)) . l:line
-        call setline(l:i, l:line)
-    endfor
-    set nomodified
-    set nomodifiable
-endfunction
-command! -nargs=* MyMarkdownToc :silent call Vimrc_MarkdownToc()
-
-
-
-
-"" # BREAK }}} }}} }}}
-
-"" # incoming {{{1
-"" disabled by default
-if 0
-
-endif
-
-"" # some links {{{1
-"" https://github.com/easymotion/vim-easymotion
-"" https://github.com/SirVer/ultisnips
-"" https://github.com/tpope/vim-abolish
-"" https://github.com/wellle/targets.vim
-"" # }}}
-
-"" # minpac {{{1
 "" ## lazy loading {{{2
 "" ### unused {{{
 " let g:DelayedPackages=[]
@@ -1003,108 +1080,20 @@ function! Vimrc_AddPackagesDelayed(channel)
     close
 endfunction
 call job_start('sleep 2', {'close_cb': 'Vimrc_AddPackagesDelayed', 'out_io': 'null'})
+"
+"" BREAK }}} }}}
 
-augroup MyOnFiletypeMarkdownPackadd
-    au!
-    autocmd FileType markdown packadd vim-markdown | packadd vim-markdown-folding
-            \ | exec 'augroup MyOnFiletypeMarkdownPackadd | au! | augroup END'
-augrou END
+"" # incoming {{{1
+"" disabled by default
+if 0
 
-augroup MyOnFiletypeRstPackadd
-    au!
-    autocmd FileType rst silent packadd riv.vim
-            \ | exec 'command! RivFoldUpdate norma! zx'
-            \ | exec 'augroup MyOnFiletypeRstPackadd | au! | augroup END'
-            \ | silent exec "RivReload"
-            \ | silent source $MYVIMRC
-augroup END
-
-augroup MyOnFiletypeCppPackadd
-    au!
-    autocmd FileType c packadd OmniCppComplete
-          \ | exec 'augroup MyOnFiletypeCppPackadd | au! | augroup END'
-    autocmd FileType cpp packadd OmniCppComplete
-          \ | exec 'augroup MyOnFiletypeCppPackadd | au! | augroup END'
-augrou END
-
-
-" load plugins on first command
-"" }}} }}}
-"" ## package installation{{{2
-command! MyPackUpdate packadd minpac | source $MYVIMRC | call minpac#update() | helptags ~/.vim/pack/minpac
-command! MyPackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
-
-function! Vimrc_MinpacAdd(plugname, ...)
-endfunction
-
-if exists('*minpac#init')
-    call minpac#init()
-    function! Vimrc_MinpacAdd(plugname, ...)
-        if(a:0 == 0)
-            call minpac#add(a:plugname)
-        else
-            call minpac#add(a:plugname, a:1)
-        endif
-    endfunction
 endif
 
-"" minpac itself.
-call Vimrc_MinpacAdd('melantronica/minpac', {'type': 'opt'})
-"" Color
-call Vimrc_MinpacAdd('rafi/awesome-vim-colorschemes', {'type': 'opt'})
-call Vimrc_MinpacAdd('vim-airline/vim-airline-themes', {'type': 'opt'})
-call Vimrc_MinpacAdd('vim-airline/vim-airline',       {'type': 'opt'})
-"" editing
-call Vimrc_MinpacAdd('tpope/vim-fugitive')   " everything git
-call Vimrc_MinpacAdd('tpope/vim-commentary') " comment code
-call Vimrc_MinpacAdd('tpope/vim-surround')   " change surrounding
-call Vimrc_MinpacAdd('tpope/vim-eunuch')     " bash functions as commands
-call Vimrc_MinpacAdd('tommcdo/vim-lion')     " align by character
-call Vimrc_MinpacAdd('ConradIrwin/vim-bracketed-paste') " when pasting from X disable formatting
-"" grep
-call Vimrc_MinpacAdd('mileszs/ack.vim')      " search with ack
-call Vimrc_MinpacAdd('mhinz/vim-grepper')    " various grep commands
-call Vimrc_MinpacAdd('romainl/vim-qf')       " quickfix updates
-call Vimrc_MinpacAdd('romainl/vim-qlist')    " quickfix updates
-call Vimrc_MinpacAdd('int3/vim-extradite') " git log with diff
-"" ---------------------------------------------------------------
-" delayed packages
-call Vimrc_MinpacAdd('w0rp/ale',                     {'type': 'opt'}) " syntax check = linter
-call Vimrc_MinpacAdd('ludovicchabant/vim-gutentags', {'type': 'opt'}) " automatic tag creation
-
-" loaded on first command
-call Vimrc_MinpacAdd('kien/ctrlp.vim',               {'type': 'opt'}) " fuzzy finder {{{3
-command! CtrlP packadd ctrlp.vim | CtrlP
-
-call Vimrc_MinpacAdd('majutsushi/tagbar',            {'type': 'opt'}) " tagbar {{{3
-command! TagbarToggle delcommand TagbarToggle | packadd tagbar | TagbarToggle
-
-call Vimrc_MinpacAdd('scrooloose/nerdtree',          {'type': 'opt'}) " file browser {{{3
-call Vimrc_MinpacAdd('Xuyuanp/nerdtree-git-plugin',  {'type': 'opt'}) " git symbols {{{3
-command! NERDTreeToggle delcommand NERDTreeToggle | packadd nerdtree | packadd nerdtree-git-plugin | NERDTreeToggle
-
-call Vimrc_MinpacAdd('melantronica/vim-i3mux',       {'type': 'opt'}) " i3mux {{{3
-command! -nargs=1 I3muxNew packadd vim-i3mux | I3muxNew <args>
-
-call Vimrc_MinpacAdd('vim-scripts/Conque-GDB',       {'type': 'opt'}) " gdb integration {{{3
-command! -nargs=* ConqueGdb packadd Conque-GDB | ConqueGdb <args>
-
-call Vimrc_MinpacAdd('airblade/vim-gitgutter',       {'type': 'opt'}) " shot diff in the gutter {{{3
-command! GitGutter delcommand GitGutter | packadd vim-gitgutter | GitGutterEnable
-"" }}}
-
-" loaded on filetype 
-call Vimrc_MinpacAdd('melantronica/riv.vim') " reStructuredText notes
-call Vimrc_MinpacAdd('tpope/vim-markdown',           {'type': 'opt'}) " mardown
-call Vimrc_MinpacAdd('nelstrom/vim-markdown-folding', {'type': 'opt'}) " fold rules for markdown
-call Vimrc_MinpacAdd('vim-scripts/OmniCppComplete',  {'type': 'opt'}) " cpp omni completion
-
-" load manually
-call Vimrc_MinpacAdd('Valloric/YouCompleteMe',       {'type': 'opt'}) " completion engine (very overdozed)
-call Vimrc_MinpacAdd('ervandew/supertab',            {'type': 'opt'}) " make use of tab key
-call Vimrc_MinpacAdd('chrisbra/vim-diff-enhanced',   {'type': 'opt'}) " diff enhancer
-call Vimrc_MinpacAdd('tpope/vim-obsession',          {'type': 'opt'}) " session management
-call Vimrc_MinpacAdd('tpope/vim-repeat',             {'type': 'opt'}) " create repeatable commands
-
+"" # some links {{{1
+"" https://github.com/easymotion/vim-easymotion
+"" https://github.com/SirVer/ultisnips
+"" https://github.com/tpope/vim-abolish
+"" https://github.com/wellle/targets.vim
+"" # }}}
 
 
