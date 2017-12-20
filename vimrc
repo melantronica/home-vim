@@ -1029,12 +1029,6 @@ augrou END
 
 
 " load plugins on first command
-command! CtrlP packadd ctrlp.vim | CtrlP
-command! -nargs=1 I3muxNew packadd vim-i3mux | I3muxNew <args>
-command! -nargs=* ConqueGdb packadd Conque-GDB | ConqueGdb <args>
-command! GitGutter delcommand GitGutter | packadd vim-gitgutter | GitGutterEnable
-command! NERDTreeToggle delcommand NERDTreeToggle | packadd nerdtree | packadd nerdtree-git-plugin | NERDTreeToggle
-command! TagbarToggle delcommand TagbarToggle | packadd tagbar | TagbarToggle
 "" }}} }}}
 "" ## package installation{{{2
 command! MyPackUpdate packadd minpac | source $MYVIMRC | call minpac#update() | helptags ~/.vim/pack/minpac
@@ -1079,15 +1073,27 @@ call Vimrc_MinpacAdd('w0rp/ale',                     {'type': 'opt'}) " syntax c
 call Vimrc_MinpacAdd('ludovicchabant/vim-gutentags', {'type': 'opt'}) " automatic tag creation
 
 " loaded on first command
-call Vimrc_MinpacAdd('kien/ctrlp.vim',               {'type': 'opt'}) " fuzzy finder
-call Vimrc_MinpacAdd('majutsushi/tagbar',            {'type': 'opt'}) " tagbar
-call Vimrc_MinpacAdd('scrooloose/nerdtree',          {'type': 'opt'}) " file browser
-call Vimrc_MinpacAdd('Xuyuanp/nerdtree-git-plugin',  {'type': 'opt'}) " git symbols
-call Vimrc_MinpacAdd('melantronica/vim-i3mux',       {'type': 'opt'}) " i3mux
-call Vimrc_MinpacAdd('vim-scripts/Conque-GDB',       {'type': 'opt'}) " gdb integration
-call Vimrc_MinpacAdd('airblade/vim-gitgutter',       {'type': 'opt'}) " shot diff in the gutter
+call Vimrc_MinpacAdd('kien/ctrlp.vim',               {'type': 'opt'}) " fuzzy finder {{{3
+command! CtrlP packadd ctrlp.vim | CtrlP
 
-" loaded on filetype
+call Vimrc_MinpacAdd('majutsushi/tagbar',            {'type': 'opt'}) " tagbar {{{3
+command! TagbarToggle delcommand TagbarToggle | packadd tagbar | TagbarToggle
+
+call Vimrc_MinpacAdd('scrooloose/nerdtree',          {'type': 'opt'}) " file browser {{{3
+call Vimrc_MinpacAdd('Xuyuanp/nerdtree-git-plugin',  {'type': 'opt'}) " git symbols {{{3
+command! NERDTreeToggle delcommand NERDTreeToggle | packadd nerdtree | packadd nerdtree-git-plugin | NERDTreeToggle
+
+call Vimrc_MinpacAdd('melantronica/vim-i3mux',       {'type': 'opt'}) " i3mux {{{3
+command! -nargs=1 I3muxNew packadd vim-i3mux | I3muxNew <args>
+
+call Vimrc_MinpacAdd('vim-scripts/Conque-GDB',       {'type': 'opt'}) " gdb integration {{{3
+command! -nargs=* ConqueGdb packadd Conque-GDB | ConqueGdb <args>
+
+call Vimrc_MinpacAdd('airblade/vim-gitgutter',       {'type': 'opt'}) " shot diff in the gutter {{{3
+command! GitGutter delcommand GitGutter | packadd vim-gitgutter | GitGutterEnable
+"" }}}
+
+" loaded on filetype 
 call Vimrc_MinpacAdd('melantronica/riv.vim') " reStructuredText notes
 call Vimrc_MinpacAdd('tpope/vim-markdown',           {'type': 'opt'}) " mardown
 call Vimrc_MinpacAdd('nelstrom/vim-markdown-folding', {'type': 'opt'}) " fold rules for markdown
