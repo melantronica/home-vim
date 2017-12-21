@@ -539,11 +539,10 @@ function! Vimrc_JumpInFile(back, forw)
     endwhile
 endfunction
 
-exec "set <A-o>=\eo"
-nnoremap <silent> <A-o> :call Vimrc_JumpInFile("\<c-i>", "\<c-o>")<cr>
-exec "set <A-i>=\ei"
-nnoremap <silent> <A-i> :call Vimrc_JumpInFile("\<c-o>", "\<c-i>")<cr>
-
+"set <A-o>=o
+nnoremap <silent> <leader><C-o> :call Vimrc_JumpInFile("\<c-i>", "\<c-o>")<cr>
+"set <A-i>=i
+nnoremap <silent> <leader><C-i> :call Vimrc_JumpInFile("\<c-o>", "\<c-i>")<cr>
 
 
 "" # keybindings {{{1
@@ -622,18 +621,14 @@ cmap <C-S-j> <C-W>
 nnoremap <leader><C-l> :redraw!<CR> :redraw!<CR>:redraw!<CR>
 
 "" move between windows with alt hjkl
-exec "set <A-h>=\eh"
-noremap <A-h> <C-w>h
-inoremap <A-h> <C-o><C-w>h
-exec "set <A-j>=\ej"
-noremap <A-j> <C-w>j
-inoremap <A-j> <C-o><C-w>j
-exec "set <A-k>=\ek"
-noremap <A-k> <C-w>k
-inoremap <A-k> <C-o><C-w>k
-exec "set <A-l>=\el"
-noremap <A-l> <C-w>l
-inoremap <A-l> <C-o><C-w>l
+"set <A-h>=h
+noremap <C-h> <C-w>h
+"set <A-j>=j
+noremap <C-j> <C-w>j
+"set <A-k>=k
+noremap <C-k> <C-w>k
+"set <A-l>=l
+noremap <C-l> <C-w>l
 
 
 "" window management
