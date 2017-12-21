@@ -35,7 +35,9 @@ filetype indent on          " ft based indent
 filetype plugin indent on   " ft based plugins
 
 let mapleader=','
+let g:mapleader=','
 let maplocalleader='\\'
+let g:maplocalleader='\\'
 
 set fileformat=unix         " set file format
 set shell=/bin/bash         " shell command
