@@ -587,6 +587,12 @@ imap <F8> <C-o>@q
 map <leader>p "1p
 map <leader>P "1P
 
+"" delete into blackhole
+nnoremap <leader>d  "_d
+nnoremap <leader>dd "_dd
+vnoremap <leader>p  "_dp
+vnoremap <leader>P  "_dP
+
 "" shift+arrow selection
 nmap <S-Up> vk
 nmap <S-Down> vj
