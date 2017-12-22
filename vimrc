@@ -106,13 +106,13 @@ set nowildmenu
 set wildignore=.svn,CVS,.git,.hg,*.o,*.a,*.mo,*.la,*.so,*.obj,*.swp,*.xpm,*.exe,*.rar
 "set wildmode=longest:list,full  " completition style
 set wildmode=list:longest,full  " completition style
-
-
+set wildignorecase
+set fileignorecase
 "" # search {{{1
 
 set hlsearch        " highlight search results
 set incsearch       " search while typing
-noh
+noh                 " disbale all previous highlights
 
 " This rewires n and N to do the blink for the next match
 nnoremap <silent> n   n:call Vimrc_HLNext(0.1)<cr>
