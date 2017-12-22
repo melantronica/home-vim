@@ -679,8 +679,8 @@ augroup MyOnFileTypePython
 augroup END
 "" }}} }}}
 
-"" # minpac {{{1
-"" ## package manager {{{2
+"" # package manager {{{1
+"" ## minpac {{{2
 command! MyPackUpdate packadd minpac | source $MYVIMRC | call minpac#update() | helptags ~/.vim/pack/minpac
 command! MyPackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
 
@@ -698,7 +698,7 @@ if exists('*minpac#init')
     endfunction
 endif
 
-"" ## package installation{{{2
+"" ## packages {{{2
 call Vimrc_MinpacAdd('melantronica/minpac',           {'type': 'opt'}) " package manager
 "" editing
 call Vimrc_MinpacAdd('tpope/vim-fugitive')   " everything git
@@ -712,7 +712,7 @@ call Vimrc_MinpacAdd('mileszs/ack.vim')      " search with ack
 call Vimrc_MinpacAdd('mhinz/vim-grepper')    " various grep commands
 call Vimrc_MinpacAdd('romainl/vim-qf')       " quickfix updates
 call Vimrc_MinpacAdd('romainl/vim-qlist')    " quickfix updates
-call Vimrc_MinpacAdd('int3/vim-extradite') " git log with diff
+call Vimrc_MinpacAdd('int3/vim-extradite')   " git log with diff
 "" ---------------------------------------------------------------
 " delayed packages
 call Vimrc_MinpacAdd('w0rp/ale',                      {'type': 'opt'}) " syntax check = linter {{{3
@@ -1004,13 +1004,12 @@ let g:ycm_global_ycm_extra_conf='~/.vim/templates/ycm_extra_conf.py.kernel'   " 
 "" white- and blacklist for conf files (! is blocklist)
 "let g:ycm_extra_conf_globlist = ['~/dev/*','!~/*']
 "" }}} }}}
-"" ## lazy loading helper {{{2
-if !exists('g:Vimrc_PacksLoaded')
+if !exists('g:Vimrc_PacksLoaded') " {{{3
     let g:Vimrc_PacksLoaded=1
 endif
 
-"" ## unused(backup) {{{2
-"" ###     # syntastic {{{3
+"" ## unused(backup) {{{3
+"" ###     # syntastic {{{4
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
@@ -1026,7 +1025,7 @@ let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 
 
 
-"" BREAK }}} }}} }}}
+"" BREAK }}} }}} }}} }}}
 
 "" # some links {{{1
 "" https://github.com/easymotion/vim-easymotion
