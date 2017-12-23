@@ -271,7 +271,7 @@ augroup END
 "inoremap <expr> <C-p>      pumvisible() ? "\<C-p>" : "\<C-r>=execute('set norelativenumber')\<CR>\<C-p>"
 
 "" # tags {{{1
-set tagcase
+"set tagcase
 set showfulltag
 
 function! Vimrc_UpdateTags()
