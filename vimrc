@@ -713,6 +713,8 @@ call Vimrc_MinpacAdd('tpope/vim-fugitive')   " everything git
 call Vimrc_MinpacAdd('tpope/vim-commentary') " comment code
 call Vimrc_MinpacAdd('tpope/vim-surround')   " change surrounding
 call Vimrc_MinpacAdd('tpope/vim-eunuch')     " bash functions as commands
+call Vimrc_MinpacAdd('tpope/vim-abolish')        " nice search and abbrev
+call Vimrc_MinpacAdd('wellle/targets.vim')        " nice search and abbrev
 call Vimrc_MinpacAdd('tommcdo/vim-lion')     " align by character
 call Vimrc_MinpacAdd('ConradIrwin/vim-bracketed-paste') " when pasting from X disable formatting
 "" grep
