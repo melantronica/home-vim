@@ -463,7 +463,11 @@ set foldtext=Vimrc_FoldText()
 
 set nofoldenable        " we start without folding
 set foldlevel=1         " if enabled we want to have foldlevel 1 expanded
-set foldmethod=marker   " default mode is marker, so {{{ }}} gives us folding
+set foldlevelstart=1         " if enabled we want to have foldlevel 1 expanded
+set foldminlines=0
+set foldmethod=marker   " default mode is marker, so gives us folding
+
+set foldopen=all
 
 "" Alt-z toggles folds
 nnoremap <A-z> za
@@ -474,7 +478,7 @@ vnoremap <A-z> zf
 noremap <Leader>zf :call Vimrc_ToggleFold()<CR>
 
 let g:vimrc_fold_mode = 0
-let g:vimrc_fold_modes = ['marker', 'syntax', 'indent', 'diff', 'manual']
+let g:vimrc_fold_modes = ['marker', 'syntax', 'indent', 'diff', 'manual', 'expr']
 function! Vimrc_ToggleFold()
     let g:vimrc_fold_mode = g:vimrc_fold_mode + 1
     if g:vimrc_fold_mode >= len(g:vimrc_fold_modes) | let g:vimrc_fold_mode = 0 | endif
