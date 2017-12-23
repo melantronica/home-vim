@@ -114,6 +114,8 @@ set hlsearch        " highlight search results
 set incsearch       " search while typing
 noh                 " disbale all previous highlights
 
+set wrapscan        " wrap searches trough end of file
+
 " This rewires n and N to do the blink for the next match
 nnoremap <silent> n   n:call Vimrc_HLNext(0.1)<cr>
 nnoremap <silent> N   N:call Vimrc_HLNext(0.1)<cr>
