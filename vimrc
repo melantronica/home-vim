@@ -467,7 +467,6 @@ set foldlevelstart=1         " if enabled we want to have foldlevel 1 expanded
 set foldminlines=0
 set foldmethod=marker   " default mode is marker, so gives us folding
 
-set foldopen=all
 
 "" Alt-z toggles folds
 nnoremap <A-z> za
