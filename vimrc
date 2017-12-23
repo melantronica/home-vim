@@ -271,6 +271,9 @@ augroup END
 "inoremap <expr> <C-p>      pumvisible() ? "\<C-p>" : "\<C-r>=execute('set norelativenumber')\<CR>\<C-p>"
 
 "" # tags {{{1
+set tagcase
+set showfulltag
+
 function! Vimrc_UpdateTags()
     execute ':!ctags -R --languages=C++ --c++-kinds=+p --fields=+iaS --extra=+q ./'
     echohl StatusLine | echo 'C/C++ tag updated' | echohl None
