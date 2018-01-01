@@ -1,5 +1,11 @@
 "runtime colors/Tomorrow-Night-Bright.vim
 runtime colors/molokai.vim 
+"runtime colors/xoria256.vim
+"runtime colors/dracula.vim
+"runtime colors/jellyx.vim
+
+
+
 " https://jonasjacek.github.io/colors/
 
 let g:colors_name = "tentacle"
